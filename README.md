@@ -24,4 +24,3 @@ The follow command build, run and clean Docker container which runs the program
 ```
 ./run.sh
 ```
-
