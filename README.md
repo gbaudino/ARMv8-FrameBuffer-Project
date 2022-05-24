@@ -21,6 +21,7 @@ The follow command build, run and clean Docker container which runs the program
 > **Note**  
 > By executing the run.sh file we are deleting the container at the end of its execution so as not to retain unnecessary containers.
 
+
 ```
 ./run.sh
 ```
