@@ -6,10 +6,28 @@
 
 .globl main
 main:
+	str x30, [sp]
 	// X0 contiene la direccion base del framebuffer
  	mov x20, x0	// Save framebuffer base address to x20	
 	//---------------- CODE HERE ------------------------------------
 	
+	bl createBackground
+
+	bl createFloor
+
+	bl createFlag
+
+	bl createRocket
+
+	bl exitProgram
+
+
+
+createBackground:
+	//Guardado registro return
+	sub sp, sp, 16
+	str x30, [sp]
+
 	//Create Background
 	//Parameters
 	//Color:
@@ -22,6 +40,17 @@ main:
 	mov x6, SCREEN_WIDTH	//Square Width
 	bl createSquare
 
+	//Carga del registro de return y devolucion del siguiente
+	ldr x30, [sp]
+	add sp, sp, 16
+	ret
+
+
+createFloor:
+	//Guardado registro return
+	sub sp, sp, 16
+	str x30, [sp]
+
 	//Create Floor
 	//Parameters:
 	//Color:
@@ -33,6 +62,17 @@ main:
 	mov x5, FLOOR_HEIGHT	//Square Height
 	mov x6, SCREEN_WIDTH	//Square Width
 	bl createSquare
+
+	//Carga del registro de return y devolucion del siguiente
+	ldr x30, [sp]
+	add sp, sp, 16
+	ret
+
+
+createFlag:
+	//Guardado registro return
+	sub sp, sp, 16
+	str x30, [sp]
 
 	//Crear Mastil de la Bandera
 	//Parametros
@@ -70,11 +110,17 @@ main:
 	mov x6, 18 		//Square Width
 	bl createSquare
 
-	bl createRocket
+	//Carga del registro de return y devolucion del siguiente
+	ldr x30, [sp]
+	add sp, sp, 16
+	ret
 
-	bl exitProgram
 
 createRocket:
+	//Guardado registro return
+	sub sp, sp, 16
+	str x30, [sp]
+	
 
 	//Crear Negro de la Capsula
 	//Parametros
@@ -111,10 +157,19 @@ createRocket:
 	mov x6, 44 		//Square Width
 	bl createSquare
 
+	//Carga del registro de return y devolucion del siguiente
+	ldr x30, [sp]
+	add sp, sp, 16
 	ret
 
 createSquare:
+	//Guardado registro return
+	sub sp, sp, 16
+	str x30, [sp]
+
 	// Input values:
+	// - x14: Opcional para triangulos
+	// - w10: Color of Square
 	// - x21: Coord del primero en Y
 	// - x22: Coord del primero en X
 	// - x5: Square Height
@@ -136,7 +191,7 @@ createSquare:
 	mov x17, SCREEN_WIDTH
 	sub x15, x17, x6
 	lsl x15, x15, 2
-	add x15,x15,0 // Opcional para formar un cono
+	add x15,x15,x14 // Opcional para formar un cono
 
 	mov x3, x5 //Set Square Height
 	loop2:
@@ -149,7 +204,13 @@ createSquare:
 		add x19, x19, x15	 // Direccion actual + restante para la sig fila = x19 + (SCREEN_WIDTH - FLOOR_WIDTH)*4
 		sub x3,x3,1	    	 // Decrement Y counter
 		cbnz x3,loop2	   	 // if not last row, jump
+	
+	//Carga del registro de return y devolucion del siguiente
+	ldr x30, [sp]
+	add sp, sp, 16
 	ret
+
+
 	//---------------------------------------------------------------
 	// Infinite Loop 
 
