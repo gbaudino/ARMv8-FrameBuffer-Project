@@ -38,7 +38,7 @@ createBackground:
 	mov x22, 0				//Coord del primero en X
 	mov x5, 360				//Square Height
 	mov x6, SCREEN_WIDTH	//Square Width
-	bl createSquare
+	bl createRectangle
 
 	//Carga del registro de return y devolucion del siguiente
 	ldr x30, [sp]
@@ -61,7 +61,7 @@ createFloor:
 	mov x22, 0 				//Coord del primero en X
 	mov x5, FLOOR_HEIGHT	//Square Height
 	mov x6, SCREEN_WIDTH	//Square Width
-	bl createSquare
+	bl createRectangle
 
 	//Carga del registro de return y devolucion del siguiente
 	ldr x30, [sp]
@@ -84,7 +84,7 @@ createFlag:
 	mov x22, 420 	//Coord del primero en X
 	mov x5, 40 		//Square Height
 	mov x6, 2 		//Square Width
-	bl createSquare
+	bl createRectangle
 
 	//Crear Azul de la Bandera
 	//Parametros
@@ -96,7 +96,7 @@ createFlag:
 	mov x22, 422 	//Coord del primero en X
 	mov x5, 15 		//Square Height
 	mov x6, 18 		//Square Width
-	bl createSquare
+	bl createRectangle
 
 	//Crear Blanco de la Bandera
 	//Parametros
@@ -108,7 +108,7 @@ createFlag:
 	mov x22, 422 	//Coord del primero en X
 	mov x5, 5 		//Square Height
 	mov x6, 18 		//Square Width
-	bl createSquare
+	bl createRectangle
 
 	//Carga del registro de return y devolucion del siguiente
 	ldr x30, [sp]
@@ -132,7 +132,7 @@ createRocket:
 	mov x22, 300 	//Coord del primero en X
 	mov x5, 50 		//Square Height
 	mov x6, 50 		//Square Width
-	bl createSquare
+	bl createRectangle
 
 	//Crear Azul de la Capsula
 	//Parametros
@@ -143,7 +143,7 @@ createRocket:
 	mov x22, 302 	//Coord del primero en X
 	mov x5, 3 		//Square Height
 	mov x6, 46 		//Square Width
-	bl createSquare
+	bl createRectangle
 
 	//Crear blanco de la Capsula
 	//Parametros
@@ -155,14 +155,27 @@ createRocket:
 	mov x22, 303 	//Coord del primero en X
 	mov x5, 40		//Square Height
 	mov x6, 44 		//Square Width
-	bl createSquare
+	bl createRectangle
+
+	//Crear Negro del triangulo
+	//Parametros
+		//Color
+	movz x10, 0x0000, lsl 16 
+	movk x10, 0x0000, lsl 0
+		
+	mov x21, 243 	//Coord del primero en Y
+	mov x22, 303 	//Coord del primero en X
+	mov x5, 8		//Triangle Height
+	mov x6, 44		//Triangle Width
+
+	bl createTriangle
 
 	//Carga del registro de return y devolucion del siguiente
 	ldr x30, [sp]
 	add sp, sp, 16
 	ret
 
-createSquare:
+createRectangle:
 	//Guardado registro return
 	sub sp, sp, 16
 	str x30, [sp]
@@ -180,8 +193,7 @@ createSquare:
 	mov x18, SCREEN_WIDTH   // Generacion del 640
 	mul x23, x21, x18 		// (y * 640)
 	add x23,x23, x22		// + (Coord del primero en x) = [x + (y * 640)]
-	mov x18, 4 				//inmutable (Creacion del 4 para mult)
-	mul x19, x23, x18 		// (4 * [x + (y * 640)])
+	lsl x19, x23, 2 		//(4 * [x + (y * 640)])
 	add x19,x19,x20 		// Dirección de inicio + 4 * [x + (y * 640)]
 
 
@@ -210,6 +222,32 @@ createSquare:
 	add sp, sp, 16
 	ret
 
+createTriangle: 
+	//Guardado registro return
+	sub sp, sp, 16
+	str x30, [sp]
+
+		// Input values:
+	// - X10: Color of Triangle
+	// - x21: Coord del primero en Y
+	// - x22: Coord del primero en X
+	// - x5: Triangle Height
+	// - x6: Triangle Width
+
+	loop_Triang2:
+		bl createRectangle
+	loop_Triang :
+		sub x21, x21, 3  //Disminuyo el tamaño X
+		add x22, x22, 3  //Aumento la Tamaño Y
+		sub x6, x6, 6	 //Va disminuyendo el ancho de cada escalon
+		cmp x6, XZR		// Comparo x6 con 0
+		b.GT loop_Triang2 //Me aseguro que el resultado no sea negativo.
+
+
+	//Carga del registro de return y devolucion del siguiente
+	ldr x30, [sp]
+	add sp, sp, 16
+	ret
 
 	//---------------------------------------------------------------
 	// Infinite Loop 
