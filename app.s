@@ -8,7 +8,13 @@
 main:
 	bl config
 
-	bl exitProgram
+	bl static
+
+	movz x7, 0x0200
+	movk x7, 0x4000
+	bl delay
+
+	b dynamic
 
 
 config:
@@ -24,9 +30,27 @@ config:
     mov x21, SCREEN_WIDTH   // Save Screen Width
     mov x22, SCREEN_HEIGHT  // Save Screen Height
 
-	//Initialize optional variables with Zero
-	mov x3, 0x00000000
-	mov x4, 0x00000000
+	//Carga del registro de return y devolucion del siguiente
+	ldr x30, [sp]
+	add sp, sp, 16
+	ret
+
+
+delay:
+    //Guardado registro return
+    sub sp, sp, 16
+	str x30, [sp]
+
+    // Input values:
+        // - x7: Limit to repeat
+
+    cont:
+        sub x7, x7, 1
+        cbnz x7, cont
+
+    ldr x30, [sp]
+	add sp, sp, 16
+    ret
 
 
 createRectangle:
@@ -38,8 +62,8 @@ createRectangle:
 	    // - x0:    Color Base
         // - x1:    Coord primero en y
         // - x2:    Coord prim en x
-        // - x5:    Alto del rectangulo
-        // - x6:    Ancho del rectangulo
+        // - x3:    Alto del rectangulo
+        // - x4:    Ancho del rectangulo
 
     //Temporary values:
 		// - x9: 	Temp Base Address of Rectangle
@@ -52,6 +76,7 @@ createRectangle:
 		// - x21:	Screen Width
 		// - x22:	Screen Height
 
+	
 	//Generacion de la coordenada del primero del cuadrado
 	//Coord del pixel = Dirección de inicio + 4 * [x + (y * 640)]
 	mul x9, x1, x21 		// (y * 640)
@@ -64,12 +89,12 @@ createRectangle:
 	//Generacion de la cantidad de memoria a correr x9 para llevarlo a la siguiente fila
 	//(SCREEN_WIDTH - SQUARE_WIDTH)*4
 	mov x10, x21
-	sub x10, x10, x6
+	sub x10, x10, x4
 	lsl x10, x10, 2
 
-	mov x12, x5 //Set Rectangle Height
+	mov x12, x3 //Set Rectangle Height
 	resetRectW:
-	mov x11, x6 //Set and Reset Rectangle Width
+	mov x11, x4 //Set and Reset Rectangle Width
 	nxtPixelRect:
 		stur x0,[x9]	   	 	// Set color of pixel N
 		add x9,x9,4	   			// Next pixel
@@ -95,12 +120,10 @@ createTriangle:
 		// - x2: Coord del primero en X
 		// - x3: Alto Escalon
 		// - x4: Ancho Escalon
-		// - x5: Ancho del Triangulo
-		// - x6: Cantidad de escalones
+		// - x5: Reduccion Alto Escalon
+		// - x6: Reduccion Ancho Escalon
+		// - x7: Cantidad de escalones
 
-	//Temporary values:
-		// - x9: 	Temp Alto Escalon
-		// - x10:	Temp Ancho Escalon
 
 	mov x9, x3
 	mov x3, 0x00000000
@@ -121,21 +144,19 @@ createTriangle:
 	add sp, sp, 16
 	ret
 
-delay:
-    //Guardado registro return
-    sub sp, sp, 16
+
+static:
+	sub sp, sp, 16
 	str x30, [sp]
 
-    // Input values:
-        // - x7: Limit to repeat
+	
 
-    cont:
-        sub x7, x7, 1
-        cbnz x7, cont
-
-    ldr x30, [sp]
+	ldr x30, [sp]
 	add sp, sp, 16
-    ret
+	ret
 
-exitProgram:
-	.end
+
+dynamic:
+
+	b dynamic
+
