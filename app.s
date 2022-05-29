@@ -85,7 +85,6 @@ createRectangle:
 	add x9,x9,x20 		// Dirección de inicio + 4 * [x + (y * 640)]
 
 
-
 	//Generacion de la cantidad de memoria a correr x9 para llevarlo a la siguiente fila
 	//(SCREEN_WIDTH - SQUARE_WIDTH)*4
 	mov x10, x21
@@ -96,7 +95,7 @@ createRectangle:
 	resetRectW:
 	mov x11, x4 //Set and Reset Rectangle Width
 	nxtPixelRect:
-		stur x0,[x9]	   	 	// Set color of pixel N
+		stur w0,[x9]	   	 	// Set color of pixel N
 		add x9,x9,4	   			// Next pixel
 		sub x11,x11,1	   			// decrement X counter
 		cbnz x11,nxtPixelRect   	// If not end row jump
@@ -108,6 +107,7 @@ createRectangle:
 	ldr x30, [sp]
 	add sp, sp, 16
 	ret
+
 
 createTriangle: 
 	//Guardado registro return
@@ -123,11 +123,54 @@ createTriangle:
 		// - x5: Reduccion Alto Escalon
 		// - x6: Reduccion Ancho Escalon
 		// - x7: Cantidad de escalones
-
-
+	
+	// Temporary values:
+		// - x9: Temp red ancho escalon
+	add x9, x6, x6
+	loop_Triang2:
+		bl createRectangle
+		sub x7, x7, 1
+		loop_Triang:
+			sub x1, x1, x3
+			add x1, x1, x5
+			add x2, x2, x6
+			sub x4, x4, x6
+			sub x4, x4, x6
+			sub x3, x3, x5
+			cbz x7, done
+			cmp x4, x9
+			blt loop_Triang2
+	done:
 
 
 	//Carga del registro de return y devolucion del siguiente
+	ldr x30, [sp]
+	add sp, sp, 16
+	ret
+
+createPoster:
+	//Guardado registro return
+	sub sp, sp, 16
+	str x30, [sp]
+
+	movz x0, 0x00ba, lsl 16
+	movk x0, 0x7404, lsl 0
+	mov x1, 90
+	mov x2, 477
+	mov x3,	117
+	mov x4, 125
+	bl createRectangle
+
+	movz x0, 0x00ff, lsl 16
+	movk x0, 0xc107, lsl 0
+	mov x1, 90
+	mov x2, 475
+	mov x3,	115
+	mov x4, 125
+	bl createRectangle
+
+	
+
 	ldr x30, [sp]
 	add sp, sp, 16
 	ret
@@ -136,7 +179,6 @@ createBackground:
 	//Guardado registro return
 	sub sp, sp, 16
 	str x30, [sp]
-
 
 	movz x0, 0x005f, lsl 16
 	movk x0, 0x4d84, lsl 0
@@ -166,7 +208,18 @@ static:
 	str x30, [sp]
 
 	bl createBackground
-	
+	bl createPoster
+
+	movz x0, 0x00ea, lsl 16
+	movk x0, 0x7f0d, lsl 0
+	mov x1, 200
+	mov x2, 100
+	mov x3, 4
+	mov x4, 20
+	mov x5, 0
+	mov x6, 4
+	mov x7, 3
+	bl createTriangle
 
 	ldr x30, [sp]
 	add sp, sp, 16
