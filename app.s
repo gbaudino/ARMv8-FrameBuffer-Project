@@ -10,8 +10,8 @@ main:
 
 	bl static
 
-	movz x7, 0x0200
-	movk x7, 0x4000
+	movz x7, 0xf200, lsl 16
+	movk x7, 0x4000, lsl 0
 	bl delay
 
 	b dynamic
@@ -61,7 +61,7 @@ createRectangle:
 	// Input values:
 	    // - x0:    Color Base
         // - x1:    Coord primero en y
-        // - x2:    Coord prim en x
+        // - x2:    Coord primero en x
         // - x3:    Alto del rectangulo
         // - x4:    Ancho del rectangulo
 
@@ -124,26 +124,36 @@ createTriangle:
 		// - x6: Reduccion Ancho Escalon
 		// - x7: Cantidad de escalones
 
-	//Temporary values:
-		// - x9:  Contador escalon
 
 
-	loop_Triang2:
-		bl createRectangle
-		add x9, x9, 1
-		loop_Triang :
-			sub x1, x1, 3  //Disminuyo el tamaño X
-			add x2, x2, 3  //Aumento la Tamaño Y
-			sub x3, x3, x5	// Va disminuyendo el alto del escalon.
-			sub x4, x4, x6	 //Va disminuyendo el ancho de cada escalon, añadir reduccion de ancho (x6), cambiar variables
-			cmp x9, x7
-			b.eq done
-			cmp x6, XZR		// Comparo x6 con 0
-			b.GT loop_Triang2 //Me aseguro que el resultado no sea negativo.
-	done:
 
-	//Despues probar forma alternativa del loop
+	//Carga del registro de return y devolucion del siguiente
+	ldr x30, [sp]
+	add sp, sp, 16
+	ret
 
+createBackground:
+	//Guardado registro return
+	sub sp, sp, 16
+	str x30, [sp]
+
+
+	movz x0, 0x005f, lsl 16
+	movk x0, 0x4d84, lsl 0
+	mov x1, 0
+	mov x2, 0
+	mov x3, 400
+	mov x4, x21
+	bl createRectangle
+
+
+	movz x0, 0x0079, lsl 16
+	movk x0, 0x5548, lsl 0
+	mov x1, 400
+	mov x2, 0
+	mov x3, 80
+	mov x4, x21
+	bl createRectangle
 
 	//Carga del registro de return y devolucion del siguiente
 	ldr x30, [sp]
@@ -155,6 +165,7 @@ static:
 	sub sp, sp, 16
 	str x30, [sp]
 
+	bl createBackground
 	
 
 	ldr x30, [sp]
