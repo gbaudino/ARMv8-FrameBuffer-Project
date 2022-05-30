@@ -148,6 +148,26 @@ createTriangle:
 	add sp, sp, 16
 	ret
 
+createArcade:
+//Guardado registro return
+	sub sp, sp, 16
+	str x30, [sp]
+
+	movz x0, 0x001d, lsl 16
+	movk x0, 0xe9b6, lsl 0
+	mov x1, 89
+	mov x2, 247
+	mov x3,	100
+	mov x4, 134
+	bl createRectangle
+
+
+	ldr x30, [sp]
+	add sp, sp, 16
+	ret
+
+
+
 createPoster:
 	//Guardado registro return
 	sub sp, sp, 16
@@ -156,20 +176,159 @@ createPoster:
 	movz x0, 0x00ba, lsl 16
 	movk x0, 0x7404, lsl 0
 	mov x1, 90
-	mov x2, 477
+	mov x2, 470
 	mov x3,	117
 	mov x4, 125
 	bl createRectangle
 
 	movz x0, 0x00ff, lsl 16
 	movk x0, 0xc107, lsl 0
-	mov x1, 90
-	mov x2, 475
+	mov x1, 89
+	mov x2, 472
 	mov x3,	115
 	mov x4, 125
 	bl createRectangle
 
 	
+
+	ldr x30, [sp]
+	add sp, sp, 16
+	ret
+
+createMonkey:
+	//Guardado registro return
+	sub sp, sp, 16
+	str x30, [sp]
+
+	movz x0, 0x0070, lsl 16
+	movk x0, 0x4d37, lsl 0
+	mov x1, 103
+	mov x2, 539
+	mov x3,	4
+	mov x4, 18
+	bl createRectangle
+
+	movz x0, 0x0070, lsl 16
+	movk x0, 0x4d37, lsl 0
+	mov x1, 107
+	mov x2, 539
+	mov x3,	1
+	mov x4, 13
+	bl createRectangle
+
+	movz x0, 0x0070, lsl 16
+	movk x0, 0x4d37, lsl 0
+	mov x1, 108
+	mov x2, 534
+	mov x3,	5
+	mov x4, 18
+	bl createRectangle
+
+	movz x0, 0x0070, lsl 16
+	movk x0, 0x4d37, lsl 0
+	mov x1, 113
+	mov x2, 529
+	mov x3,	5
+	mov x4, 34
+	bl createRectangle
+	
+	movz x0, 0x0070, lsl 16
+	movk x0, 0x4d37, lsl 0
+	mov x1, 118
+	mov x2, 514
+	mov x3,	5
+	mov x4, 39
+	bl createRectangle
+
+	movz x0, 0x0070, lsl 16
+	movk x0, 0x4d37, lsl 0
+	mov x1, 123
+	mov x2, 509
+	mov x3,	5
+	mov x4, 29
+	bl createRectangle
+
+	movz x0, 0x0070, lsl 16
+	movk x0, 0x4d37, lsl 0
+	mov x1, 128
+	mov x2, 504
+	mov x3,	5
+	mov x4, 34
+	bl createRectangle
+
+	movz x0, 0x0070, lsl 16
+	movk x0, 0x4d37, lsl 0
+	mov x1, 133
+	mov x2, 499
+	mov x3,	5
+	mov x4, 44
+	bl createRectangle
+
+	movz x0, 0x0070, lsl 16
+	movk x0, 0x4d37, lsl 0
+	mov x1, 138
+	mov x2, 499
+	mov x3,	5
+	mov x4, 39
+	bl createRectangle
+
+	movz x0, 0x0070, lsl 16
+	movk x0, 0x4d37, lsl 0
+	mov x1, 143
+	mov x2, 494
+	mov x3,	5
+	mov x4, 39
+	bl createRectangle
+
+	movz x0, 0x0070, lsl 16
+	movk x0, 0x4d37, lsl 0
+	mov x1, 148
+	mov x2, 494
+	mov x3,	11
+	mov x4, 49
+	bl createRectangle
+
+	movz x0, 0x0070, lsl 16
+	movk x0, 0x4d37, lsl 0
+	mov x1, 159
+	mov x2, 488
+	mov x3,	15
+	mov x4, 50
+	bl createRectangle
+
+	movz x0, 0x0070, lsl 16
+	movk x0, 0x4d37, lsl 0
+	mov x1, 174
+	mov x2, 494
+	mov x3,	5
+	mov x4, 19
+	bl createRectangle
+
+	movz x0, 0x0070, lsl 16
+	movk x0, 0x4d37, lsl 0
+	mov x1, 179
+	mov x2, 488
+	mov x3,	5
+	mov x4, 19
+	bl createRectangle
+
+	movz x0, 0x0070, lsl 16
+	movk x0, 0x4d37, lsl 0
+	mov x1, 174
+	mov x2, 519
+	mov x3,	5
+	mov x4, 19
+	bl createRectangle
+
+	movz x0, 0x0070, lsl 16
+	movk x0, 0x4d37, lsl 0
+	mov x1, 179
+	mov x2, 529
+	mov x3,	5
+	mov x4, 9
+	bl createRectangle
+
+
 
 	ldr x30, [sp]
 	add sp, sp, 16
@@ -184,16 +343,16 @@ createBackground:
 	movk x0, 0x4d84, lsl 0
 	mov x1, 0
 	mov x2, 0
-	mov x3, 400
+	mov x3, 396
 	mov x4, x21
 	bl createRectangle
 
 
 	movz x0, 0x0079, lsl 16
 	movk x0, 0x5548, lsl 0
-	mov x1, 400
+	mov x1, 396
 	mov x2, 0
-	mov x3, 80
+	mov x3, 85
 	mov x4, x21
 	bl createRectangle
 
@@ -208,18 +367,10 @@ static:
 	str x30, [sp]
 
 	bl createBackground
+	bl createArcade
 	bl createPoster
+	bl createMonkey
 
-	movz x0, 0x00ea, lsl 16
-	movk x0, 0x7f0d, lsl 0
-	mov x1, 200
-	mov x2, 100
-	mov x3, 4
-	mov x4, 20
-	mov x5, 0
-	mov x6, 4
-	mov x7, 3
-	bl createTriangle
 
 	ldr x30, [sp]
 	add sp, sp, 16
