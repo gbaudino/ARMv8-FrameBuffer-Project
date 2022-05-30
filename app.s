@@ -127,22 +127,32 @@ createTriangle:
 	//Temporary values:
 		// - x9:  Contador escalon
 
-
+	mov x9, 0
 	loop_Triang2:
 		bl createRectangle
-		add x9, x9, 1
+		sub x7, x7, 1
 		loop_Triang :
-			sub x1, x1, 3  //Disminuyo el tamaño X
-			add x2, x2, 3  //Aumento la Tamaño Y
+
 			sub x3, x3, x5	// Va disminuyendo el alto del escalon.
 			sub x4, x4, x6	 //Va disminuyendo el ancho de cada escalon, añadir reduccion de ancho (x6), cambiar variables
-			cmp x9, x7
-			b.eq done
-			cmp x6, XZR		// Comparo x6 con 0
+			sub x1, x1, x3  //Disminuyo el tamaño Y
+
+			add x2, x2,x5  //Aumento la Tamaño X
+			
+			cmp x7, xzr		//Veo si no llegue al limite de escalones
+			b.eq done		//Si llegamos al limite de escalones cerramos
+			cmp x4, XZR		// Comparo x4 con 0
 			b.GT loop_Triang2 //Me aseguro que el resultado no sea negativo.
 	done:
 
 	//Despues probar forma alternativa del loop
+
+	// Input values Rectangle:
+	    // - x0:    Color Base
+        // - x1:    Coord primero en y
+        // - x2:    Coord prim en x
+        // - x3:    Alto del rectangulo
+        // - x4:    Ancho del rectangulo
 
 
 	//Carga del registro de return y devolucion del siguiente
@@ -155,7 +165,36 @@ static:
 	sub sp, sp, 16
 	str x30, [sp]
 
-	
+	movz x0, 0x00FF, lsl 16
+	movz x0, 0xFFFF, lsl 0
+
+
+	mov x1, 0
+	mov x2, 0	
+    // - x3:    Alto del rectangulo
+    // - x4:    Ancho del rectangulo
+	mov x3, 480
+	mov x4, 640
+	bl createRectangle
+
+
+	// Input values:
+		movz x0, 0x0000, lsl 16
+		movz x0, 0x0000, lsl 0
+		mov x1, 240
+		mov x2, 320
+		// - x3: Alto Escalon
+		mov x3, 8
+		// - x4: Ancho Escalon
+		mov x4, 80
+		// - x5: Reduccion Alto Escalon
+		mov x5, 1
+		// - x6: Reduccion Ancho Escalon
+		mov x6, 18
+		// - x7: Cantidad de escalones
+		mov x7, 7
+	bl createTriangle
+
 
 	ldr x30, [sp]
 	add sp, sp, 16
