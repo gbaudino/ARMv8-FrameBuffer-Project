@@ -8,13 +8,7 @@
 main:
 	bl config
 
-	bl static
-
-	movz x7, 0xf200, lsl 16
-	movk x7, 0x4000, lsl 0
-	bl delay
-
-	b dynamic
+	bl program
 
 
 config:
@@ -119,7 +113,7 @@ createTriangle:
 		// - x1: Coord del primero en Y
 		// - x2: Coord del primero en X
 		// - x3: Alto Escalon
-		// - x4: Ancho Escalon
+		// - x4: Ancho Triangulo
 		// - x5: Reduccion Alto Escalon
 		// - x6: Reduccion Ancho Escalon
 		// - x7: Cantidad de escalones
@@ -137,10 +131,10 @@ createTriangle:
 			sub x4, x4, x6
 			sub x4, x4, x6
 			sub x3, x3, x5
-			cbz x7, done
+			cbz x7, doneTriang
 			cmp x4, x9
 			blt loop_Triang2
-	done:
+	doneTriang:
 
 
 	//Carga del registro de return y devolucion del siguiente
@@ -148,30 +142,88 @@ createTriangle:
 	add sp, sp, 16
 	ret
 
-createArcade:
-//Guardado registro return
+createRectangleTriangle: 
+	//Guardado registro return
+	sub sp, sp, 16
+	str x30, [sp] 
+
+	// Input values:
+		// - x0: Color of Triangle
+		// - x1: Coord del primero en Y
+		// - x2: Coord del primero en X
+		// - x3: Alto Escalon
+		// - x5: Alignment: 0 - izq, otherwise - der
+		// - x4: Ancho Triangulo
+		// - x6: Reduccion Ancho Escalon
+		// - x7: Cantidad de escalones
+	
+	// Temporary values:
+		// - x9: Temp red ancho escalon
+	add x9, x6, x6
+	loop_RectangleTriang2:
+		bl createRectangle
+		sub x7, x7, 1
+		loop_RectangleTriang:
+			sub x1, x1, x3
+			cbnz x5, right
+			sub x4, x4, x6
+			right:
+			cbz x5, left
+			add x2, x2, x6
+			sub x4, x4, x6
+			left:
+			cbz x7, doneRectTriang
+			cmp x4, x9
+			blt loop_RectangleTriang2
+	doneRectTriang:
+
+
+	//Carga del registro de return y devolucion del siguiente
+	ldr x30, [sp]
+	add sp, sp, 16
+	ret
+
+
+createBackground:
+	//Guardado registro return
 	sub sp, sp, 16
 	str x30, [sp]
 
-	movz x0, 0x001d, lsl 16
-	movk x0, 0xe9b6, lsl 0
-	mov x1, 89
-	mov x2, 247
-	mov x3,	100
-	mov x4, 134
+	movz x0, 0x005f, lsl 16
+	movk x0, 0x4d84, lsl 0
+	mov x1, 0
+	mov x2, 0
+	mov x3, 396
+	mov x4, x21
 	bl createRectangle
 
 
+	movz x0, 0x0079, lsl 16
+	movk x0, 0x5548, lsl 0
+	mov x1, 396
+	mov x2, 0
+	mov x3, 85
+	mov x4, x21
+	bl createRectangle
+
+	//Carga del registro de return y devolucion del siguiente
 	ldr x30, [sp]
 	add sp, sp, 16
 	ret
 
 
 createLightKey:
-
-//Guardado registro return
+	// Input values:
+		// - x0: Light Key Status: 0 - Off, otherwise - On
+	//Guardado registro return
 	sub sp, sp, 16
 	str x30, [sp]
+	
+	//Guardado registro x0
+	sub sp, sp, 16
+	str x0, [sp]
+	
+
 
 	movz x0, 0x0000, lsl 16
 	movk x0, 0x0000, lsl 0
@@ -204,20 +256,26 @@ createLightKey:
 	mov x3,	2
 	mov x4, 2
 	bl createRectangle
+	
+	movz x0, 0x0061, lsl 16
+	movk x0, 0x6161, lsl 0
+	mov x1, 141
+	mov x2, 98
+	mov x3,	6
+	mov x4, 12
+	bl createRectangle
+
+	ldr x0, [sp]
+	add sp, sp, 16
+	cbnz x0, onStatus
+	sub sp, sp, 16
+	str x0, [sp]
 
 	movz x0, 0x0000, lsl 16
 	movk x0, 0x0000, lsl 0
 	mov x1, 129
 	mov x2, 98
 	mov x3,	12
-	mov x4, 12
-	bl createRectangle
-
-	movz x0, 0x0061, lsl 16
-	movk x0, 0x6161, lsl 0
-	mov x1, 141
-	mov x2, 98
-	mov x3,	6
 	mov x4, 12
 	bl createRectangle
 
@@ -229,13 +287,36 @@ createLightKey:
 	mov x4, 12
 	bl createRectangle
 
+	onStatus:
+	ldr x0, [sp]
+	add sp, sp, 16
+	cbz x0, doneLightKey
+	sub sp, sp, 16
+	str x0, [sp]
+
+	movz x0, 0x0021, lsl 16
+	movk x0, 0xc59b, lsl 0
+	mov x1, 129
+	mov x2, 98
+	mov x3,	12
+	mov x4, 12
+	bl createRectangle
+
+	movz x0, 0x0000, lsl 16
+	movk x0, 0x0000, lsl 0
+	mov x1, 147
+	mov x2, 98
+	mov x3,	12
+	mov x4, 12
+	bl createRectangle
+
+	doneLightKey:
 	ldr x30, [sp]
 	add sp, sp, 16
 	ret
 
 
 createCable:
-
 //Guardado registro return
 	sub sp, sp, 16
 	str x30, [sp]
@@ -286,7 +367,7 @@ createCable:
 	mov x2, 404
 	mov x3,	6
 	mov x4, 190
-		bl createRectangle
+	bl createRectangle
 
 	movz x0, 0x0000, lsl 16
 	movk x0, 0x0000, lsl 0
@@ -317,57 +398,6 @@ createCable:
 	add sp, sp, 16
 	ret
 
-
-createPoster:
-	//Guardado registro return
-	sub sp, sp, 16
-	str x30, [sp]
-
-	movz x0, 0x00f0, lsl 16
-	movk x0, 0xac14, lsl 0
-	mov x1, 88
-	mov x2, 470
-	mov x3,	116
-	mov x4, 127
-	bl createRectangle
-
-		movz x0, 0x00fb, lsl 16
-	movk x0, 0xfcf9, lsl 0
-	mov x1, 85
-	mov x2, 465
-	mov x3,	4
-	mov x4, 138
-	bl createRectangle
-
-		movz x0, 0x00fb, lsl 16
-	movk x0, 0xfcf9, lsl 0
-	mov x1, 202
-	mov x2, 465
-	mov x3,	4
-	mov x4, 138
-	bl createRectangle
-
-		movz x0, 0x00fb, lsl 16
-	movk x0, 0xfcf9, lsl 0
-	mov x1, 82
-	mov x2, 468
-	mov x3,	127
-	mov x4, 4
-	bl createRectangle
-
-		movz x0, 0x00fb, lsl 16
-	movk x0, 0xfcf9, lsl 0
-	mov x1, 82
-	mov x2, 596
-	mov x3,	127
-	mov x4, 4
-	bl createRectangle
-	
-	bl createMonkey
-
-	ldr x30, [sp]
-	add sp, sp, 16
-	ret
 
 createMonkey:
 	//Guardado registro return
@@ -762,29 +792,383 @@ createMonkey:
 	add sp, sp, 16
 	ret
 
-createBackground:
+
+createPoster:
 	//Guardado registro return
 	sub sp, sp, 16
 	str x30, [sp]
 
-	movz x0, 0x005f, lsl 16
-	movk x0, 0x4d84, lsl 0
-	mov x1, 0
-	mov x2, 0
-	mov x3, 396
-	mov x4, x21
+	movz x0, 0x00f0, lsl 16
+	movk x0, 0xac14, lsl 0
+	mov x1, 88
+	mov x2, 470
+	mov x3,	116
+	mov x4, 127
 	bl createRectangle
 
-
-	movz x0, 0x0079, lsl 16
-	movk x0, 0x5548, lsl 0
-	mov x1, 396
-	mov x2, 0
-	mov x3, 85
-	mov x4, x21
+		movz x0, 0x00fb, lsl 16
+	movk x0, 0xfcf9, lsl 0
+	mov x1, 85
+	mov x2, 465
+	mov x3,	4
+	mov x4, 138
 	bl createRectangle
 
-	//Carga del registro de return y devolucion del siguiente
+	movz x0, 0x00fb, lsl 16
+	movk x0, 0xfcf9, lsl 0
+	mov x1, 202
+	mov x2, 465
+	mov x3,	4
+	mov x4, 138
+	bl createRectangle
+
+	movz x0, 0x00fb, lsl 16
+	movk x0, 0xfcf9, lsl 0
+	mov x1, 82
+	mov x2, 468
+	mov x3,	127
+	mov x4, 4
+	bl createRectangle
+
+	movz x0, 0x00fb, lsl 16
+	movk x0, 0xfcf9, lsl 0
+	mov x1, 82
+	mov x2, 596
+	mov x3,	127
+	mov x4, 4
+	bl createRectangle
+	
+	bl createMonkey
+
+	ldr x30, [sp]
+	add sp, sp, 16
+	ret
+
+
+// ------------------------
+// Creacion maquina arcade
+// ------------------------
+createArcadeCase:
+	//Guardado registro return
+	sub sp, sp, 16
+	str x30, [sp]
+
+	//Creacion triang1 borde blanco maq
+	movz x0, 0x00f9, lsl 16
+	movk x0, 0xfaf5, lsl 0
+	mov x1, 24
+	mov x2, 221
+	mov x3,	4
+	mov x4, 12
+	mov x5, 1
+	mov x6, 4
+	mov x7, 3
+	bl createRectangleTriangle
+	
+
+	//Creacion triang2 borde cyan maq
+	movz x0, 0x0064, lsl 16
+	movk x0, 0xdefe, lsl 0
+	mov x1, 24
+	mov x2, 225
+	mov x3,	4
+	mov x4, 8
+	mov x5, 1
+	mov x6, 4
+	mov x7, 2
+	bl createRectangleTriangle
+
+	//Creacion triang3 borde blanco maq
+	movz x0, 0x00f9, lsl 16
+	movk x0, 0xfaf5, lsl 0
+	mov x1, 24
+	mov x2, 396
+	mov x3,	4
+	mov x4, 12
+	mov x5, 0
+	mov x6, 4
+	mov x7, 3
+	bl createRectangleTriangle
+	
+
+	//Creacion triang4 borde cyan maq
+	movz x0, 0x0064, lsl 16
+	movk x0, 0xdefe, lsl 0
+	mov x1, 24
+	mov x2, 396
+	mov x3,	4
+	mov x4, 8
+	mov x5, 0
+	mov x6, 4
+	mov x7, 2
+	bl createRectangleTriangle
+
+	//Creacion bordes blancos maq
+	movz x0, 0x00f9, lsl 16
+	movk x0, 0xfaf5, lsl 0
+	mov x1, 16
+	mov x2, 233
+	mov x3,	13
+	mov x4, 163
+	bl createRectangle
+
+	//Creacion bordes blancos maq
+	movz x0, 0x00f9, lsl 16
+	movk x0, 0xfaf5, lsl 0
+	mov x1, 28
+	mov x2, 221
+	mov x3,	408
+	mov x4, 187
+	bl createRectangle
+
+	//Creacion interior cyan maq
+	movz x0, 0x0064, lsl 16
+	movk x0, 0xdefe, lsl 0
+	mov x1, 28
+	mov x2, 225
+	mov x3,	387
+	mov x4, 179
+	bl createRectangle
+
+	ldr x30, [sp]
+	add sp, sp, 16
+	ret
+
+
+createArcadeTop:
+	//Guardado registro return
+	sub sp, sp, 16
+	str x30, [sp]
+
+	//Creacion interior amarillo claro maq (parte superior)
+	movz x0, 0x00fe, lsl 16
+	movk x0, 0xea64, lsl 0
+	mov x1, 19
+	mov x2, 233
+	mov x3,	185
+	mov x4, 163
+	bl createRectangle
+
+	//Creacion interior amarillo oscuro maq (parte superior)
+	movz x0, 0x00ff, lsl 16
+	movk x0, 0xa200, lsl 0
+	mov x1, 64
+	mov x2, 233
+	mov x3,	22
+	mov x4, 163
+	bl createRectangle
+
+	//Creacion interior triang1 amarillo oscuro maq (parte superior)
+	movz x0, 0x00fe, lsl 16
+	movk x0, 0xea64, lsl 0
+	mov x1, 82
+	mov x2, 233
+	mov x3,	4
+	mov x4, 12
+	mov x5, 0
+	mov x6, 4
+	mov x7, 3
+	bl createRectangleTriangle
+
+	//Creacion interior triang2 amarillo oscuro maq (parte superior)
+	movz x0, 0x00fe, lsl 16
+	movk x0, 0xea64, lsl 0
+	mov x1, 82
+	mov x2, 384
+	mov x3,	4
+	mov x4, 12
+	mov x5, 1
+	mov x6, 4
+	mov x7, 3
+	bl createRectangleTriangle
+
+	//Creacion interior amarillo oscuro maq (parte superior)
+	movz x0, 0x00ff, lsl 16
+	movk x0, 0xa200, lsl 0
+	mov x1, 191
+	mov x2, 245
+	mov x3,	13
+	mov x4, 139
+	bl createRectangle
+
+	//Creacion interior triang3 amarillo oscuro maq (parte superior)
+	movz x0, 0x00ff, lsl 16
+	movk x0, 0xa200, lsl 0
+	mov x1, 200
+	mov x2, 237
+	mov x3,	4
+	mov x4, 24
+	mov x5, 0
+	mov x6, 4
+	mov x7, 3
+	bl createTriangle
+
+	//Creacion interior triang4 amarillo oscuro maq (parte superior)
+	movz x0, 0x00ff, lsl 16
+	movk x0, 0xa200, lsl 0
+	mov x1, 204
+	mov x2, 372
+	mov x3,	4
+	mov x4, 24
+	mov x5, 0
+	mov x6, 4
+	mov x7, 3
+	bl createTriangle
+
+	//Creacion interior amarillo oscuro maq (parte superior)
+	movz x0, 0x00ff, lsl 16
+	movk x0, 0xa200, lsl 0
+	mov x1, 204
+	mov x2, 233
+	mov x3,	9
+	mov x4, 163
+	bl createRectangle
+
+	ldr x30, [sp]
+	add sp, sp, 16
+	ret
+
+
+createArcadePanel:
+	//Guardado registro return
+	sub sp, sp, 16
+	str x30, [sp]
+
+
+
+
+	ldr x30, [sp]
+	add sp, sp, 16
+	ret
+
+
+createArcadeBottom:
+	//Guardado registro return
+	sub sp, sp, 16
+	str x30, [sp]
+
+
+
+
+	ldr x30, [sp]
+	add sp, sp, 16
+	ret
+
+
+createArcadeScreen:
+	//Guardado registro return
+	sub sp, sp, 16
+	str x30, [sp]
+
+	//Creacion bordes negros
+	movz x0, 0x0051, lsl 16
+	movk x0, 0x4621, lsl 0
+	mov x1, 86
+	mov x2, 245
+	mov x3,	106
+	mov x4, 139
+	bl createRectangle
+
+	//Creacion bordes negros
+	movz x0, 0x0072, lsl 16
+	movk x0, 0x4526, lsl 0
+	mov x1, 86
+	mov x2, 246
+	mov x3,	106
+	mov x4, 137
+	bl createRectangle
+
+	//Creacion borde negro
+	movz x0, 0x0042, lsl 16
+	movk x0, 0x2d42, lsl 0
+	mov x1, 87
+	mov x2, 246
+	mov x3,	104
+	mov x4, 137
+	bl createRectangle
+
+	//Creacion parte del vidrio
+	movz x0, 0x001d, lsl 16
+	movk x0, 0xe9b6, lsl 0
+	mov x1, 89
+	mov x2, 247
+	mov x3,	100
+	mov x4, 135
+	bl createRectangle
+
+	//Creacion reflejo del vidrio
+	movz x0, 0x009f, lsl 16
+	movk x0, 0xedb8, lsl 0
+	mov x1, 101
+	mov x2, 258
+	mov x3,	36
+	mov x4, 36
+	bl createRectangle
+
+	//Creacion triangulo reflejo del vidrio
+	movz x0, 0x001d, lsl 16
+	movk x0, 0xe9b6, lsl 0
+	mov x1, 125
+	mov x2, 270
+	mov x3, 12
+	mov x4, 48
+	mov x5, 0
+	mov x6, 12
+	mov x7, 2
+	bl createTriangle
+
+	//Creacion reflejo del vidrio
+	movz x0, 0x0021, lsl 16
+	movk x0, 0xc59b, lsl 0
+	mov x1, 101
+	mov x2, 258
+	mov x3,	10
+	mov x4, 10
+	bl createRectangle
+
+	//Creacion reflejo del vidrio
+	movz x0, 0x0021, lsl 16
+	movk x0, 0xc59b, lsl 0
+	mov x1, 166
+	mov x2, 260
+	mov x3,	12
+	mov x4, 88
+	bl createRectangle
+
+	//Creacion reflejo del vidrio
+	movz x0, 0x0021, lsl 16
+	movk x0, 0xc59b, lsl 0
+	mov x1, 154
+	mov x2, 348
+	mov x3,	24
+	mov x4, 24
+	bl createRectangle
+
+	//Creacion reflejo del vidrio
+	movz x0, 0x0021, lsl 16
+	movk x0, 0xc59b, lsl 0
+	mov x1, 115
+	mov x2, 360
+	mov x3,	39
+	mov x4, 12
+	bl createRectangle
+
+	ldr x30, [sp]
+	add sp, sp, 16
+	ret
+
+
+createArcade:
+	//Guardado registro return
+	sub sp, sp, 16
+	str x30, [sp]
+
+	bl createArcadeCase	
+	bl createArcadeTop
+	bl createArcadePanel
+	bl createArcadeBottom
+	bl createArcadeScreen
+
 	ldr x30, [sp]
 	add sp, sp, 16
 	ret
@@ -795,18 +1179,30 @@ static:
 	str x30, [sp]
 
 	bl createBackground
+	mov x0, 0
 	bl createLightKey
 	bl createCable
-	bl createArcade
 	bl createPoster
-
+	bl createArcade
 
 	ldr x30, [sp]
 	add sp, sp, 16
 	ret
 
+program:
+	bl static
 
-dynamic:
+	movz x7, 0x8200, lsl 16
+	movk x7, 0x4000, lsl 0
+	bl delay
 
-	b dynamic
+	dynamic:
+		mov x0, 1
+		bl createLightKey
+
+		movz x7, 0x8200, lsl 16
+		movk x7, 0x4000, lsl 0
+		bl delay
+
+		b program
 
