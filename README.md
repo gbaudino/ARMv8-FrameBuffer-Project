@@ -3,7 +3,7 @@
 ## Installation
 
 > **Warning**  
-> This installation is implemented for archlinux based  distributions which install packages with their pacman manager.
+> This installation is implemented for archlinux based distributions which install packages with their pacman manager.
 
 These instructions will install git if necessary and clone the repository. Then, entering the folder, we give execution permissions to install and proceed to the installation.
 ```bash
@@ -13,7 +13,8 @@ cd ARMv8-FrameBuffer-Project && chmod +x install.sh
 ```
 
 > **Note**  
-> If your system is not archlinux based and you want to perform this installation, then you will need to find a way to install what is installed with it in the above command and in the install.sh file.
+> If your system is not archlinux based and you want to perform this installation, then you will need to find a way to install [git](https://git-scm.com/downloads) and (docker)[https://docs.docker.com/engine/install/] in your system. Finally activate docker and run the run.sh file.
+
 
 ## Usage
 The follow command build, run and clean Docker container which runs the program
