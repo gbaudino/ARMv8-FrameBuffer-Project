@@ -13,7 +13,7 @@ cd ARMv8-FrameBuffer-Project && chmod +x install.sh
 ```
 
 > **Note**  
-> If your system is not archlinux based and you want to perform this installation, then you will need to find a way to install [git](https://git-scm.com/downloads) and (docker)[https://docs.docker.com/engine/install/] in your system. Finally activate docker and run the run.sh file.
+> If your system is not archlinux based and you want to perform this installation, then you will need to find a way to install [git](https://git-scm.com/downloads) and [docker](https://docs.docker.com/engine/install/) in your system. Finally activate docker and run the run.sh file.
 
 
 ## Usage
