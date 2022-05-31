@@ -211,6 +211,67 @@ createBackground:
 	add sp, sp, 16
 	ret
 
+lightSwitcher:
+	// Input values:
+		// - x0: Light Key Status: 0 - Off, otherwise - On
+		
+	//Guardado registro return
+	sub sp, sp, 16
+	str x30, [sp]
+	
+	//Guardado registro x0
+	sub sp, sp, 16
+	str x0, [sp]
+	
+	ldr x0, [sp]
+	add sp, sp, 16
+	cbnz x0, onStatus
+	sub sp, sp, 16
+	str x0, [sp]
+
+	movz x0, 0x0000, lsl 16
+	movk x0, 0x0000, lsl 0
+	mov x1, 129
+	mov x2, 98
+	mov x3,	12
+	mov x4, 12
+	bl createRectangle
+
+	movz x0, 0x00d5, lsl 16
+	movk x0, 0x0000, lsl 0
+	mov x1, 147
+	mov x2, 98
+	mov x3,	12
+	mov x4, 12
+	bl createRectangle
+
+	onStatus:
+	ldr x0, [sp]
+	add sp, sp, 16
+	cbz x0, doneLightKey
+	sub sp, sp, 16
+	str x0, [sp]
+
+	movz x0, 0x0021, lsl 16
+	movk x0, 0xc59b, lsl 0
+	mov x1, 129
+	mov x2, 98
+	mov x3,	12
+	mov x4, 12
+	bl createRectangle
+
+	movz x0, 0x0000, lsl 16
+	movk x0, 0x0000, lsl 0
+	mov x1, 147
+	mov x2, 98
+	mov x3,	12
+	mov x4, 12
+	bl createRectangle
+
+	doneLightKey:
+	ldr x30, [sp]
+	add sp, sp, 16
+	ret
 
 createLightKey:
 	// Input values:
@@ -268,50 +329,8 @@ createLightKey:
 
 	ldr x0, [sp]
 	add sp, sp, 16
-	cbnz x0, onStatus
-	sub sp, sp, 16
-	str x0, [sp]
-
-	movz x0, 0x0000, lsl 16
-	movk x0, 0x0000, lsl 0
-	mov x1, 129
-	mov x2, 98
-	mov x3,	12
-	mov x4, 12
-	bl createRectangle
-
-	movz x0, 0x00d5, lsl 16
-	movk x0, 0x0000, lsl 0
-	mov x1, 147
-	mov x2, 98
-	mov x3,	12
-	mov x4, 12
-	bl createRectangle
-
-	onStatus:
-	ldr x0, [sp]
-	add sp, sp, 16
-	cbz x0, doneLightKey
-	sub sp, sp, 16
-	str x0, [sp]
-
-	movz x0, 0x0021, lsl 16
-	movk x0, 0xc59b, lsl 0
-	mov x1, 129
-	mov x2, 98
-	mov x3,	12
-	mov x4, 12
-	bl createRectangle
-
-	movz x0, 0x0000, lsl 16
-	movk x0, 0x0000, lsl 0
-	mov x1, 147
-	mov x2, 98
-	mov x3,	12
-	mov x4, 12
-	bl createRectangle
-
-	doneLightKey:
+	bl lightSwitcher
+	
 	ldr x30, [sp]
 	add sp, sp, 16
 	ret
