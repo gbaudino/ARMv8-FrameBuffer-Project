@@ -183,12 +183,34 @@ createRectangleTriangle:
 	add sp, sp, 16
 	ret
 
+createCuevaRaton:
+	//Guardado registro return
+	sub sp, sp, 16
+	str x30, [sp]
+
+	// Input values:
+	// - x0: 	Color of Base
+	// - x5:	Variacion tamano
+
+	mov x1, 380
+	mov x2, 120
+	add x2, x2, x5
+	mov x3, 18
+	sub x3, x3, x5
+	mov x4, 16
+	sub x4, x4, x5
+	bl createRectangle
+
+	//Carga del registro de return y devolucion del siguiente
+	ldr x30, [sp]
+	add sp, sp, 16
+	ret
 
 createBackground:
 	//Guardado registro return
 	sub sp, sp, 16
 	str x30, [sp]
-
+	//Pared
 	movz x0, 0x005f, lsl 16
 	movk x0, 0x4d84, lsl 0
 	mov x1, 0
@@ -197,7 +219,7 @@ createBackground:
 	mov x4, x21
 	bl createRectangle
 
-
+	//Suelo
 	movz x0, 0x0079, lsl 16
 	movk x0, 0x5548, lsl 0
 	mov x1, 397
@@ -205,6 +227,21 @@ createBackground:
 	mov x3, 83
 	mov x4, x21
 	bl createRectangle
+
+	//Cueva raton
+	movz x0, 0x0022, lsl 16
+	movk x0, 0x2222, lsl 0
+	mov x5, 0
+	bl createCuevaRaton
+
+	//Cueva raton
+	movz x0, 0x0000, lsl 16
+	movk x0, 0x0000, lsl 0
+	mov x5, 2
+	bl createCuevaRaton
+
+	//Semicirculo cueva raton
+	
 
 	//Carga del registro de return y devolucion del siguiente
 	ldr x30, [sp]
@@ -826,7 +863,7 @@ createPoster:
 	mov x4, 127
 	bl createRectangle
 
-		movz x0, 0x00fb, lsl 16
+	movz x0, 0x00fb, lsl 16
 	movk x0, 0xfcf9, lsl 0
 	mov x1, 85
 	mov x2, 465
@@ -1122,6 +1159,95 @@ createArcadeCase:
 	add sp, sp, 16
 	ret
 
+createNintendoLogo:
+	//Guardado registro return
+	sub sp, sp, 16
+	str x30, [sp]
+
+	// Input values:
+	// - x0: 	Color of Base
+	// - x5:	Variacion tamano
+	mov x1, 32
+	add x1, x1, x5
+	mov x2, 242
+	add x2, x2, x5
+	mov x3,	20
+	sub x3, x3, x5
+	sub x3, x3, x5
+	mov x4, 144
+	sub x4, x4, x5
+	sub x4, x4, x5
+	bl createRectangle
+
+	mov x1, 30
+	add x1, x1, x5
+	mov x2, 244
+	add x2, x2, x5
+	mov x3,	2
+	mov x4, 140
+	sub x4, x4, x5
+	sub x4, x4, x5
+	bl createRectangle
+
+	mov x1, 28
+	add x1, x1, x5
+	mov x2, 246
+	add x2, x2, x5
+	mov x3,	2
+	mov x4, 136
+	sub x4, x4, x5
+	sub x4, x4, x5
+	bl createRectangle
+
+	mov x1, 26
+	add x1, x1, x5
+	mov x2, 248
+	add x2, x2, x5
+	mov x3,	2
+	mov x4, 132
+	sub x4, x4, x5
+	sub x4, x4, x5
+	bl createRectangle
+
+	mov x1, 52
+	sub x1, x1, x5
+	mov x2, 244
+	add x2, x2, x5
+	mov x3,	2
+	mov x4, 140
+	sub x4, x4, x5
+	sub x4, x4, x5
+	bl createRectangle
+
+	mov x1, 54
+	sub x1, x1, x5
+	mov x2, 246
+	add x2, x2, x5
+	mov x3,	2
+	mov x4, 136
+	sub x4, x4, x5
+	sub x4, x4, x5
+	bl createRectangle
+
+	mov x1, 56
+	sub x1, x1, x5
+	mov x2, 248
+	add x2, x2, x5
+	mov x3,	2
+	mov x4, 132
+	sub x4, x4, x5
+	sub x4, x4, x5
+	bl createRectangle
+
+	ldr x30, [sp]
+	add sp, sp, 16
+	ret
+
+createNLetterLogo:
+	// Input values:
+	// - x0: 	Color of Base
+	// - x1: 	Coord inicial Y
+	// - x2: 	Coord inicial X
 
 createArcadeTop:
 	//Guardado registro return
@@ -1211,6 +1337,20 @@ createArcadeTop:
 	mov x3,	9
 	mov x4, 163
 	bl createRectangle
+
+	//Parte blanca logo nintendo
+	movz x0, 0x00f6, lsl 16
+	movk x0, 0x1b26, lsl 0
+	mov x5, 0
+	bl createNintendoLogo
+
+	//Parte roja logo nintendo
+	movz x0, 0x00f9, lsl 16
+	movk x0, 0xfaf5, lsl 0
+	mov x5, 2
+	bl createNintendoLogo
+
+	
 
 	ldr x30, [sp]
 	add sp, sp, 16
