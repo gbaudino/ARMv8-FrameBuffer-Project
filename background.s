@@ -18,7 +18,7 @@ createLightKey:
 	mov x2, 86
 	mov x3,	54
 	mov x4, 35
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x00c9, lsl 16
 	movk x0, 0xd7da, lsl 0
@@ -26,7 +26,7 @@ createLightKey:
 	mov x2, 87
 	mov x3,	52
 	mov x4, 33
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x0000, lsl 16
 	movk x0, 0x0000, lsl 0
@@ -34,7 +34,7 @@ createLightKey:
 	mov x2, 103
 	mov x3,	2
 	mov x4, 2
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x0000, lsl 16
 	movk x0, 0x0000, lsl 0
@@ -42,7 +42,7 @@ createLightKey:
 	mov x2, 103
 	mov x3,	2
 	mov x4, 2
-	bl createRectangle
+	bl createVRectangle
 	
 	movz x0, 0x0061, lsl 16
 	movk x0, 0x6161, lsl 0
@@ -50,7 +50,7 @@ createLightKey:
 	mov x2, 98
 	mov x3,	6
 	mov x4, 12
-	bl createRectangle
+	bl createVRectangle
 
 	ldr x0, [sp]
 	add sp, sp, 16
@@ -73,7 +73,7 @@ createMonkey:
 	mov x2, 539
 	mov x3,	4
 	mov x4, 19
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x0070, lsl 16
 	movk x0, 0x4d37, lsl 0
@@ -81,7 +81,7 @@ createMonkey:
 	mov x2, 539
 	mov x3,	1
 	mov x4, 14
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x0070, lsl 16
 	movk x0, 0x4d37, lsl 0
@@ -89,7 +89,7 @@ createMonkey:
 	mov x2, 534
 	mov x3,	5
 	mov x4, 19
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x0070, lsl 16
 	movk x0, 0x4d37, lsl 0
@@ -97,7 +97,7 @@ createMonkey:
 	mov x2, 529
 	mov x3,	5
 	mov x4, 35
-	bl createRectangle
+	bl createVRectangle
 	
 	movz x0, 0x0070, lsl 16
 	movk x0, 0x4d37, lsl 0
@@ -105,7 +105,7 @@ createMonkey:
 	mov x2, 514
 	mov x3,	5
 	mov x4, 40
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x0070, lsl 16
 	movk x0, 0x4d37, lsl 0
@@ -113,7 +113,7 @@ createMonkey:
 	mov x2, 509
 	mov x3,	5
 	mov x4, 30
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x0070, lsl 16
 	movk x0, 0x4d37, lsl 0
@@ -121,7 +121,7 @@ createMonkey:
 	mov x2, 504
 	mov x3,	5
 	mov x4, 35
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x0070, lsl 16
 	movk x0, 0x4d37, lsl 0
@@ -129,7 +129,7 @@ createMonkey:
 	mov x2, 499
 	mov x3,	5
 	mov x4, 45
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x0070, lsl 16
 	movk x0, 0x4d37, lsl 0
@@ -137,7 +137,7 @@ createMonkey:
 	mov x2, 499
 	mov x3,	5
 	mov x4, 40
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x0070, lsl 16
 	movk x0, 0x4d37, lsl 0
@@ -145,7 +145,7 @@ createMonkey:
 	mov x2, 494
 	mov x3,	5
 	mov x4, 40
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x0070, lsl 16
 	movk x0, 0x4d37, lsl 0
@@ -153,7 +153,7 @@ createMonkey:
 	mov x2, 494
 	mov x3,	11
 	mov x4, 50
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x0070, lsl 16
 	movk x0, 0x4d37, lsl 0
@@ -161,7 +161,7 @@ createMonkey:
 	mov x2, 488
 	mov x3,	15
 	mov x4, 51
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x0070, lsl 16
 	movk x0, 0x4d37, lsl 0
@@ -169,7 +169,7 @@ createMonkey:
 	mov x2, 494
 	mov x3,	5
 	mov x4, 20
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x0070, lsl 16
 	movk x0, 0x4d37, lsl 0
@@ -177,7 +177,7 @@ createMonkey:
 	mov x2, 488
 	mov x3,	5
 	mov x4, 20
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x0070, lsl 16
 	movk x0, 0x4d37, lsl 0
@@ -185,7 +185,7 @@ createMonkey:
 	mov x2, 519
 	mov x3,	5
 	mov x4, 20
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x0070, lsl 16
 	movk x0, 0x4d37, lsl 0
@@ -193,7 +193,7 @@ createMonkey:
 	mov x2, 529
 	mov x3,	5
 	mov x4, 10
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x0070, lsl 16
 	movk x0, 0x4d37, lsl 0
@@ -201,7 +201,7 @@ createMonkey:
 	mov x2, 554
 	mov x3,	15
 	mov x4, 10
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x0070, lsl 16
 	movk x0, 0x4d37, lsl 0
@@ -209,7 +209,7 @@ createMonkey:
 	mov x2, 559
 	mov x3,	10
 	mov x4, 10
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x0070, lsl 16
 	movk x0, 0x4d37, lsl 0
@@ -217,7 +217,7 @@ createMonkey:
 	mov x2, 549
 	mov x3,	11
 	mov x4, 5
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x0070, lsl 16
 	movk x0, 0x4d37, lsl 0
@@ -225,7 +225,7 @@ createMonkey:
 	mov x2, 564
 	mov x3,	5
 	mov x4, 5
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x0052, lsl 16
 	movk x0, 0x2f1b, lsl 0
@@ -233,7 +233,7 @@ createMonkey:
 	mov x2, 514
 	mov x3,	15
 	mov x4, 5
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x0052, lsl 16
 	movk x0, 0x2f1b, lsl 0
@@ -241,7 +241,7 @@ createMonkey:
 	mov x2, 509
 	mov x3,	5
 	mov x4, 5
-	bl createRectangle
+	bl createVRectangle
 
 	//Creación parte rosa
 
@@ -251,7 +251,7 @@ createMonkey:
 	mov x2, 560
 	mov x3,	5
 	mov x4, 9
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x00e9, lsl 16
 	movk x0, 0xc8a5, lsl 0
@@ -259,7 +259,7 @@ createMonkey:
 	mov x2, 519
 	mov x3,	5
 	mov x4, 20
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x00e9, lsl 16
 	movk x0, 0xc8a5, lsl 0
@@ -267,7 +267,7 @@ createMonkey:
 	mov x2, 488
 	mov x3,	5
 	mov x4, 26
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x00e9, lsl 16
 	movk x0, 0xc8a5, lsl 0
@@ -275,7 +275,7 @@ createMonkey:
 	mov x2, 524
 	mov x3,	5
 	mov x4, 5
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x00e9, lsl 16
 	movk x0, 0xc8a5, lsl 0
@@ -283,7 +283,7 @@ createMonkey:
 	mov x2, 514
 	mov x3,	5
 	mov x4, 5
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x00e9, lsl 16
 	movk x0, 0xc8a5, lsl 0
@@ -291,7 +291,7 @@ createMonkey:
 	mov x2, 534
 	mov x3,	4
 	mov x4, 10
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x00e9, lsl 16
 	movk x0, 0xc8a5, lsl 0
@@ -299,7 +299,7 @@ createMonkey:
 	mov x2, 539
 	mov x3,	10
 	mov x4, 5
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x00e9, lsl 16
 	movk x0, 0xc8a5, lsl 0
@@ -307,7 +307,7 @@ createMonkey:
 	mov x2, 549
 	mov x3,	5
 	mov x4, 20
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x00e9, lsl 16
 	movk x0, 0xc8a5, lsl 0
@@ -315,7 +315,7 @@ createMonkey:
 	mov x2, 544
 	mov x3,	10
 	mov x4, 30
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x00e9, lsl 16
 	movk x0, 0xc8a5, lsl 0
@@ -323,7 +323,7 @@ createMonkey:
 	mov x2, 539
 	mov x3,	10
 	mov x4, 40
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x00e9, lsl 16
 	movk x0, 0xc8a5, lsl 0
@@ -331,7 +331,7 @@ createMonkey:
 	mov x2, 544
 	mov x3,	5
 	mov x4, 20
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x00e9, lsl 16
 	movk x0, 0xc8a5, lsl 0
@@ -339,7 +339,7 @@ createMonkey:
 	mov x2, 569
 	mov x3,	5
 	mov x4, 5
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x00e9, lsl 16
 	movk x0, 0xc8a5, lsl 0
@@ -347,7 +347,7 @@ createMonkey:
 	mov x2, 539
 	mov x3,	10
 	mov x4, 10
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x00e9, lsl 16
 	movk x0, 0xc8a5, lsl 0
@@ -355,7 +355,7 @@ createMonkey:
 	mov x2, 554
 	mov x3,	4
 	mov x4, 15
-	bl createRectangle
+	bl createVRectangle
 
 	//Creación corbata
 
@@ -365,7 +365,7 @@ createMonkey:
 	mov x2, 524
 	mov x3,	15
 	mov x4, 5
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x00f6, lsl 16
 	movk x0, 0x1b26, lsl 0
@@ -373,7 +373,7 @@ createMonkey:
 	mov x2, 529
 	mov x3,	5
 	mov x4, 5
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x00f6, lsl 16
 	movk x0, 0x1b26, lsl 0
@@ -381,7 +381,7 @@ createMonkey:
 	mov x2, 534
 	mov x3,	10
 	mov x4, 5
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x00f6, lsl 16
 	movk x0, 0x1b26, lsl 0
@@ -389,7 +389,7 @@ createMonkey:
 	mov x2, 539
 	mov x3,	5
 	mov x4, 5
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x00f6, lsl 16
 	movk x0, 0x1b26, lsl 0
@@ -397,7 +397,7 @@ createMonkey:
 	mov x2, 544
 	mov x3,	21
 	mov x4, 5
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x00f6, lsl 16
 	movk x0, 0x1b26, lsl 0
@@ -405,7 +405,7 @@ createMonkey:
 	mov x2, 549
 	mov x3,	26
 	mov x4, 5
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x00f6, lsl 16
 	movk x0, 0x1b26, lsl 0
@@ -413,7 +413,7 @@ createMonkey:
 	mov x2, 554
 	mov x3,	6
 	mov x4, 5
-	bl createRectangle
+	bl createVRectangle
 
 	//Creación de ojos y boca
 
@@ -423,7 +423,7 @@ createMonkey:
 	mov x2, 554
 	mov x3,	11
 	mov x4, 6
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x0000, lsl 16
 	movk x0, 0x0000, lsl 0
@@ -431,7 +431,7 @@ createMonkey:
 	mov x2, 560
 	mov x3,	11
 	mov x4, 4
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x0000, lsl 16
 	movk x0, 0x0000, lsl 0
@@ -439,7 +439,7 @@ createMonkey:
 	mov x2, 549
 	mov x3,	4
 	mov x4, 5
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x0000, lsl 16
 	movk x0, 0x0000, lsl 0
@@ -447,7 +447,7 @@ createMonkey:
 	mov x2, 554
 	mov x3,	5
 	mov x4, 20
-	bl createRectangle
+	bl createVRectangle
 
 
 	ldr x30, [sp]
@@ -466,7 +466,7 @@ createPoster:
 	mov x2, 470
 	mov x3,	116
 	mov x4, 127
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x00fb, lsl 16
 	movk x0, 0xfcf9, lsl 0
@@ -474,7 +474,7 @@ createPoster:
 	mov x2, 465
 	mov x3,	4
 	mov x4, 138
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x00fb, lsl 16
 	movk x0, 0xfcf9, lsl 0
@@ -482,7 +482,7 @@ createPoster:
 	mov x2, 465
 	mov x3,	4
 	mov x4, 138
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x00fb, lsl 16
 	movk x0, 0xfcf9, lsl 0
@@ -490,7 +490,7 @@ createPoster:
 	mov x2, 468
 	mov x3,	127
 	mov x4, 4
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x00fb, lsl 16
 	movk x0, 0xfcf9, lsl 0
@@ -498,7 +498,7 @@ createPoster:
 	mov x2, 596
 	mov x3,	127
 	mov x4, 4
-	bl createRectangle
+	bl createVRectangle
 	
 	bl createMonkey
 
@@ -519,7 +519,7 @@ createBackground:
 	mov x2, 0
 	mov x3, 397
 	mov x4, x21
-	bl createRectangle
+	bl createVRectangle
 
 	//Suelo
 	movz x0, 0x0079, lsl 16
@@ -528,7 +528,7 @@ createBackground:
 	mov x2, 0
 	mov x3, 83
 	mov x4, x21
-	bl createRectangle
+	bl createVRectangle
 
 	//Cueva raton
 	movz x0, 0x0022, lsl 16
@@ -554,7 +554,7 @@ createBackground:
 	mov x2, 585
 	mov x3,	18
 	mov x4, 27
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x00bf, lsl 16
 	movk x0, 0xbfbb, lsl 0
@@ -562,7 +562,7 @@ createBackground:
 	mov x2, 589
 	mov x3,	26
 	mov x4, 19
-	bl createRectangle
+	bl createVRectangle
 
    	mov x0, 0
     bl createLightKey

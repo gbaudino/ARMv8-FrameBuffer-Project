@@ -1,8 +1,41 @@
-.globl createRectangle
-createRectangle:
+generateFrstPixelCoord:
 	//Guardado registro return
 	sub sp, sp, 16
 	str x30, [sp]
+
+	// Input values:
+        // - x1:    Coord primero en y
+        // - x2:    Coord primero en x
+	
+	// Output values:
+		// - x7: 	First pixel coord
+
+	//Saved values used:
+		// - x20:	Framebuffer Base Address
+		// - x21:	Screen Width
+
+	//Generacion de la coordenada del primero
+	//Coord del pixel = Dirección de inicio + 4 * [x + (y * 640)]
+	mul x7, x1, x21 		// (y * 640)
+	add x7,x7, x2		// + (Coord del primero en x) = [x + (y * 640)]
+	lsl x7, x7, 2 		//(4 * [x + (y * 640)])
+	add x7, x7, x20 		// Dirección de inicio + 4 * [x + (y * 640)]
+
+	//Carga del registro de return y devolucion del siguiente
+	ldr x30, [sp]
+	add sp, sp, 16
+	ret
+
+
+.globl createVRectangle
+createVRectangle:
+	//Guardado registro return
+	sub sp, sp, 16
+	str x30, [sp]
+
+	//Guardado registros temporales usados
+	sub sp, sp, 16
+	str x9, [sp]
 
 	// Input values:
 	    // - x0:    Color Base
@@ -12,53 +45,74 @@ createRectangle:
         // - x4:    Ancho del rectangulo
 
     //Temporary values:
-		// - x9: 	Temp Base Address of Rectangle
-		// - x10:	Temp Calc of sum of memory needed for the next row
-		// - x11: 	Temp actual row
-		// - x12: 	Temp actual column
+		// - x9: 	Temp copia del alto del rectangulo
 
-	//Saved values used:
-		// - x20:	Framebuffer Base Address
-		// - x21:	Screen Width
-		// - x22:	Screen Height
-
+	mov x9, x3
+	mov x3, 0
+	genVRectangle:
+		bl createHLine
+		add x1, x1, 1
+		add x3, x3, 1
+		cmp x3, x9
+		bne genVRectangle
 	
-	//Generacion de la coordenada del primero del cuadrado
-	//Coord del pixel = Dirección de inicio + 4 * [x + (y * 640)]
-	mul x9, x1, x21 		// (y * 640)
-	add x9,x9, x2		// + (Coord del primero en x) = [x + (y * 640)]
-	lsl x9, x9, 2 		//(4 * [x + (y * 640)])
-	add x9,x9,x20 		// Dirección de inicio + 4 * [x + (y * 640)]
+	//Carga de registros temporales usados
+	ldr x9, [sp]
+	add sp, sp, 16
 
-
-	//Generacion de la cantidad de memoria a correr x9 para llevarlo a la siguiente fila
-	//(SCREEN_WIDTH - SQUARE_WIDTH)*4
-	mov x10, x21
-	sub x10, x10, x4
-	lsl x10, x10, 2
-
-	mov x12, x3 //Set Rectangle Height
-	resetRectW:
-	mov x11, x4 //Set and Reset Rectangle Width
-	nxtPixelRect:
-		stur w0,[x9]	   	 	// Set color of pixel N
-		add x9,x9,4	   			// Next pixel
-		sub x11,x11,1	   			// decrement X counter
-		cbnz x11,nxtPixelRect   	// If not end row jump
-		add x9, x9, x10	 		// Direccion actual + restante para la sig fila = x19 + (SCREEN_WIDTH - FLOOR_WIDTH)*4
-		sub x12,x12,1	    	 	// Decrement Y counter
-		cbnz x12,resetRectW 		// if not last row, jump
-	
-	//Carga del registro de return y devolucion del siguiente
+	//Carga del registro de return y return
 	ldr x30, [sp]
 	add sp, sp, 16
 	ret
+
+.globl createHRectangle
+createHRectangle:
+	//Guardado registro return
+	sub sp, sp, 16
+	str x30, [sp]
+
+	//Guardado registros temporales usados
+	sub sp, sp, 16
+	str x9, [sp]
+
+	// Input values:
+	    // - x0:    Color Base
+        // - x1:    Coord primero en y
+        // - x2:    Coord primero en x
+        // - x3:    Alto del rectangulo
+        // - x4:    Ancho del rectangulo
+
+    //Temporary values:
+		// - x9: 	Temp copia del ancho del rectangulo
+
+	mov x9, x4
+	mov x4, 0
+	genHRectangle:
+		bl createVLine
+		add x2, x2, 1
+		add x4, x4, 1
+		cmp x4, x9
+		bne genHRectangle
+
+	//Carga de registros temporales usados
+	ldr x9, [sp]
+	add sp, sp, 16
+
+	//Carga del registro de return y return
+	ldr x30, [sp]
+	add sp, sp, 16
+	ret
+
 
 .globl createTriangle
 createTriangle: 
 	//Guardado registro return
 	sub sp, sp, 16
 	str x30, [sp] 
+
+	//Guardado registros temporales usados
+	sub sp, sp, 16
+	str x9, [sp]
 
 	// Input values:
 		// - x0: Color of Triangle
@@ -72,9 +126,20 @@ createTriangle:
 	
 	// Temporary values:
 		// - x9: Temp red ancho escalon
+
 	add x9, x6, x6
+
 	loop_Triang2:
-		bl createRectangle
+		//Guardado registros usados
+		sub sp, sp, 16
+		str x7, [sp]
+		
+		bl createVRectangle
+		
+		//Carga de registros usados
+		ldr x7, [sp]
+		add sp, sp, 16
+		
 		sub x7, x7, 1
 		loop_Triang:
 			sub x1, x1, x3
@@ -88,8 +153,11 @@ createTriangle:
 			blt loop_Triang2
 	doneTriang:
 
+	//Carga de registros temporales usados
+	ldr x9, [sp]
+	add sp, sp, 16
 
-	//Carga del registro de return y devolucion del siguiente
+	//Carga del registro de return y return
 	ldr x30, [sp]
 	add sp, sp, 16
 	ret
@@ -99,7 +167,11 @@ createTriangle:
 createRectangleTriangle: 
 	//Guardado registro return
 	sub sp, sp, 16
-	str x30, [sp] 
+	str x30, [sp]
+
+	//Guardado registros temporales usados
+	sub sp, sp, 16
+	str x9, [sp]
 
 	// Input values:
 		// - x0: Color of Triangle
@@ -112,10 +184,11 @@ createRectangleTriangle:
 		// - x7: Cantidad de escalones
 	
 	// Temporary values:
-		// - x9: Temp red ancho escalon
+		// - x9: Temp reduccion ancho escalon
+	
 	add x9, x6, x6
 	loop_RectangleTriang2:
-		bl createRectangle
+		bl createVRectangle
 		sub x7, x7, 1
 		loop_RectangleTriang:
 			sub x1, x1, x3
@@ -131,8 +204,135 @@ createRectangleTriangle:
 			blt loop_RectangleTriang2
 	doneRectTriang:
 
+	//Carga de registros temporales usados
+	ldr x9, [sp]
+	add sp, sp, 16
 
-	//Carga del registro de return y devolucion del siguiente
+	//Carga del registro de return y return
+	ldr x30, [sp]
+	add sp, sp, 16
+	ret
+
+
+.globl createHLine
+createHLine:
+	//Guardado registro return
+	sub sp, sp, 16
+	str x30, [sp]
+	//Guardado registros temporales usados
+	sub sp, sp, 16
+	str x9, [sp]
+
+	sub sp, sp, 16
+	str x10, [sp]
+
+	// Input values:
+	    // - x0:    Color Base
+        // - x1:    Coord primero en y
+        // - x2:    Coord primero en x
+        // - x4:    Largo (Horizontal) de la linea
+
+    //Temporary values:
+		// - x9: 	Temp Base Address of Line
+		// - x10:	Temp Largo actual
+
+	
+	//Guardado registros usados
+	sub sp, sp, 16
+	str x7, [sp]
+
+	bl generateFrstPixelCoord
+	mov x9, x7
+	
+	//Carga de registros usados
+	ldr x7, [sp]
+	add sp, sp, 16
+
+	mov x10, x4 //Set Line Width
+	nxtPixelHLine:
+		stur w0,[x9]	   	 		// Set color of pixel N
+		add x9,x9,4	   				// Next pixel
+		sub x10,x10,1	   			// decrement X counter
+		cbnz x10,nxtPixelHLine   	// If not end row jump
+	
+	//Carga de registros temporales usados
+	ldr x10, [sp]
+	add sp, sp, 16
+
+	ldr x9, [sp]
+	add sp, sp, 16
+
+	//Carga del registro de return y return
+	ldr x30, [sp]
+	add sp, sp, 16
+	ret
+
+
+
+.globl createVLine
+createVLine:
+	//Guardado registro return
+	sub sp, sp, 16
+	str x30, [sp]
+
+	//Guardado registros temporales usados
+	sub sp, sp, 16
+	str x9, [sp]
+
+	sub sp, sp, 16
+	str x10, [sp]
+
+	sub sp, sp, 16
+	str x11, [sp]
+
+	// Input values:
+	    // - x0:    Color Base
+        // - x1:    Coord primero en y
+        // - x2:    Coord primero en x
+        // - x3:    Largo (Vertical)
+
+    //Temporary values:
+		// - x9: 	Temp Base Address of Line
+		// - x10:	Temp Calc of sum of memory needed for the next row
+		// - x11:	Temp Largo actual
+
+
+	//Guardado registros usados
+	sub sp, sp, 16
+	str x7, [sp]
+
+	bl generateFrstPixelCoord
+	mov x9, x7
+
+	//Carga de registros usados
+	ldr x7, [sp]
+	add sp, sp, 16
+
+
+	//Generacion de la cantidad de memoria a correr x9 para llevarlo a la siguiente fila
+	//(SCREEN_WIDTH - LINE_WIDTH)*4
+	mov x10, x21
+	sub x10, x10, 1
+	lsl x10, x10, 2
+
+	mov x11, x3
+	DrawVLine:
+		stur w0,[x9]	   	 	// Set color of pixel N
+		add x9, x9, x10			//NextLine
+		sub x11,x11,1	   		// decrement X counter
+		cbnz x11,DrawVLine   	// If not end row jump
+	
+	//Carga de registros temporales usados
+	ldr x11, [sp]
+	add sp, sp, 16
+
+	ldr x10, [sp]
+	add sp, sp, 16
+
+	ldr x9, [sp]
+	add sp, sp, 16
+
+	//Carga del registro de return y return
 	ldr x30, [sp]
 	add sp, sp, 16
 	ret

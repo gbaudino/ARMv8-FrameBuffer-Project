@@ -23,7 +23,7 @@ lightSwitcher:
 	mov x2, 98
 	mov x3,	12
 	mov x4, 12
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x00d5, lsl 16
 	movk x0, 0x0000, lsl 0
@@ -31,7 +31,7 @@ lightSwitcher:
 	mov x2, 98
 	mov x3,	12
 	mov x4, 12
-	bl createRectangle
+	bl createVRectangle
 
 	onStatus:
 	ldr x0, [sp]
@@ -46,7 +46,7 @@ lightSwitcher:
 	mov x2, 98
 	mov x3,	12
 	mov x4, 12
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x0000, lsl 16
 	movk x0, 0x0000, lsl 0
@@ -54,7 +54,7 @@ lightSwitcher:
 	mov x2, 98
 	mov x3,	12
 	mov x4, 12
-	bl createRectangle
+	bl createVRectangle
 
 	doneLightKey:
 	ldr x30, [sp]
@@ -78,7 +78,7 @@ lineaNegra:
     mov x2, 124
     mov x3, 1
     mov x4, 3
-    bl createRectangle
+    bl createVRectangle
 
     movz x0, 0x0000, lsl 16
     movk x0, 0x0000, lsl 0
@@ -87,7 +87,7 @@ lineaNegra:
     mov x2, 129
     mov x3, 1
     mov x4, 3
-    bl createRectangle
+    bl createVRectangle
 
     movz x7, 0x00fe, lsl 16
     movk x7, 0x0000, lsl 0
@@ -115,7 +115,7 @@ parpadeoRaton:
         bne repParpadeo
     
     movz x7, 0x00ff, lsl 16
-    movk x7, 0x0000, lsl 0
+    movk x7, 0xf000, lsl 0
     bl delay
 	
     bl createRatonEyes
@@ -123,3 +123,8 @@ parpadeoRaton:
 	ldr x30, [sp]
 	add sp, sp, 16
 	ret
+
+
+.globl generateCurrent
+generateCurrent:
+	

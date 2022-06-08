@@ -9,7 +9,7 @@ createCable:
 	mov x2, 593
 	mov x3,	18
 	mov x4, 12
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x0042, lsl 16
 	movk x0, 0x4242, lsl 0
@@ -17,7 +17,7 @@ createCable:
 	mov x2, 596
 	mov x3,	44
 	mov x4, 6
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x0042, lsl 16
 	movk x0, 0x4242, lsl 0
@@ -25,7 +25,7 @@ createCable:
 	mov x2, 592
 	mov x3,	6
 	mov x4, 6
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x0042, lsl 16
 	movk x0, 0x4242, lsl 0
@@ -33,31 +33,34 @@ createCable:
 	mov x2, 404
 	mov x3,	6
 	mov x4, 190
-	bl createRectangle
+	bl createVRectangle
 
+	//Interior cable vertical
 	movz x0, 0x0000, lsl 16
 	movk x0, 0x0000, lsl 0
 	mov x1, 328
 	mov x2, 597
 	mov x3,	43
 	mov x4, 4
-	bl createRectangle
+	bl createVRectangle
 
+	//Interior cable cuadradito curva
 	movz x0, 0x0000, lsl 16
 	movk x0, 0x0000, lsl 0
 	mov x1, 371
 	mov x2, 593
 	mov x3,	4
 	mov x4, 4
-	bl createRectangle
+	bl createVRectangle
 
+	//Interior cable horizontal
 	movz x0, 0x0000, lsl 16
 	movk x0, 0x0000, lsl 0
 	mov x1, 375
 	mov x2, 404
 	mov x3,	4
 	mov x4, 189
-	bl createRectangle
+	bl createVRectangle
 
 
 	ldr x30, [sp]
@@ -83,7 +86,7 @@ createArcadeBase:
 	mov x4, 222
 	sub x4, x4, x5
 	sub x4, x4, x5
-	bl createRectangle
+	bl createVRectangle
 
 	mov x1, 393
 	add x1, x1, x5
@@ -93,7 +96,7 @@ createArcadeBase:
 	mov x4, 198
 	sub x4, x4, x5
 	sub x4, x4, x5
-	bl createRectangle
+	bl createVRectangle
 
 	mov x1, 397
 	add x1, x1, x5
@@ -103,7 +106,7 @@ createArcadeBase:
 	mov x4, 206
 	sub x4, x4, x5
 	sub x4, x4, x5
-	bl createRectangle
+	bl createVRectangle
 
 	mov x1, 401
 	add x1, x1, x5
@@ -113,7 +116,7 @@ createArcadeBase:
 	mov x4, 214
 	sub x4, x4, x5
 	sub x4, x4, x5
-	bl createRectangle
+	bl createVRectangle
 
 	mov x1, 425
 	sub x1, x1, x5
@@ -123,7 +126,7 @@ createArcadeBase:
 	mov x4, 214
 	sub x4, x4, x5
 	sub x4, x4, x5
-	bl createRectangle
+	bl createVRectangle
 
 	mov x1, 429
 	sub x1, x1, x5
@@ -133,7 +136,7 @@ createArcadeBase:
 	mov x4, 206
 	sub x4, x4, x5
 	sub x4, x4, x5
-	bl createRectangle
+	bl createVRectangle
 
 	mov x1, 433
 	sub x1, x1, x5
@@ -143,7 +146,7 @@ createArcadeBase:
 	mov x4, 198
 	sub x4, x4, x5
 	sub x4, x4, x5
-	bl createRectangle
+	bl createVRectangle
 
 	ldr x30, [sp]
 	add sp, sp, 16
@@ -212,7 +215,7 @@ createArcadeCase:
 	mov x2, 233
 	mov x3,	13
 	mov x4, 163
-	bl createRectangle
+	bl createVRectangle
 
 	//Creacion bordes blancos maq
 	movz x0, 0x00f9, lsl 16
@@ -221,7 +224,7 @@ createArcadeCase:
 	mov x2, 221
 	mov x3, 408
 	mov x4, 187
-	bl createRectangle
+	bl createVRectangle
 
 	//Creacion bordes blancos panel
 	movz x0, 0x00f9, lsl 16
@@ -242,7 +245,7 @@ createArcadeCase:
 	mov x2, 197
 	mov x3, 22
 	mov x4, 236
-	bl createRectangle
+	bl createVRectangle
 
 	//Creacion bordes cyan panel
 	movz x0, 0x0064, lsl 16
@@ -263,7 +266,7 @@ createArcadeCase:
 	mov x2, 201
 	mov x3, 22
 	mov x4, 228
-	bl createRectangle
+	bl createVRectangle
 
 	//Añadimos borde para terminar el detalle (izq)
 	movz x0, 0x00f9, lsl 16
@@ -272,7 +275,7 @@ createArcadeCase:
 	mov x2, 197
 	mov x3, 4
 	mov x4, 28
-	bl createRectangle
+	bl createVRectangle
 
 	//Añadimos borde para terminar el detalle (der)
 	movz x0, 0x00f9, lsl 16
@@ -281,7 +284,7 @@ createArcadeCase:
 	mov x2, 404
 	mov x3, 4
 	mov x4, 28
-	bl createRectangle
+	bl createVRectangle
 
 	//Fix
 	movz x0, 0x0064, lsl 16
@@ -290,7 +293,7 @@ createArcadeCase:
 	mov x2, 221
 	mov x3, 5
 	mov x4, 187
-	bl createRectangle
+	bl createVRectangle
 
 	//Creacion blanco abajo
 	movz x0, 0x00f9, lsl 16
@@ -311,7 +314,7 @@ createArcadeCase:
 	mov x2, 225
 	mov x3,	387
 	mov x4, 179
-	bl createRectangle
+	bl createVRectangle
 
 	ldr x30, [sp]
 	add sp, sp, 16
@@ -426,7 +429,7 @@ createNintendoLogo:
 	mov x4, 144
 	sub x4, x4, x5
 	sub x4, x4, x5
-	bl createRectangle
+	bl createVRectangle
 
 	mov x1, 30
 	add x1, x1, x5
@@ -436,7 +439,7 @@ createNintendoLogo:
 	mov x4, 140
 	sub x4, x4, x5
 	sub x4, x4, x5
-	bl createRectangle
+	bl createVRectangle
 
 	mov x1, 28
 	add x1, x1, x5
@@ -446,7 +449,7 @@ createNintendoLogo:
 	mov x4, 136
 	sub x4, x4, x5
 	sub x4, x4, x5
-	bl createRectangle
+	bl createVRectangle
 
 	mov x1, 26
 	add x1, x1, x5
@@ -456,7 +459,7 @@ createNintendoLogo:
 	mov x4, 132
 	sub x4, x4, x5
 	sub x4, x4, x5
-	bl createRectangle
+	bl createVRectangle
 
 	mov x1, 52
 	sub x1, x1, x5
@@ -466,7 +469,7 @@ createNintendoLogo:
 	mov x4, 140
 	sub x4, x4, x5
 	sub x4, x4, x5
-	bl createRectangle
+	bl createVRectangle
 
 	mov x1, 54
 	sub x1, x1, x5
@@ -476,7 +479,7 @@ createNintendoLogo:
 	mov x4, 136
 	sub x4, x4, x5
 	sub x4, x4, x5
-	bl createRectangle
+	bl createVRectangle
 
 	mov x1, 56
 	sub x1, x1, x5
@@ -486,7 +489,7 @@ createNintendoLogo:
 	mov x4, 132
 	sub x4, x4, x5
 	sub x4, x4, x5
-	bl createRectangle
+	bl createVRectangle
 
 	ldr x30, [sp]
 	add sp, sp, 16
@@ -505,7 +508,7 @@ createArcadeTop:
 	mov x2, 233
 	mov x3,	185
 	mov x4, 163
-	bl createRectangle
+	bl createVRectangle
 
 	//Creacion interior amarillo oscuro maq
 	movz x0, 0x00ff, lsl 16
@@ -514,7 +517,7 @@ createArcadeTop:
 	mov x2, 233
 	mov x3,	22
 	mov x4, 163
-	bl createRectangle
+	bl createVRectangle
 
 	//Creacion interior triang1 amarillo oscuro maq
 	movz x0, 0x00fe, lsl 16
@@ -547,7 +550,7 @@ createArcadeTop:
 	mov x2, 245
 	mov x3,	13
 	mov x4, 139
-	bl createRectangle
+	bl createVRectangle
 
 	//Creacion interior triang3 amarillo oscuro maq
 	movz x0, 0x00ff, lsl 16
@@ -580,7 +583,7 @@ createArcadeTop:
 	mov x2, 233
 	mov x3,	9
 	mov x4, 163
-	bl createRectangle
+	bl createVRectangle
 
 	//Parte blanca logo nintendo
 	movz x0, 0x00f6, lsl 16
@@ -625,7 +628,7 @@ createArcadePanel:
 	mov x2, 210
 	mov x3, 22
 	mov x4, 210
-	bl createRectangle
+	bl createVRectangle
 
 	//Aca empiezan los detalles del panel
 	//INICIO BOTONES AZULES
@@ -635,7 +638,7 @@ createArcadePanel:
 	mov x2, 238
 	mov x3, 4
 	mov x4, 20
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x0029, lsl 16
 	movk x0, 0x62ff, lsl 0
@@ -643,7 +646,7 @@ createArcadePanel:
 	mov x2, 235
 	mov x3, 4
 	mov x4, 20
-	bl createRectangle
+	bl createVRectangle
 	//FIN BOTONES AZULES
 
 	//INICIO BOTONES ROJOS
@@ -653,7 +656,7 @@ createArcadePanel:
 	mov x2, 266
 	mov x3, 4
 	mov x4, 20
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x00ec, lsl 16
 	movk x0, 0x4738, lsl 0
@@ -661,7 +664,7 @@ createArcadePanel:
 	mov x2, 262
 	mov x3, 4
 	mov x4, 20
-	bl createRectangle
+	bl createVRectangle
 	//FIN BOTONES ROJOS
 
 	//INICIO BASE CONTROLADOR
@@ -671,7 +674,7 @@ createArcadePanel:
 	mov x2, 308
 	mov x3, 13
 	mov x4, 20
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x0029, lsl 16
 	movk x0, 0x62ff, lsl 0
@@ -679,7 +682,7 @@ createArcadePanel:
 	mov x2, 305
 	mov x3, 4
 	mov x4, 3
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x0029, lsl 16
 	movk x0, 0x62ff, lsl 0
@@ -687,7 +690,7 @@ createArcadePanel:
 	mov x2, 328
 	mov x3, 4
 	mov x4, 3
-	bl createRectangle
+	bl createVRectangle
 	//FIN BASE DEL CONTROLADOR
 
 	//INICIO PAlANCA
@@ -697,7 +700,7 @@ createArcadePanel:
 	mov x2, 317
 	mov x3, 13
 	mov x4, 3
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x00fb, lsl 16
 	movk x0, 0x3e41, lsl 0
@@ -705,7 +708,7 @@ createArcadePanel:
 	mov x2, 313
 	mov x3, 7
 	mov x4, 12
-	bl createRectangle
+	bl createVRectangle
 	//FIN PALANCA
 
 	//BOTONES DERECHA
@@ -715,7 +718,7 @@ createArcadePanel:
 	mov x2, 365
 	mov x3, 4
 	mov x4, 9
-	bl createRectangle
+	bl createVRectangle
 
 	movz x0, 0x0029, lsl 16
 	movk x0, 0x62ff, lsl 0
@@ -723,7 +726,7 @@ createArcadePanel:
 	mov x2, 380
 	mov x3, 4
 	mov x4, 9
-	bl createRectangle
+	bl createVRectangle
 
 	//FIN BOTONES
 
@@ -746,7 +749,7 @@ createArcadeBottom:
 	mov x2, 233
 	mov x3,	160
 	mov x4, 163
-	bl createRectangle
+	bl createVRectangle
 
 	//Creacion linea abajo amarillo claro
 	movz x0, 0x00fe, lsl 16
@@ -755,7 +758,7 @@ createArcadeBottom:
 	mov x2, 233
 	mov x3,	4
 	mov x4, 163
-	bl createRectangle
+	bl createVRectangle
 
 	//Creacion linea abajo amarillo claro
 	movz x0, 0x00fe, lsl 16
@@ -764,7 +767,7 @@ createArcadeBottom:
 	mov x2, 248
 	mov x3,	109
 	mov x4, 4
-	bl createRectangle
+	bl createVRectangle
 
 	//Creacion linea abajo amarillo claro
 	movz x0, 0x00fe, lsl 16
@@ -773,7 +776,7 @@ createArcadeBottom:
 	mov x2, 376
 	mov x3,	109
 	mov x4, 4
-	bl createRectangle
+	bl createVRectangle
 
 	//Creacion linea abajo amarillo claro
 	movz x0, 0x00fe, lsl 16
@@ -782,7 +785,7 @@ createArcadeBottom:
 	mov x2, 256
 	mov x3,	4
 	mov x4, 116
-	bl createRectangle
+	bl createVRectangle
 
 	//Creacion triangulo abajo amarillo claro
 	movz x0, 0x00fe, lsl 16
@@ -791,7 +794,7 @@ createArcadeBottom:
 	mov x2, 252
 	mov x3,	4
 	mov x4, 4
-	bl createRectangle
+	bl createVRectangle
 
 	//Creacion triangulo abajo amarillo claro
 	movz x0, 0x00fe, lsl 16
@@ -800,7 +803,7 @@ createArcadeBottom:
 	mov x2, 372
 	mov x3,	4
 	mov x4, 4
-	bl createRectangle
+	bl createVRectangle
 
 	//Creacion llave puerta
 	movz x0, 0x00bf, lsl 16
@@ -809,7 +812,7 @@ createArcadeBottom:
 	mov x2, 347
 	mov x3, 20
 	mov x4, 12
-	bl createRectangle
+	bl createVRectangle
 
 	//Creacion llave puerta
 	movz x0, 0x00bf, lsl 16
@@ -818,7 +821,7 @@ createArcadeBottom:
 	mov x2, 343
 	mov x3, 12
 	mov x4, 20
-	bl createRectangle
+	bl createVRectangle
 
 	//Creacion llave puerta
 	movz x0, 0x0077, lsl 16
@@ -827,7 +830,7 @@ createArcadeBottom:
 	mov x2, 351
 	mov x3, 12
 	mov x4, 4
-	bl createRectangle
+	bl createVRectangle
 
 	ldr x30, [sp]
 	add sp, sp, 16
@@ -846,7 +849,7 @@ createArcadeScreen:
 	mov x2, 245
 	mov x3,	106
 	mov x4, 139
-	bl createRectangle
+	bl createVRectangle
 
 	//Creacion bordes negros
 	movz x0, 0x0072, lsl 16
@@ -855,7 +858,7 @@ createArcadeScreen:
 	mov x2, 246
 	mov x3,	106
 	mov x4, 137
-	bl createRectangle
+	bl createVRectangle
 
 	//Creacion borde negro
 	movz x0, 0x0042, lsl 16
@@ -864,7 +867,7 @@ createArcadeScreen:
 	mov x2, 246
 	mov x3,	104
 	mov x4, 137
-	bl createRectangle
+	bl createVRectangle
 
 	//Creacion parte del vidrio
 	movz x0, 0x0000, lsl 16
@@ -873,7 +876,7 @@ createArcadeScreen:
 	mov x2, 247
 	mov x3,	100
 	mov x4, 135
-	bl createRectangle
+	bl createVRectangle
 
 	//Creacion reflejo del vidrio
 	movz x0, 0x009f, lsl 16
@@ -882,7 +885,7 @@ createArcadeScreen:
 	mov x2, 258
 	mov x3,	36
 	mov x4, 36
-	bl createRectangle
+	bl createVRectangle
 
 	//Creacion triangulo reflejo del vidrio
 	movz x0, 0x0000, lsl 16
@@ -903,7 +906,7 @@ createArcadeScreen:
 	mov x2, 258
 	mov x3,	10
 	mov x4, 10
-	bl createRectangle
+	bl createVRectangle
 
 	//Creacion reflejo del vidrio
 	movz x0, 0x0021, lsl 16
@@ -912,7 +915,7 @@ createArcadeScreen:
 	mov x2, 260
 	mov x3,	12
 	mov x4, 88
-	bl createRectangle
+	bl createVRectangle
 
 	//Creacion reflejo del vidrio
 	movz x0, 0x0021, lsl 16
@@ -921,7 +924,7 @@ createArcadeScreen:
 	mov x2, 348
 	mov x3,	24
 	mov x4, 24
-	bl createRectangle
+	bl createVRectangle
 
 	//Creacion reflejo del vidrio
 	movz x0, 0x0021, lsl 16
@@ -930,7 +933,7 @@ createArcadeScreen:
 	mov x2, 360
 	mov x3,	39
 	mov x4, 12
-	bl createRectangle
+	bl createVRectangle
 
 	ldr x30, [sp]
 	add sp, sp, 16
