@@ -33,6 +33,10 @@ createVRectangle:
 	sub sp, sp, 16
 	str x30, [sp]
 
+	//Guardado registro usado
+	sub sp, sp, 16
+	str x1, [sp]
+
 	//Guardado registros temporales usados
 	sub sp, sp, 16
 	str x9, [sp]
@@ -45,19 +49,22 @@ createVRectangle:
         // - x4:    Ancho del rectangulo
 
     //Temporary values:
-		// - x9: 	Temp copia del alto del rectangulo
+		// - x9: 	Temp fila actual del rectangulo
 
-	mov x9, x3
-	mov x3, 0
+	mov x9, 0
 	genVRectangle:
 		bl createHLine
 		add x1, x1, 1
-		add x3, x3, 1
-		cmp x3, x9
+		add x9, x9, 1
+		cmp x9, x3
 		bne genVRectangle
 	
 	//Carga de registros temporales usados
 	ldr x9, [sp]
+	add sp, sp, 16
+
+	//Carga de registros usados
+	ldr x1, [sp]
 	add sp, sp, 16
 
 	//Carga del registro de return y return
@@ -110,52 +117,25 @@ createTriangle:
 	sub sp, sp, 16
 	str x30, [sp] 
 
-	//Guardado registros temporales usados
-	sub sp, sp, 16
-	str x9, [sp]
-
 	// Input values:
 		// - x0: Color of Triangle
 		// - x1: Coord del primero en Y
 		// - x2: Coord del primero en X
 		// - x3: Alto Escalon
 		// - x4: Ancho Triangulo
-		// - x5: Reduccion Alto Escalon
 		// - x6: Reduccion Ancho Escalon
 		// - x7: Cantidad de escalones
-	
-	// Temporary values:
-		// - x9: Temp red ancho escalon
-
-	add x9, x6, x6
 
 	loop_Triang2:
-		//Guardado registros usados
-		sub sp, sp, 16
-		str x7, [sp]
-		
 		bl createVRectangle
-		
-		//Carga de registros usados
-		ldr x7, [sp]
-		add sp, sp, 16
-		
 		sub x7, x7, 1
 		loop_Triang:
 			sub x1, x1, x3
-			add x1, x1, x5
 			add x2, x2, x6
 			sub x4, x4, x6
 			sub x4, x4, x6
-			sub x3, x3, x5
-			cbz x7, doneTriang
-			cmp x4, x9
-			blt loop_Triang2
+			cbnz x7, loop_Triang2
 	doneTriang:
-
-	//Carga de registros temporales usados
-	ldr x9, [sp]
-	add sp, sp, 16
 
 	//Carga del registro de return y return
 	ldr x30, [sp]
@@ -199,9 +179,7 @@ createRectangleTriangle:
 			add x2, x2, x6
 			sub x4, x4, x6
 			left:
-			cbz x7, doneRectTriang
-			cmp x4, x9
-			blt loop_RectangleTriang2
+			cbnz x7, loop_RectangleTriang2
 	doneRectTriang:
 
 	//Carga de registros temporales usados
@@ -243,10 +221,6 @@ createHLine:
 
 	bl generateFrstPixelCoord
 	mov x9, x7
-	
-	//Carga de registros usados
-	ldr x7, [sp]
-	add sp, sp, 16
 
 	mov x10, x4 //Set Line Width
 	nxtPixelHLine:
@@ -254,6 +228,10 @@ createHLine:
 		add x9,x9,4	   				// Next pixel
 		sub x10,x10,1	   			// decrement X counter
 		cbnz x10,nxtPixelHLine   	// If not end row jump
+
+	//Carga de registros usados
+	ldr x7, [sp]
+	add sp, sp, 16
 	
 	//Carga de registros temporales usados
 	ldr x10, [sp]
@@ -312,7 +290,6 @@ createVLine:
 	//Generacion de la cantidad de memoria a correr x9 para llevarlo a la siguiente fila
 	//(SCREEN_WIDTH - LINE_WIDTH)*4
 	mov x10, x21
-	sub x10, x10, 1
 	lsl x10, x10, 2
 
 	mov x11, x3

@@ -543,10 +543,6 @@ createBackground:
 	bl createCuevaRaton
    	bl createRatonEyes
 
-
-	//Semicirculo cueva raton
-	
-
     //Enchufe Maquina
     movz x0, 0x00bf, lsl 16
 	movk x0, 0xbfbb, lsl 0

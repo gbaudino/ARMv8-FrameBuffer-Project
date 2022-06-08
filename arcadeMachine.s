@@ -83,7 +83,7 @@ createArcadeBase:
 	mov x3,	20
 	sub x3, x3, x5
 	sub x3, x3, x5
-	mov x4, 222
+	mov x4, 221
 	sub x4, x4, x5
 	sub x4, x4, x5
 	bl createVRectangle
@@ -93,7 +93,7 @@ createArcadeBase:
 	mov x2, 216
 	add x2, x2, x5
 	mov x3,	4
-	mov x4, 198
+	mov x4, 197
 	sub x4, x4, x5
 	sub x4, x4, x5
 	bl createVRectangle
@@ -103,7 +103,7 @@ createArcadeBase:
 	mov x2, 212
 	add x2, x2, x5
 	mov x3,	4
-	mov x4, 206
+	mov x4, 205
 	sub x4, x4, x5
 	sub x4, x4, x5
 	bl createVRectangle
@@ -113,7 +113,7 @@ createArcadeBase:
 	mov x2, 208
 	add x2, x2, x5
 	mov x3,	4
-	mov x4, 214
+	mov x4, 213
 	sub x4, x4, x5
 	sub x4, x4, x5
 	bl createVRectangle
@@ -123,7 +123,7 @@ createArcadeBase:
 	mov x2, 208
 	add x2, x2, x5
 	mov x3,	4
-	mov x4, 214
+	mov x4, 213
 	sub x4, x4, x5
 	sub x4, x4, x5
 	bl createVRectangle
@@ -133,7 +133,7 @@ createArcadeBase:
 	mov x2, 212
 	add x2, x2, x5
 	mov x3,	4
-	mov x4, 206
+	mov x4, 205
 	sub x4, x4, x5
 	sub x4, x4, x5
 	bl createVRectangle
@@ -143,7 +143,7 @@ createArcadeBase:
 	mov x2, 216
 	add x2, x2, x5
 	mov x3,	4
-	mov x4, 198
+	mov x4, 197
 	sub x4, x4, x5
 	sub x4, x4, x5
 	bl createVRectangle
@@ -240,7 +240,6 @@ createArcadeCase:
 
 	movz x0, 0x00f9, lsl 16
 	movk x0, 0xfaf5, lsl 0
-
 	mov x1, 233
 	mov x2, 197
 	mov x3, 22
@@ -253,7 +252,7 @@ createArcadeCase:
 	mov x1, 233
 	mov x2, 201
 	mov x3, 4
-	mov x4, 227
+	mov x4, 228
 	mov x5, 0
 	mov x6, 4
 	mov x7, 5
@@ -281,7 +280,7 @@ createArcadeCase:
 	movz x0, 0x00f9, lsl 16
 	movk x0, 0xfaf5, lsl 0
 	mov x1, 255
-	mov x2, 404
+	mov x2, 405
 	mov x3, 4
 	mov x4, 28
 	bl createVRectangle
@@ -613,9 +612,9 @@ createArcadePanel:
 	movz x0, 0x0026, lsl 16
 	movk x0, 0x3b59, lsl 0
 	mov x1, 229
-	mov x2, 214
+	mov x2, 213
 	mov x3, 4
-	mov x4, 202
+	mov x4, 203
 	mov x5, 0
 	mov x6, 4
 	mov x7, 5
@@ -625,9 +624,9 @@ createArcadePanel:
 	movz x0, 0x00fe, lsl 16
 	movk x0, 0xea64, lsl 0
 	mov x1, 233
-	mov x2, 210
+	mov x2, 209
 	mov x3, 22
-	mov x4, 210
+	mov x4, 212
 	bl createVRectangle
 
 	//Aca empiezan los detalles del panel
@@ -729,7 +728,13 @@ createArcadePanel:
 	bl createVRectangle
 
 	//FIN BOTONES
-
+	
+	movz x0, 0x005f, lsl 16
+	movk x0, 0x4d84, lsl 0
+	mov x1, 213
+	mov x2, 412
+	mov x3, 4
+	bl createVLine
 
 
 	ldr x30, [sp]
