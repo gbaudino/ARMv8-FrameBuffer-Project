@@ -144,3 +144,22 @@ createOffSwitcher:
 	ldr x30, [sp]
 	add sp, sp, 16
 	ret
+
+
+.globl breakSwitcher
+breakSwitcher:
+	//Guardado registro return
+	sub sp, sp, 16
+	str x30, [sp]
+
+	movz x0, 0x0000, lsl 16
+	movk x0, 0x0000, lsl 0
+	mov x1, 129
+	mov x2, 98
+	mov x3,	12
+	mov x4, 12
+	bl createVRectangle
+
+	ldr x30, [sp]
+	add sp, sp, 16
+	ret

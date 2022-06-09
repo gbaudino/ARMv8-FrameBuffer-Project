@@ -67,4 +67,17 @@ generateFrstPixelCoord:
 	ldr x30, [sp]
 	add sp, sp, 16
 	ret
-    
+
+.globl generateRandomNumber
+generateRandomNumber:
+	//Guardado registro return
+	sub sp, sp, 16
+	str x30, [sp]
+
+	
+
+	//Carga del registro de return y devolucion del siguiente
+	ldr x30, [sp]
+	add sp, sp, 16
+	ret
+	

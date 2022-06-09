@@ -4,8 +4,8 @@ createArcadeBase:
 	str x30, [sp]
 
 	// Input values:
-	// - x0: 	Color of Base
-	// - x5:	Variacion tamano
+		// - x0: 	Color of Base
+		// - x5:	Variacion tamano
 	mov x1, 405
 	add x1, x1, x5
 	mov x2, 204
