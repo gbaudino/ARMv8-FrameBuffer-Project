@@ -1,32 +1,3 @@
-generateFrstPixelCoord:
-	//Guardado registro return
-	sub sp, sp, 16
-	str x30, [sp]
-
-	// Input values:
-        // - x1:    Coord primero en y
-        // - x2:    Coord primero en x
-	
-	// Output values:
-		// - x7: 	First pixel coord
-
-	//Saved values used:
-		// - x20:	Framebuffer Base Address
-		// - x21:	Screen Width
-
-	//Generacion de la coordenada del primero
-	//Coord del pixel = Dirección de inicio + 4 * [x + (y * 640)]
-	mul x7, x1, x21 		// (y * 640)
-	add x7,x7, x2		// + (Coord del primero en x) = [x + (y * 640)]
-	lsl x7, x7, 2 		//(4 * [x + (y * 640)])
-	add x7, x7, x20 		// Dirección de inicio + 4 * [x + (y * 640)]
-
-	//Carga del registro de return y devolucion del siguiente
-	ldr x30, [sp]
-	add sp, sp, 16
-	ret
-
-
 .globl createVRectangle
 createVRectangle:
 	//Guardado registro return

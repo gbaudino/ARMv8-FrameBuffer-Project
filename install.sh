@@ -25,5 +25,9 @@ echo "##############################################"
 echo "######### Give necessary permissions #########"
 echo "##############################################"
 echo
-sudo chmod +x ./initServices.sh
 sudo chmod +x ./run.sh
+echo
+echo "#############################################"
+echo "########### Installation finished ###########"
+echo "#############################################"
+echo

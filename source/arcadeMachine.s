@@ -1,73 +1,3 @@
-createCable:
-	//Guardado registro return
-	sub sp, sp, 16
-	str x30, [sp]
-
-	movz x0, 0x0000, lsl 16
-	movk x0, 0x0000, lsl 0
-	mov x1, 310
-	mov x2, 593
-	mov x3,	18
-	mov x4, 12
-	bl createVRectangle
-
-	movz x0, 0x0042, lsl 16
-	movk x0, 0x4242, lsl 0
-	mov x1, 328
-	mov x2, 596
-	mov x3,	44
-	mov x4, 6
-	bl createVRectangle
-
-	movz x0, 0x0042, lsl 16
-	movk x0, 0x4242, lsl 0
-	mov x1, 370
-	mov x2, 592
-	mov x3,	6
-	mov x4, 6
-	bl createVRectangle
-
-	movz x0, 0x0042, lsl 16
-	movk x0, 0x4242, lsl 0
-	mov x1, 374
-	mov x2, 404
-	mov x3,	6
-	mov x4, 190
-	bl createVRectangle
-
-	//Interior cable vertical
-	movz x0, 0x0000, lsl 16
-	movk x0, 0x0000, lsl 0
-	mov x1, 328
-	mov x2, 597
-	mov x3,	43
-	mov x4, 4
-	bl createVRectangle
-
-	//Interior cable cuadradito curva
-	movz x0, 0x0000, lsl 16
-	movk x0, 0x0000, lsl 0
-	mov x1, 371
-	mov x2, 593
-	mov x3,	4
-	mov x4, 4
-	bl createVRectangle
-
-	//Interior cable horizontal
-	movz x0, 0x0000, lsl 16
-	movk x0, 0x0000, lsl 0
-	mov x1, 375
-	mov x2, 404
-	mov x3,	4
-	mov x4, 189
-	bl createVRectangle
-
-
-	ldr x30, [sp]
-	add sp, sp, 16
-	ret
-
-
 createArcadeBase:
 	//Guardado registro return
 	sub sp, sp, 16
@@ -320,96 +250,6 @@ createArcadeCase:
 	ret
 
 
-createMayusNLetterLogo:
-	//Guardado registro return
-	sub sp, sp, 16
-	str x30, [sp]
-	
-	// Input values:
-	// - x0: 	Color of Base
-	
-	ldr x30, [sp]
-	add sp, sp, 16
-	ret
-
-createILetterLogo:
-	//Guardado registro return
-	sub sp, sp, 16
-	str x30, [sp]
-	
-	// Input values:
-	// - x0: 	Color of Base
-	
-	ldr x30, [sp]
-	add sp, sp, 16
-	ret
-
-
-createNLetterLogo:
-	//Guardado registro return
-	sub sp, sp, 16
-	str x30, [sp]
-	
-	// Input values:
-	// - x0: 	Color of Base
-	
-	ldr x30, [sp]
-	add sp, sp, 16
-	ret
-
-
-createTLetterLogo:
-	//Guardado registro return
-	sub sp, sp, 16
-	str x30, [sp]
-	
-	// Input values:
-	// - x0: 	Color of Base
-	
-	ldr x30, [sp]
-	add sp, sp, 16
-	ret
-
-
-createELetterLogo:
-	//Guardado registro return
-	sub sp, sp, 16
-	str x30, [sp]
-	
-	// Input values:
-	// - x0: 	Color of Base
-	
-	ldr x30, [sp]
-	add sp, sp, 16
-	ret
-
-
-createDLetterLogo:
-	//Guardado registro return
-	sub sp, sp, 16
-	str x30, [sp]
-	
-	// Input values:
-	// - x0: 	Color of Base
-	
-	ldr x30, [sp]
-	add sp, sp, 16
-	ret
-
-	
-createOLetterLogo:
-	//Guardado registro return
-	sub sp, sp, 16
-	str x30, [sp]
-	
-	// Input values:
-	// - x0: 	Color of Base
-	
-	ldr x30, [sp]
-	add sp, sp, 16
-	ret
-
-
 createNintendoLogo:
 	//Guardado registro return
 	sub sp, sp, 16
@@ -489,6 +329,8 @@ createNintendoLogo:
 	sub x4, x4, x5
 	sub x4, x4, x5
 	bl createVRectangle
+
+	bl createMayusNLetterLogo
 
 	ldr x30, [sp]
 	add sp, sp, 16
@@ -874,71 +716,7 @@ createArcadeScreen:
 	mov x4, 137
 	bl createVRectangle
 
-	//Creacion parte del vidrio
-	movz x0, 0x0000, lsl 16
-	movk x0, 0x1a0d, lsl 0
-	mov x1, 89
-	mov x2, 247
-	mov x3,	100
-	mov x4, 135
-	bl createVRectangle
-
-	//Creacion reflejo del vidrio
-	movz x0, 0x009f, lsl 16
-	movk x0, 0xedb8, lsl 0
-	mov x1, 101
-	mov x2, 258
-	mov x3,	36
-	mov x4, 36
-	bl createVRectangle
-
-	//Creacion triangulo reflejo del vidrio
-	movz x0, 0x0000, lsl 16
-	movk x0, 0x1a0d, lsl 0
-	mov x1, 125
-	mov x2, 270
-	mov x3, 12
-	mov x4, 48
-	mov x5, 0
-	mov x6, 12
-	mov x7, 2
-	bl createTriangle
-
-	//Creacion reflejo del vidrio
-	movz x0, 0x0021, lsl 16
-	movk x0, 0xc59b, lsl 0
-	mov x1, 101
-	mov x2, 258
-	mov x3,	10
-	mov x4, 10
-	bl createVRectangle
-
-	//Creacion reflejo del vidrio
-	movz x0, 0x0021, lsl 16
-	movk x0, 0xc59b, lsl 0
-	mov x1, 166
-	mov x2, 260
-	mov x3,	12
-	mov x4, 88
-	bl createVRectangle
-
-	//Creacion reflejo del vidrio
-	movz x0, 0x0021, lsl 16
-	movk x0, 0xc59b, lsl 0
-	mov x1, 154
-	mov x2, 348
-	mov x3,	24
-	mov x4, 24
-	bl createVRectangle
-
-	//Creacion reflejo del vidrio
-	movz x0, 0x0021, lsl 16
-	movk x0, 0xc59b, lsl 0
-	mov x1, 115
-	mov x2, 360
-	mov x3,	39
-	mov x4, 12
-	bl createVRectangle
+	bl powerOffScreen
 
 	ldr x30, [sp]
 	add sp, sp, 16
@@ -950,7 +728,7 @@ createArcade:
 	sub sp, sp, 16
 	str x30, [sp]
 
-    bl createCable
+    bl createOffWire
 	bl createArcadeCase	
 	bl createArcadeTop
 	bl createArcadePanel

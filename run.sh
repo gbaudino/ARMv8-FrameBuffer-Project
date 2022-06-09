@@ -3,7 +3,12 @@ echo '###############################'
 echo '####### Running project #######'
 echo '###############################'
 echo
-bash ./initServices.sh
+echo
+echo "#############################################"
+echo "########## Init necessary services ##########"
+echo "#############################################"
+echo
+sudo systemctl start docker.service && xhost +
 echo
 echo '#####################################'
 echo '####### Building docker Image #######'

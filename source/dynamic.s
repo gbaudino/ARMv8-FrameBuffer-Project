@@ -4,13 +4,12 @@ dynamic:
 	sub sp, sp, 16
 	str x30, [sp]
 
-	mov x0, 1
-	bl createLightKey
+	bl createOnSwitcher
 	bl parpadeoRaton
 	bl generateCurrent
 	bl parpadeoRaton
 	bl powerOnScreen
-	
+	bl parpadeoRaton
 
 	ldr x30, [sp]
 	add sp, sp, 16
