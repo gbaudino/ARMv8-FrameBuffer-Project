@@ -125,6 +125,112 @@ parpadeoRaton:
 	ret
 
 
+generateVerticalCurrent:
+	//Guardado registro return
+	sub sp, sp, 16
+	str x30, [sp]
+
+	//Interior cable vertical
+	movz x0, 0x00ff, lsl 16
+	movk x0, 0xa200, lsl 0
+	mov x1, 328
+	mov x2, 597
+	mov x3, 1
+	mov x4, 4
+	loopVCurrent:
+		bl createVRectangle
+		add x3, x3, 1
+		cmp x3, 44
+		movz x7, 0x00ff, lsl 16
+        movk x7, 0x0000, lsl 0
+        bl delay
+		blt loopVCurrent
+	
+	ldr x30, [sp]
+	add sp, sp, 16
+	ret
+
+
+generateCurveCurrent:
+	//Guardado registro return
+	sub sp, sp, 16
+	str x30, [sp]
+
+	movz x7, 0x00ff, lsl 16
+	movk x7, 0x0000, lsl 0
+	bl delay
+
+	//Interior cable cuadradito curva
+	movz x0, 0x00ff, lsl 16
+	movk x0, 0xa200, lsl 0
+	mov x1, 371
+	mov x2, 593
+	mov x3,	4
+	mov x4, 4
+	bl createVRectangle
+
+	movz x7, 0x00ff, lsl 16
+	movk x7, 0x0000, lsl 0
+	bl delay
+
+	ldr x30, [sp]
+	add sp, sp, 16
+	ret
+
+
+generateHorizontalCurrent:
+	//Guardado registro return
+	sub sp, sp, 16
+	str x30, [sp]
+
+	movz x7, 0x00ff, lsl 16
+	movk x7, 0x0000, lsl 0
+	bl delay
+
+	//Interior cable horizontal
+	movz x0, 0x00ff, lsl 16
+	movk x0, 0xa200, lsl 0
+	mov x1, 375
+	mov x2, 592
+	mov x3,	4
+	mov x4, 185
+	loopHCurrent:
+		bl createVLine
+		sub x4, x4, 1
+		sub x2, x2, 1
+		movz x7, 0x00f0, lsl 16
+        movk x7, 0x0000, lsl 0
+        bl delay
+		cbnz x4, loopHCurrent
+
+	ldr x30, [sp]
+	add sp, sp, 16
+	ret
+
+
 .globl generateCurrent
 generateCurrent:
+	//Guardado registro return
+	sub sp, sp, 16
+	str x30, [sp]
+
+	bl generateVerticalCurrent
+	bl generateCurveCurrent
+	bl generateHorizontalCurrent
+
+	ldr x30, [sp]
+	add sp, sp, 16
+	ret
+
+
+.globl powerOnScreen
+powerOnScreen:
+	//Guardado registro return
+	sub sp, sp, 16
+	str x30, [sp]
+
 	
+
+	ldr x30, [sp]
+	add sp, sp, 16
+	ret
