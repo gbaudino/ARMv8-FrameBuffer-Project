@@ -1,6 +1,9 @@
 # ARMv8 FrameBuffer Project
 
-## Installation
+## Alternative 1 (Neater)
+> **Note**  
+> In this alternative, all the requirements are automatically installed, compiled and the project is executed in an encapsulated form in a docker container for greater neatness and portability.
+### Installation
 
 > **Warning**  
 > This installation is implemented for the linux distributions listed below, run the corresponding command according to your distribution or if not listed find out how to install git on your distribution.
@@ -26,13 +29,30 @@ cd ARMv8-FrameBuffer-Project && chmod +x install.sh
 > if your system is not listed and you want to perform this installation, then you will need to find a way to install [git](https://git-scm.com/downloads) and [docker](https://docs.docker.com/engine/install/) in your system. Finally activate docker and run the run.sh file.
 
 
-## Usage
+### Usage
 The follow command build, run and clean Docker container which runs the program
 
 > **Note**  
 > By executing the run.sh file we are deleting the container at the end of its execution so as not to retain unnecessary containers.
 
-
 ```
 ./run.sh
+```
+
+## Alternative 2
+
+> **Note**  
+> In this alternative, you must take care of installing the necessary dependencies for the project to work correctly.
+
+### Usage
+The following command automatically compiles all .s files and executes the project.
+
+```
+./make runQEMU
+```
+
+You can then run this other command if you want to delete all these build files created.
+
+```
+./make clean
 ```

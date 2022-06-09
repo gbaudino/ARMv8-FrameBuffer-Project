@@ -27,4 +27,3 @@ echo "##############################################"
 echo
 sudo chmod +x ./initServices.sh
 sudo chmod +x ./run.sh
-bash ./initServices.sh

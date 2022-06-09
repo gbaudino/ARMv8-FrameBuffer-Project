@@ -229,7 +229,14 @@ powerOnScreen:
 	sub sp, sp, 16
 	str x30, [sp]
 
-	
+	//Creacion parte del vidrio
+	movz x0, 0x00ff, lsl 16
+	movk x0, 0xffff, lsl 0
+	mov x1, 89
+	mov x2, 247
+	mov x3,	100
+	mov x4, 135
+	bl createVRectangle
 
 	ldr x30, [sp]
 	add sp, sp, 16
