@@ -10,6 +10,5 @@ program:
 	movk x7, 0x4000, lsl 0
 	bl delay
 	
-	bl dynamic
-	b program
+	b dynamic
 

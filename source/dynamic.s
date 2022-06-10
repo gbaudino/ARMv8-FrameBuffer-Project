@@ -1,10 +1,6 @@
-.arch armv8.5-a+rng
-
 .globl dynamic
 dynamic:
-	//Guardado registro return
-	sub sp, sp, 16
-	str x30, [sp]
+
 	bl createOnSwitcher
 	bl parpadeoRaton
 	bl generateCurrent
@@ -16,7 +12,11 @@ dynamic:
 	bl breakSwitcher
 	bl parpadeoRaton
 	bl parpadeoRaton
+	parpadeoPantallaInfinito:
+		bl parpadeoRaton
+		
+		movz x7, 0x00ff, lsl 16
+		movk x7, 0xffff, lsl 0
+		bl delay
 
-	ldr x30, [sp]
-	add sp, sp, 16
-	ret
+		b parpadeoPantallaInfinito
