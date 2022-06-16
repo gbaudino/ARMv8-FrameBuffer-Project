@@ -5,5 +5,4 @@
 .equ SCREEN_WIDTH, 		640
 .equ SCREEN_HEIGHT, 	480
 
-
 .endif

@@ -10,16 +10,16 @@ generateVerticalCurrent:
 	//Interior cable vertical
 	movz x0, 0x00ff, lsl 16
 	movk x0, 0xa200, lsl 0
-	mov x1, 328
-	mov x2, 597
+	mov x1, 333
+	mov x2, 527
 	mov x3, 1
 	mov x4, 4
 	loopVCurrent:
 		bl createVRectangle
 		add x3, x3, 1
-		cmp x3, 44
+		cmp x3, 39
 		movz x7, 0x00ff, lsl 16
-        movk x7, 0x0000, lsl 0
+    	movk x7, 0x0000, lsl 0
         bl delay
 		blt loopVCurrent
 	
@@ -41,7 +41,7 @@ generateCurveCurrent:
 	movz x0, 0x00ff, lsl 16
 	movk x0, 0xa200, lsl 0
 	mov x1, 371
-	mov x2, 593
+	mov x2, 523
 	mov x3,	4
 	mov x4, 4
 	bl createVRectangle
@@ -68,15 +68,15 @@ generateHorizontalCurrent:
 	movz x0, 0x00ff, lsl 16
 	movk x0, 0xa200, lsl 0
 	mov x1, 375
-	mov x2, 592
+	mov x2, 522
 	mov x3,	4
-	mov x4, 185
+	mov x4, 115
 	loopHCurrent:
 		bl createVLine
 		sub x4, x4, 1
 		sub x2, x2, 1
 		movz x7, 0x00f0, lsl 16
-        movk x7, 0x0000, lsl 0
+    	movk x7, 0x0000, lsl 0
         bl delay
 		cbnz x4, loopHCurrent
 
@@ -116,7 +116,7 @@ wire:
 	movz x0, 0x0000, lsl 16
 	movk x0, 0x0000, lsl 0
 	mov x1, 328
-	mov x2, 597
+	mov x2, 527
 	mov x3,	43
 	mov x4, 4
 	bl createVRectangle
@@ -125,7 +125,7 @@ wire:
 	movz x0, 0x0000, lsl 16
 	movk x0, 0x0000, lsl 0
 	mov x1, 371
-	mov x2, 593
+	mov x2, 523
 	mov x3,	4
 	mov x4, 4
 	bl createVRectangle
@@ -136,7 +136,7 @@ wire:
 	mov x1, 375
 	mov x2, 404
 	mov x3,	4
-	mov x4, 189
+	mov x4, 119
 	bl createVRectangle
 
     wireOnStatus:
@@ -150,7 +150,7 @@ wire:
 	movz x0, 0x00ff, lsl 16
 	movk x0, 0xa200, lsl 0
 	mov x1, 328
-	mov x2, 597
+	mov x2, 527
 	mov x3,	43
 	mov x4, 4
 	bl createVRectangle
@@ -159,7 +159,7 @@ wire:
 	movz x0, 0x00ff, lsl 16
 	movk x0, 0xa200, lsl 0
 	mov x1, 371
-	mov x2, 593
+	mov x2, 523
 	mov x3,	4
 	mov x4, 4
 	bl createVRectangle
@@ -170,7 +170,7 @@ wire:
 	mov x1, 375
 	mov x2, 404
 	mov x3,	4
-	mov x4, 189
+	mov x4, 119
 	bl createVRectangle
     
     doneWire:
@@ -195,7 +195,7 @@ createWire:
 	movz x0, 0x0000, lsl 16
 	movk x0, 0x0000, lsl 0
 	mov x1, 310
-	mov x2, 593
+	mov x2, 523
 	mov x3,	18
 	mov x4, 12
 	bl createVRectangle
@@ -203,7 +203,7 @@ createWire:
 	movz x0, 0x0042, lsl 16
 	movk x0, 0x4242, lsl 0
 	mov x1, 328
-	mov x2, 596
+	mov x2, 526
 	mov x3,	44
 	mov x4, 6
 	bl createVRectangle
@@ -211,7 +211,7 @@ createWire:
 	movz x0, 0x0042, lsl 16
 	movk x0, 0x4242, lsl 0
 	mov x1, 370
-	mov x2, 592
+	mov x2, 522
 	mov x3,	6
 	mov x4, 6
 	bl createVRectangle
@@ -221,7 +221,7 @@ createWire:
 	mov x1, 374
 	mov x2, 404
 	mov x3,	6
-	mov x4, 190
+	mov x4, 120
 	bl createVRectangle
 
     ldr x0, [sp]

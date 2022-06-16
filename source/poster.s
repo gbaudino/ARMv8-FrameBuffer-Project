@@ -7,8 +7,8 @@ createMonkey:
 	str x30, [sp]
 
 	//Creación de la parte marrón
-	movz x0, 0x0070, lsl 16
-	movk x0, 0x4d37, lsl 0
+	movz x0, 0x004e, lsl 16
+	movk x0, 0x2005, lsl 0
 	mov x1, 103
 	mov x2, 539
 	mov x3,	4
@@ -111,8 +111,8 @@ createMonkey:
 	mov x3,	5
 	bl createVRectangle
 
-	movz x0, 0x0052, lsl 16
-	movk x0, 0x2f1b, lsl 0
+	movz x0, 0x0038, lsl 16
+	movk x0, 0x1503, lsl 0
 	mov x1, 154
 	mov x2, 514
 	mov x3,	15
