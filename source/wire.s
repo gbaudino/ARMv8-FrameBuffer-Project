@@ -1,3 +1,6 @@
+
+.include "utilities.s"
+
 .globl generateVerticalCurrent
 generateVerticalCurrent:
 	//Guardado registro return
@@ -22,7 +25,7 @@ generateVerticalCurrent:
 	
 	ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30
 
 .globl generateCurveCurrent
 generateCurveCurrent:
@@ -49,7 +52,7 @@ generateCurveCurrent:
 
 	ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30
 
 .globl generateHorizontalCurrent
 generateHorizontalCurrent:
@@ -79,7 +82,7 @@ generateHorizontalCurrent:
 
 	ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30
 
 
 .globl generateCurrent
@@ -94,7 +97,7 @@ generateCurrent:
 
 	ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30
 
 
 wire:
@@ -173,7 +176,7 @@ wire:
     doneWire:
     ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30
 
 
 .globl createWire
@@ -227,7 +230,7 @@ createWire:
 
 	ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30
 
 .globl createOnWire
 createOnWire:
@@ -240,7 +243,7 @@ createOnWire:
 
 	ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30
 
 
 .globl createOffWire
@@ -254,4 +257,4 @@ createOffWire:
 
 	ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30

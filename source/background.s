@@ -1,3 +1,6 @@
+
+.include "utilities.s"
+
 .globl createBackground
 createBackground:
 	//Guardado registro return
@@ -59,4 +62,4 @@ createBackground:
 	//Carga del registro de return y devolucion del siguiente
 	ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30

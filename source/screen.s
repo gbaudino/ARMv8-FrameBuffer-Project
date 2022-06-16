@@ -1,3 +1,6 @@
+
+.include "utilities.s"
+
 .globl resetScreen
 resetScreen:
     //Guardado registro return
@@ -15,7 +18,7 @@ resetScreen:
 
     ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30
 
 
 .globl powerOffScreen
@@ -92,7 +95,7 @@ powerOffScreen:
 	
     ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30
 
 
 screenPowerEffect:
@@ -130,7 +133,7 @@ screenPowerEffect:
 
 	ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30
 
 
 .globl powerOnScreen
@@ -149,7 +152,7 @@ powerOnScreen:
 
 	ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30
 
 
 .globl transitionToTheGame
@@ -193,4 +196,4 @@ transitionToTheGame:
 
 	ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30

@@ -1,3 +1,6 @@
+
+.include "utilities.s"
+
 .globl createCuevaRaton
 createCuevaRaton:
 	//Guardado registro return
@@ -52,7 +55,7 @@ createCuevaRaton:
 	//Carga del registro de return y devolucion del siguiente
 	ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30
 
 
 .globl createRatonEyes
@@ -96,7 +99,7 @@ createRatonEyes:
 	//Carga del registro de return y devolucion del siguiente
 	ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30
 
 
 .globl genParpadoRaton
@@ -126,7 +129,7 @@ genParpadoRaton:
 
 	ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30
 
 
 .globl parpadeoRaton
@@ -157,4 +160,4 @@ parpadeoRaton:
 
 	ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30

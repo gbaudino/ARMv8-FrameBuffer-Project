@@ -1,3 +1,6 @@
+
+.include "utilities.s"
+
 switcher:
 	// Input values:
 		// - x0: Light Key Status: 0 - Off, otherwise - On
@@ -21,9 +24,6 @@ switcher:
 	movz x0, 0x00d5, lsl 16
 	movk x0, 0x0000, lsl 0
 	mov x1, 147
-	mov x2, 98
-	mov x3,	12
-	mov x4, 12
 	bl createVRectangle
 
 	switcherOnStatus:
@@ -44,15 +44,12 @@ switcher:
 	movz x0, 0x0000, lsl 16
 	movk x0, 0x0000, lsl 0
 	mov x1, 147
-	mov x2, 98
-	mov x3,	12
-	mov x4, 12
 	bl createVRectangle
 
 	doneSwitcher:
 	ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30
 
 
 .globl createSwitcher
@@ -115,7 +112,7 @@ createSwitcher:
 	
 	ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30
 
 
 .globl createOnSwitcher
@@ -129,7 +126,7 @@ createOnSwitcher:
 
 	ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30
 
 
 .globl createOffSwitcher
@@ -143,7 +140,7 @@ createOffSwitcher:
 
 	ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30
 
 
 .globl breakSwitcher
@@ -162,4 +159,4 @@ breakSwitcher:
 
 	ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30

@@ -1,11 +1,15 @@
+
+.include "utilities.s"
+
 createArcadeBase:
 	//Guardado registro return
-	sub sp, sp, 16
+	sub sp, sp, 8
 	str x30, [sp]
 
 	// Input values:
 		// - x0: 	Color of Base
 		// - x5:	Variacion tamano
+	
 	mov x1, 405
 	add x1, x1, x5
 	mov x2, 204
@@ -32,7 +36,6 @@ createArcadeBase:
 	add x1, x1, x5
 	mov x2, 212
 	add x2, x2, x5
-	mov x3,	4
 	mov x4, 205
 	sub x4, x4, x5
 	sub x4, x4, x5
@@ -42,7 +45,6 @@ createArcadeBase:
 	add x1, x1, x5
 	mov x2, 208
 	add x2, x2, x5
-	mov x3,	4
 	mov x4, 213
 	sub x4, x4, x5
 	sub x4, x4, x5
@@ -50,19 +52,12 @@ createArcadeBase:
 
 	mov x1, 425
 	sub x1, x1, x5
-	mov x2, 208
-	add x2, x2, x5
-	mov x3,	4
-	mov x4, 213
-	sub x4, x4, x5
-	sub x4, x4, x5
 	bl createVRectangle
 
 	mov x1, 429
 	sub x1, x1, x5
 	mov x2, 212
 	add x2, x2, x5
-	mov x3,	4
 	mov x4, 205
 	sub x4, x4, x5
 	sub x4, x4, x5
@@ -72,20 +67,19 @@ createArcadeBase:
 	sub x1, x1, x5
 	mov x2, 216
 	add x2, x2, x5
-	mov x3,	4
 	mov x4, 197
 	sub x4, x4, x5
 	sub x4, x4, x5
 	bl createVRectangle
 
 	ldr x30, [sp]
-	add sp, sp, 16
-	ret
+	add sp, sp, 8
+	br x30
 
 
 createArcadeCase:
 	//Guardado registro return
-	sub sp, sp, 16
+	sub sp, sp, 8
 	str x30, [sp]
 
 	//Creacion triang1 borde blanco maq
@@ -148,8 +142,6 @@ createArcadeCase:
 	bl createVRectangle
 
 	//Creacion bordes blancos maq
-	movz x0, 0x00f9, lsl 16
-	movk x0, 0xfaf5, lsl 0
 	mov x1, 28
 	mov x2, 221
 	mov x3, 408
@@ -157,8 +149,6 @@ createArcadeCase:
 	bl createVRectangle
 
 	//Creacion bordes blancos panel
-	movz x0, 0x00f9, lsl 16
-	movk x0, 0xfaf5, lsl 0
 	mov x1, 229
 	mov x2, 201
 	mov x3, 4
@@ -168,8 +158,6 @@ createArcadeCase:
 	mov x7, 5
 	bl createTriangle
 
-	movz x0, 0x00f9, lsl 16
-	movk x0, 0xfaf5, lsl 0
 	mov x1, 233
 	mov x2, 197
 	mov x3, 22
@@ -189,8 +177,6 @@ createArcadeCase:
 	bl createTriangle
 
 	//Creacion cuadrado  cyan panel
-	movz x0, 0x0064, lsl 16
-	movk x0, 0xdefe, lsl 0
 	mov x1, 233
 	mov x2, 201
 	mov x3, 22
@@ -207,8 +193,6 @@ createArcadeCase:
 	bl createVRectangle
 
 	//Añadimos borde para terminar el detalle (der)
-	movz x0, 0x00f9, lsl 16
-	movk x0, 0xfaf5, lsl 0
 	mov x1, 255
 	mov x2, 405
 	mov x3, 4
@@ -246,8 +230,8 @@ createArcadeCase:
 	bl createVRectangle
 
 	ldr x30, [sp]
-	add sp, sp, 16
-	ret
+	add sp, sp, 8
+	br x30
 
 
 createNintendoLogo:
@@ -334,7 +318,7 @@ createNintendoLogo:
 
 	ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30
 
 
 createArcadeTop:
@@ -442,7 +426,7 @@ createArcadeTop:
 
 	ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30
 
 
 createArcadePanel:
@@ -581,7 +565,7 @@ createArcadePanel:
 
 	ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30
 
 
 createArcadeBottom:
@@ -681,7 +665,7 @@ createArcadeBottom:
 
 	ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30
 
 
 createArcadeScreen:
@@ -720,7 +704,7 @@ createArcadeScreen:
 
 	ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30
 
 .globl createArcade
 createArcade:
@@ -737,5 +721,5 @@ createArcade:
 
 	ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30
 

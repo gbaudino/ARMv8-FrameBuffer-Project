@@ -1,3 +1,6 @@
+
+.include "utilities.s"
+
 .globl dynamic
 dynamic:
 

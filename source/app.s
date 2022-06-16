@@ -1,8 +1,10 @@
+.include "data.s"
+.include "utilities.s"
+
 .globl main
 main:
 	bl config
 
-.globl program
 program:
 	bl static
 

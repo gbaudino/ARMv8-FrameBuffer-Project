@@ -9,7 +9,7 @@ createMayusNLetterLogo:
 	
 	ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30
 
 .globl createILetterLogo
 createILetterLogo:
@@ -22,7 +22,7 @@ createILetterLogo:
 	
 	ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30
 
 
 .globl createNLetterLogo
@@ -36,7 +36,7 @@ createNLetterLogo:
 	
 	ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30
 
 
 .globl createTLetterLogo
@@ -50,7 +50,7 @@ createTLetterLogo:
 	
 	ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30
 
 
 .globl createELetterLogo
@@ -64,7 +64,7 @@ createELetterLogo:
 	
 	ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30
 
 
 .globl createDLetterLogo
@@ -78,7 +78,7 @@ createDLetterLogo:
 	
 	ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30
 
 	
 .globl createOLetterLogo
@@ -92,6 +92,6 @@ createOLetterLogo:
 	
 	ldr x30, [sp]
 	add sp, sp, 16
-	ret
+	br x30
 
 

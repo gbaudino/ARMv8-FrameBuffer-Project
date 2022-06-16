@@ -1,16 +1,14 @@
+
+.include "utilities.s"
+
 .globl createVRectangle
 createVRectangle:
-	//Guardado registro return
+	//Guardado registros a usar
 	sub sp, sp, 16
-	str x30, [sp]
-
-	//Guardado registro usado
-	sub sp, sp, 16
+	str x30, [sp, #8]
 	str x1, [sp]
 
-	//Guardado registros temporales usados
-	sub sp, sp, 16
-	str x9, [sp]
+	bl saveTempValues
 
 	// Input values:
 	    // - x0:    Color Base
@@ -30,28 +28,21 @@ createVRectangle:
 		cmp x9, x3
 		bne genVRectangle
 	
-	//Carga de registros temporales usados
-	ldr x9, [sp]
-	add sp, sp, 16
+	bl loadTempValues
 
 	//Carga de registros usados
 	ldr x1, [sp]
+	ldr x30, [sp, #8]
 	add sp, sp, 16
-
-	//Carga del registro de return y return
-	ldr x30, [sp]
-	add sp, sp, 16
-	ret
+	br x30
 
 .globl createHRectangle
 createHRectangle:
 	//Guardado registro return
-	sub sp, sp, 16
+	sub sp, sp, 8
 	str x30, [sp]
 
-	//Guardado registros temporales usados
-	sub sp, sp, 16
-	str x9, [sp]
+	bl saveTempValues
 
 	// Input values:
 	    // - x0:    Color Base
@@ -72,20 +63,18 @@ createHRectangle:
 		cmp x4, x9
 		bne genHRectangle
 
-	//Carga de registros temporales usados
-	ldr x9, [sp]
-	add sp, sp, 16
+	bl loadTempValues
 
 	//Carga del registro de return y return
 	ldr x30, [sp]
-	add sp, sp, 16
-	ret
+	add sp, sp, 8
+	br x30
 
 
 .globl createTriangle
 createTriangle: 
 	//Guardado registro return
-	sub sp, sp, 16
+	sub sp, sp, 8
 	str x30, [sp] 
 
 	// Input values:
@@ -110,19 +99,17 @@ createTriangle:
 
 	//Carga del registro de return y return
 	ldr x30, [sp]
-	add sp, sp, 16
-	ret
+	add sp, sp, 8
+	br x30
 
 
 .globl createRectangleTriangle
 createRectangleTriangle: 
 	//Guardado registro return
-	sub sp, sp, 16
+	sub sp, sp, 8
 	str x30, [sp]
 
-	//Guardado registros temporales usados
-	sub sp, sp, 16
-	str x9, [sp]
+	bl saveTempValues
 
 	// Input values:
 		// - x0: Color of Triangle
@@ -153,27 +140,22 @@ createRectangleTriangle:
 			cbnz x7, loop_RectangleTriang2
 	doneRectTriang:
 
-	//Carga de registros temporales usados
-	ldr x9, [sp]
-	add sp, sp, 16
+	bl loadTempValues
 
 	//Carga del registro de return y return
 	ldr x30, [sp]
-	add sp, sp, 16
-	ret
+	add sp, sp, 8
+	br x30
 
 
 .globl createHLine
 createHLine:
-	//Guardado registro return
+	//Guardado de registros a usar
 	sub sp, sp, 16
-	str x30, [sp]
-	//Guardado registros temporales usados
-	sub sp, sp, 16
-	str x9, [sp]
-
-	sub sp, sp, 16
-	str x10, [sp]
+	str x30, [sp, #8]
+	str x7, [sp]
+	
+	bl saveTempValues
 
 	// Input values:
 	    // - x0:    Color Base
@@ -185,11 +167,6 @@ createHLine:
 		// - x9: 	Temp Base Address of Line
 		// - x10:	Temp Largo actual
 
-	
-	//Guardado registros usados
-	sub sp, sp, 16
-	str x7, [sp]
-
 	bl generateFrstPixelCoord
 	mov x9, x7
 
@@ -200,39 +177,23 @@ createHLine:
 		sub x10,x10,1	   			// decrement X counter
 		cbnz x10,nxtPixelHLine   	// If not end row jump
 
+	
+	bl loadTempValues
+
 	//Carga de registros usados
 	ldr x7, [sp]
+	ldr x30, [sp, #8]
 	add sp, sp, 16
-	
-	//Carga de registros temporales usados
-	ldr x10, [sp]
-	add sp, sp, 16
-
-	ldr x9, [sp]
-	add sp, sp, 16
-
-	//Carga del registro de return y return
-	ldr x30, [sp]
-	add sp, sp, 16
-	ret
-
-
+	br x30
 
 .globl createVLine
 createVLine:
-	//Guardado registro return
+	//Guardado de registros a usar
 	sub sp, sp, 16
-	str x30, [sp]
-
-	//Guardado registros temporales usados
-	sub sp, sp, 16
-	str x9, [sp]
-
-	sub sp, sp, 16
-	str x10, [sp]
-
-	sub sp, sp, 16
-	str x11, [sp]
+	str x30, [sp, #8]
+	str x7, [sp]
+	
+	bl saveTempValues
 
 	// Input values:
 	    // - x0:    Color Base
@@ -270,17 +231,11 @@ createVLine:
 		sub x11,x11,1	   		// decrement X counter
 		cbnz x11,DrawVLine   	// If not end row jump
 	
-	//Carga de registros temporales usados
-	ldr x11, [sp]
-	add sp, sp, 16
 
-	ldr x10, [sp]
-	add sp, sp, 16
+	bl loadTempValues
 
-	ldr x9, [sp]
+	//Carga de registros usados
+	ldr x7, [sp]
+	ldr x30, [sp, #8]
 	add sp, sp, 16
-
-	//Carga del registro de return y return
-	ldr x30, [sp]
-	add sp, sp, 16
-	ret
+	br x30

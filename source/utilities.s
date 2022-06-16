@@ -1,13 +1,10 @@
 
-.equ SCREEN_WIDTH, 		640
-.equ SCREEN_HEIGHT, 	480
+.ifndef utilities_s
+.equ utilities_s, 1
 
-.globl config
+.include "data.s"
+
 config:
-	//Guardado registro return
-	sub sp, sp, 16
-	str x30, [sp]
-
 	// Input values:
 		// the function does not receive any value
 
@@ -16,17 +13,9 @@ config:
     mov x21, SCREEN_WIDTH   // Save Screen Width
     mov x22, SCREEN_HEIGHT  // Save Screen Height
 
-	//Carga del registro de return y devolucion del siguiente
-	ldr x30, [sp]
-	add sp, sp, 16
-	ret
+	br x30
 
-.globl delay
 delay:
-    //Guardado registro return
-    sub sp, sp, 16
-	str x30, [sp]
-
     // Input values:
         // - x7: Limit to repeat
 
@@ -34,17 +23,10 @@ delay:
         sub x7, x7, 1
         cbnz x7, cont
 
-    ldr x30, [sp]
-	add sp, sp, 16
-    ret
+    br x30
 
 
-.globl generateFrstPixelCoord
 generateFrstPixelCoord:
-	//Guardado registro return
-	sub sp, sp, 16
-	str x30, [sp]
-
 	// Input values:
         // - x1:    Coord primero en y
         // - x2:    Coord primero en x
@@ -63,21 +45,47 @@ generateFrstPixelCoord:
 	lsl x7, x7, 2 		//(4 * [x + (y * 640)])
 	add x7, x7, x20 		// Dirección de inicio + 4 * [x + (y * 640)]
 
-	//Carga del registro de return y devolucion del siguiente
-	ldr x30, [sp]
-	add sp, sp, 16
-	ret
+	br x30
 
-.globl generateRandomNumber
+
+saveTempValues:
+	sub sp, sp, 56
+	str x9, [sp, #48]
+	str x10, [sp, #40]
+	str x11, [sp, #32]
+	str x12, [sp, #24]
+	str x13, [sp, #16]
+	str x14, [sp, #8]
+	str x15, [sp]
+	br x30
+
+loadTempValues:
+	ldr x15, [sp]
+	ldr x14, [sp, #8]
+	ldr x13, [sp, #16]
+	ldr x12, [sp, #24]
+	ldr x11, [sp, #32]
+	ldr x10, [sp, #40]
+	ldr x9, [sp, #48]
+	add sp, sp, 56
+	br x30
+
 generateRandomNumber:
-	//Guardado registro return
-	sub sp, sp, 16
-	str x30, [sp]
+	//Guardado registro temporal x9
+	sub sp, sp, 8
+	str x9, [sp]
 
-	
+    cmp x7, #0
+    csinc x7, x7, xzr, ne
+    eor x9, x7, x7, lsr #2
+    eor x9, x9, x7, lsr #3
+    eor x9, x9, x7, lsr #5
+    lsl x9, x9, #15
+    orr x7, x9, x7, lsr #1
 
-	//Carga del registro de return y devolucion del siguiente
-	ldr x30, [sp]
-	add sp, sp, 16
-	ret
+	ldr x9, [sp]
+	add sp, sp, 8
 	
+	br x30
+	
+.endif
