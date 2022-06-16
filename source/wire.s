@@ -4,7 +4,7 @@
 .globl generateVerticalCurrent
 generateVerticalCurrent:
 	//Guardado registro return
-	sub sp, sp, 16
+	sub sp, sp, 8
 	str x30, [sp]
 
 	//Interior cable vertical
@@ -24,13 +24,13 @@ generateVerticalCurrent:
 		blt loopVCurrent
 	
 	ldr x30, [sp]
-	add sp, sp, 16
+	add sp, sp, 8
 	br x30
 
 .globl generateCurveCurrent
 generateCurveCurrent:
 	//Guardado registro return
-	sub sp, sp, 16
+	sub sp, sp, 8
 	str x30, [sp]
 
 	movz x7, 0x00ff, lsl 16
@@ -51,13 +51,13 @@ generateCurveCurrent:
 	bl delay
 
 	ldr x30, [sp]
-	add sp, sp, 16
+	add sp, sp, 8
 	br x30
 
 .globl generateHorizontalCurrent
 generateHorizontalCurrent:
 	//Guardado registro return
-	sub sp, sp, 16
+	sub sp, sp, 8
 	str x30, [sp]
 
 	movz x7, 0x00ff, lsl 16
@@ -81,14 +81,14 @@ generateHorizontalCurrent:
 		cbnz x4, loopHCurrent
 
 	ldr x30, [sp]
-	add sp, sp, 16
+	add sp, sp, 8
 	br x30
 
 
 .globl generateCurrent
 generateCurrent:
 	//Guardado registro return
-	sub sp, sp, 16
+	sub sp, sp, 8
 	str x30, [sp]
 
 	bl generateVerticalCurrent
@@ -96,7 +96,7 @@ generateCurrent:
 	bl generateHorizontalCurrent
 
 	ldr x30, [sp]
-	add sp, sp, 16
+	add sp, sp, 8
 	br x30
 
 
@@ -105,7 +105,7 @@ wire:
 		// - x0: Wire status: 0 - Off, otherwise - On
 		
 	//Guardado registro return
-	sub sp, sp, 16
+	sub sp, sp, 8
 	str x30, [sp]
 	
 	cbnz x0, wireOnStatus
@@ -113,8 +113,7 @@ wire:
 	str x0, [sp]
 
     //Interior cable vertical
-	movz x0, 0x0000, lsl 16
-	movk x0, 0x0000, lsl 0
+	ldr x0, black
 	mov x1, 328
 	mov x2, 527
 	mov x3,	43
@@ -122,20 +121,14 @@ wire:
 	bl createVRectangle
 
 	//Interior cable cuadradito curva
-	movz x0, 0x0000, lsl 16
-	movk x0, 0x0000, lsl 0
 	mov x1, 371
 	mov x2, 523
 	mov x3,	4
-	mov x4, 4
 	bl createVRectangle
 
 	//Interior cable horizontal
-	movz x0, 0x0000, lsl 16
-	movk x0, 0x0000, lsl 0
 	mov x1, 375
 	mov x2, 404
-	mov x3,	4
 	mov x4, 119
 	bl createVRectangle
 
@@ -156,26 +149,20 @@ wire:
 	bl createVRectangle
 
 	//Interior cable cuadradito curva
-	movz x0, 0x00ff, lsl 16
-	movk x0, 0xa200, lsl 0
 	mov x1, 371
 	mov x2, 523
 	mov x3,	4
-	mov x4, 4
 	bl createVRectangle
 
 	//Interior cable horizontal
-	movz x0, 0x00ff, lsl 16
-	movk x0, 0xa200, lsl 0
 	mov x1, 375
 	mov x2, 404
-	mov x3,	4
 	mov x4, 119
 	bl createVRectangle
     
     doneWire:
     ldr x30, [sp]
-	add sp, sp, 16
+	add sp, sp, 8
 	br x30
 
 
@@ -186,14 +173,10 @@ createWire:
 		
 	//Guardado registro return
 	sub sp, sp, 16
-	str x30, [sp]
-	
-	//Guardado registro x0
-	sub sp, sp, 16
+	str x30, [sp, #8]
 	str x0, [sp]
 
-	movz x0, 0x0000, lsl 16
-	movk x0, 0x0000, lsl 0
+	ldr x0, black
 	mov x1, 310
 	mov x2, 523
 	mov x3,	18
@@ -208,53 +191,46 @@ createWire:
 	mov x4, 6
 	bl createVRectangle
 
-	movz x0, 0x0042, lsl 16
-	movk x0, 0x4242, lsl 0
 	mov x1, 370
 	mov x2, 522
 	mov x3,	6
-	mov x4, 6
 	bl createVRectangle
 
-	movz x0, 0x0042, lsl 16
-	movk x0, 0x4242, lsl 0
 	mov x1, 374
 	mov x2, 404
-	mov x3,	6
 	mov x4, 120
 	bl createVRectangle
 
     ldr x0, [sp]
-	add sp, sp, 16
     bl wire
 
-	ldr x30, [sp]
+	ldr x30, [sp, #8]
 	add sp, sp, 16
 	br x30
 
 .globl createOnWire
 createOnWire:
 	//Guardado registro return
-	sub sp, sp, 16
+	sub sp, sp, 8
 	str x30, [sp]
 
 	mov x0, 1
 	bl createWire
 
 	ldr x30, [sp]
-	add sp, sp, 16
+	add sp, sp, 8
 	br x30
 
 
 .globl createOffWire
 createOffWire:
 	//Guardado registro return
-	sub sp, sp, 16
+	sub sp, sp, 8
 	str x30, [sp]
 
 	mov x0, 0
 	bl createWire
 
 	ldr x30, [sp]
-	add sp, sp, 16
+	add sp, sp, 8
 	br x30

@@ -4,7 +4,7 @@
 .globl createCuevaRaton
 createCuevaRaton:
 	//Guardado registro return
-	sub sp, sp, 16
+	sub sp, sp, 8
 	str x30, [sp]
 
 	// Input values:
@@ -54,14 +54,14 @@ createCuevaRaton:
 
 	//Carga del registro de return y devolucion del siguiente
 	ldr x30, [sp]
-	add sp, sp, 16
+	add sp, sp, 8
 	br x30
 
 
 .globl createRatonEyes
 createRatonEyes:
 	//Guardado registro return
-	sub sp, sp, 16
+	sub sp, sp, 8
 	str x30, [sp] 
 
 	movz x0, 0xdddd, lsl 16
@@ -72,47 +72,35 @@ createRatonEyes:
 	mov x4, 3
 	bl createVRectangle
 
-	movz x0, 0x00ec, lsl 16
-	movk x0, 0x4738, lsl 0
+	mov x2, 129
+	bl createVRectangle
+
+	ldr x0, frequent_red
 	mov x1, 386
 	mov x2, 125
 	mov x3, 2
 	mov x4, 2
 	bl createVRectangle
 
-	movz x0, 0xdddd, lsl 16
-	movk x0, 0xdddd, lsl 0
-	mov x1, 384
-	mov x2, 129
-	mov x3, 4
-	mov x4, 3
-	bl createVRectangle
-
-	movz x0, 0x00ec, lsl 16
-	movk x0, 0x4738, lsl 0
-	mov x1, 386
 	mov x2, 130
-	mov x3, 2
-	mov x4, 2
 	bl createVRectangle
 
 	//Carga del registro de return y devolucion del siguiente
 	ldr x30, [sp]
-	add sp, sp, 16
+	add sp, sp, 8
 	br x30
 
 
 .globl genParpadoRaton
 genParpadoRaton:
 	//Guardado registro return
-	sub sp, sp, 16
+	sub sp, sp, 8
 	str x30, [sp]
 
 	// Input values:
 	// - x5: 	Variación Y
 	
-    movz x0, 0x0000, lsl 16
-    movk x0, 0x0000, lsl 0
+    ldr x0, black
     mov x1, 384
     add x1, x1, x5
     mov x2, 124
@@ -128,14 +116,14 @@ genParpadoRaton:
     bl delay
 
 	ldr x30, [sp]
-	add sp, sp, 16
+	add sp, sp, 8
 	br x30
 
 
 .globl parpadeoRaton
 parpadeoRaton:
 	//Guardado registro return
-	sub sp, sp, 16
+	sub sp, sp, 8
 	str x30, [sp]
 	
     mov x5,0
@@ -159,5 +147,5 @@ parpadeoRaton:
     bl delay
 
 	ldr x30, [sp]
-	add sp, sp, 16
+	add sp, sp, 8
 	br x30

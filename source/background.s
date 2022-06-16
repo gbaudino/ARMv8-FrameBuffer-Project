@@ -1,5 +1,6 @@
 
 .include "utilities.s"
+.include "data.s"
 
 .globl createBackground
 createBackground:
@@ -31,8 +32,7 @@ createBackground:
 	bl createCuevaRaton
 
 	//Cueva raton
-	movz x0, 0x0000, lsl 16
-	movk x0, 0x0000, lsl 0
+	ldr x0, black
 	mov x5, 2
 	bl createCuevaRaton
    	bl createRatonEyes

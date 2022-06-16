@@ -121,8 +121,7 @@ powerOnEffect:
 	sub sp, sp, 8
 	str x30, [sp]
 
-	movz x0, 0x00ff, lsl 16
-	movk x0, 0xffff, lsl 0
+	ldr x0, white
 	mov x1, 129
 	mov x2, 301
 	mov x3,	20
@@ -170,11 +169,10 @@ gradientScreen:
 
 	bl saveTempValues
 
-	movz x9, 0x0011, lsl 16
+	movz x9, 0x1111, lsl 16
 	movk x9, 0x1111, lsl 0
 
-	movz x0, 0x00ff, lsl 16
-	movk x0, 0xffff, lsl 0
+	ldr x0, white
 	mov x1, 89
 	mov x2, 247
 	mov x3,	100

@@ -39,8 +39,9 @@ createVRectangle:
 .globl createHRectangle
 createHRectangle:
 	//Guardado registro return
-	sub sp, sp, 8
-	str x30, [sp]
+	sub sp, sp, 16
+	str x30, [sp, #8]
+	str x2, [sp]
 
 	bl saveTempValues
 
@@ -66,16 +67,21 @@ createHRectangle:
 	bl loadTempValues
 
 	//Carga del registro de return y return
-	ldr x30, [sp]
-	add sp, sp, 8
+	ldr x2, [sp]
+	ldr x30, [sp, #8]
+	add sp, sp, 16
 	br x30
 
 
 .globl createTriangle
 createTriangle: 
 	//Guardado registro return
-	sub sp, sp, 8
-	str x30, [sp] 
+	sub sp, sp, 40
+	str x30, [sp, #32]
+	str x7 , [sp, #24]
+	str x4, [sp, #16]
+	str x2, [sp, #8]
+	str x1, [sp]
 
 	// Input values:
 		// - x0: Color of Triangle
@@ -98,17 +104,25 @@ createTriangle:
 	doneTriang:
 
 	//Carga del registro de return y return
-	ldr x30, [sp]
-	add sp, sp, 8
+	ldr x1, [sp]
+	ldr x2, [sp, #8]
+	ldr x4, [sp, #16]
+	ldr x7, [sp, #24]
+	ldr x30, [sp, #32]
+	add sp, sp, 40
 	br x30
 
 
 .globl createRectangleTriangle
 createRectangleTriangle: 
 	//Guardado registro return
-	sub sp, sp, 8
-	str x30, [sp]
-
+	sub sp, sp, 40
+	str x30, [sp, #32]
+	str x7 , [sp, #24]
+	str x4, [sp, #16]
+	str x2, [sp, #8]
+	str x1, [sp]
+	
 	bl saveTempValues
 
 	// Input values:
@@ -143,8 +157,12 @@ createRectangleTriangle:
 	bl loadTempValues
 
 	//Carga del registro de return y return
-	ldr x30, [sp]
-	add sp, sp, 8
+	ldr x1, [sp]
+	ldr x2, [sp, #8]
+	ldr x4, [sp, #16]
+	ldr x7, [sp, #24]
+	ldr x30, [sp, #32]
+	add sp, sp, 40
 	br x30
 
 
@@ -208,16 +226,8 @@ createVLine:
 
 
 	//Guardado registros usados
-	sub sp, sp, 16
-	str x7, [sp]
-
 	bl generateFrstPixelCoord
 	mov x9, x7
-
-	//Carga de registros usados
-	ldr x7, [sp]
-	add sp, sp, 16
-
 
 	//Generacion de la cantidad de memoria a correr x9 para llevarlo a la siguiente fila
 	//(SCREEN_WIDTH - LINE_WIDTH)*4

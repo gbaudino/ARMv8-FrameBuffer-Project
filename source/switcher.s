@@ -7,14 +7,12 @@ switcher:
 		
 	//Guardado registro return
 	sub sp, sp, 16
-	str x30, [sp]
-	
-	cbnz x0, switcherOnStatus
-	sub sp, sp, 16
+	str x30, [sp, #8]
 	str x0, [sp]
 
-	movz x0, 0x0000, lsl 16
-	movk x0, 0x0000, lsl 0
+	cbnz x0, switcherOnStatus
+
+	ldr x0, black
 	mov x1, 129
 	mov x2, 98
 	mov x3,	12
@@ -28,10 +26,7 @@ switcher:
 
 	switcherOnStatus:
 	ldr x0, [sp]
-	add sp, sp, 16
 	cbz x0, doneSwitcher
-	sub sp, sp, 16
-	str x0, [sp]
 
 	movz x0, 0x0021, lsl 16
 	movk x0, 0xc59b, lsl 0
@@ -41,13 +36,13 @@ switcher:
 	mov x4, 12
 	bl createVRectangle
 
-	movz x0, 0x0000, lsl 16
-	movk x0, 0x0000, lsl 0
+	ldr x0, black
 	mov x1, 147
 	bl createVRectangle
 
 	doneSwitcher:
-	ldr x30, [sp]
+	ldr x0, [sp]
+	ldr x30, [sp, #8]
 	add sp, sp, 16
 	br x30
 
@@ -62,8 +57,7 @@ createSwitcher:
 	str x30, [sp, #8]
 	str x0, [sp]
 	
-	movz x0, 0x0000, lsl 16
-	movk x0, 0x0000, lsl 0
+	ldr x0, black
 	mov x1, 117
 	mov x2, 86
 	mov x3,	54
@@ -78,8 +72,7 @@ createSwitcher:
 	mov x4, 33
 	bl createVRectangle
 
-	movz x0, 0x0000, lsl 16
-	movk x0, 0x0000, lsl 0
+	ldr x0, black
 	mov x1, 120
 	mov x2, 103
 	mov x3,	2
@@ -137,11 +130,15 @@ createOffSwitcher:
 .globl breakSwitcher
 breakSwitcher:
 	//Guardado registro return
-	sub sp, sp, 16
+	sub sp, sp, 8
 	str x30, [sp]
 
-	movz x0, 0x0000, lsl 16
-	movk x0, 0x0000, lsl 0
+
+	bl createOffSwitcher
+
+	bl createOnSwitcher
+
+	ldr x0, black
 	mov x1, 129
 	mov x2, 98
 	mov x3,	12
@@ -149,5 +146,5 @@ breakSwitcher:
 	bl createVRectangle
 
 	ldr x30, [sp]
-	add sp, sp, 16
+	add sp, sp, 8
 	br x30

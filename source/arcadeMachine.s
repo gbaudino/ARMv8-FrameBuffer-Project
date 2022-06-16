@@ -1,5 +1,6 @@
 
 .include "utilities.s"
+.include "data.s"
 
 createArcadeBase:
 	//Guardado registro return
@@ -83,8 +84,7 @@ createArcadeCase:
 	str x30, [sp]
 
 	//Creacion triang1 borde blanco maq
-	movz x0, 0x00f9, lsl 16
-	movk x0, 0xfaf5, lsl 0
+	ldr x0, machine_white
 	mov x1, 24
 	mov x2, 221
 	mov x3,	4
@@ -96,45 +96,29 @@ createArcadeCase:
 	
 
 	//Creacion triang2 borde cyan maq
-	movz x0, 0x0064, lsl 16
-	movk x0, 0xdefe, lsl 0
-	mov x1, 24
+	ldr x0, machine_cyan
 	mov x2, 225
-	mov x3,	4
 	mov x4, 8
-	mov x5, 1
-	mov x6, 4
 	mov x7, 2
 	bl createRectangleTriangle
 
 	//Creacion triang3 borde blanco maq
-	movz x0, 0x00f9, lsl 16
-	movk x0, 0xfaf5, lsl 0
-	mov x1, 24
+	ldr x0, machine_white
 	mov x2, 396
-	mov x3,	4
 	mov x4, 12
 	mov x5, 0
-	mov x6, 4
 	mov x7, 3
 	bl createRectangleTriangle
 	
 
 	//Creacion triang4 borde cyan maq
-	movz x0, 0x0064, lsl 16
-	movk x0, 0xdefe, lsl 0
-	mov x1, 24
-	mov x2, 396
-	mov x3,	4
+	ldr x0, machine_cyan
 	mov x4, 8
-	mov x5, 0
-	mov x6, 4
 	mov x7, 2
 	bl createRectangleTriangle
 
 	//Creacion bordes blancos maq
-	movz x0, 0x00f9, lsl 16
-	movk x0, 0xfaf5, lsl 0
+	ldr x0, machine_white
 	mov x1, 16
 	mov x2, 233
 	mov x3,	13
@@ -165,9 +149,7 @@ createArcadeCase:
 	bl createVRectangle
 
 	//Creacion bordes cyan panel
-	movz x0, 0x0064, lsl 16
-	movk x0, 0xdefe, lsl 0
-	mov x1, 233
+	ldr x0, machine_cyan
 	mov x2, 201
 	mov x3, 4
 	mov x4, 228
@@ -177,15 +159,11 @@ createArcadeCase:
 	bl createTriangle
 
 	//Creacion cuadrado  cyan panel
-	mov x1, 233
-	mov x2, 201
 	mov x3, 22
-	mov x4, 228
 	bl createVRectangle
 
 	//Añadimos borde para terminar el detalle (izq)
-	movz x0, 0x00f9, lsl 16
-	movk x0, 0xfaf5, lsl 0
+	ldr x0, machine_white
 	mov x1, 255
 	mov x2, 197
 	mov x3, 4
@@ -193,15 +171,11 @@ createArcadeCase:
 	bl createVRectangle
 
 	//Añadimos borde para terminar el detalle (der)
-	mov x1, 255
 	mov x2, 405
-	mov x3, 4
-	mov x4, 28
 	bl createVRectangle
 
 	//Fix
-	movz x0, 0x0064, lsl 16
-	movk x0, 0xdefe, lsl 0
+	ldr x0, machine_cyan
 	mov x1, 213
 	mov x2, 221
 	mov x3, 5
@@ -209,20 +183,17 @@ createArcadeCase:
 	bl createVRectangle
 
 	//Creacion blanco abajo
-	movz x0, 0x00f9, lsl 16
-	movk x0, 0xfaf5, lsl 0
+	ldr x0, machine_white
 	mov x5, 0
 	bl createArcadeBase
 
 	//Creacion gris abajo
-	movz x0, 0x00be, lsl 16
-	movk x0, 0xbebe, lsl 0
+	ldr x0, machine_grey
 	mov x5, 4
 	bl createArcadeBase
 
 	//Creacion interior cyan maq
-	movz x0, 0x0064, lsl 16
-	movk x0, 0xdefe, lsl 0
+	ldr x0, machine_cyan
 	mov x1, 28
 	mov x2, 225
 	mov x3,	387
@@ -236,7 +207,7 @@ createArcadeCase:
 
 createNintendoLogo:
 	//Guardado registro return
-	sub sp, sp, 16
+	sub sp, sp, 8
 	str x30, [sp]
 
 	// Input values:
@@ -314,21 +285,18 @@ createNintendoLogo:
 	sub x4, x4, x5
 	bl createVRectangle
 
-	bl createMayusNLetterLogo
-
 	ldr x30, [sp]
-	add sp, sp, 16
+	add sp, sp, 8
 	br x30
 
 
 createArcadeTop:
 	//Guardado registro return
-	sub sp, sp, 16
+	sub sp, sp, 8
 	str x30, [sp]
 
 	//Creacion interior amarillo claro maq
-	movz x0, 0x00fe, lsl 16
-	movk x0, 0xea64, lsl 0
+	ldr x0, machine_light_yellow
 	mov x1, 19
 	mov x2, 233
 	mov x3,	185
@@ -336,19 +304,14 @@ createArcadeTop:
 	bl createVRectangle
 
 	//Creacion interior amarillo oscuro maq
-	movz x0, 0x00ff, lsl 16
-	movk x0, 0xa200, lsl 0
+	ldr x0, machine_dark_yellow
 	mov x1, 64
-	mov x2, 233
 	mov x3,	22
-	mov x4, 163
 	bl createVRectangle
 
 	//Creacion interior triang1 amarillo oscuro maq
-	movz x0, 0x00fe, lsl 16
-	movk x0, 0xea64, lsl 0
+	ldr x0, machine_light_yellow
 	mov x1, 82
-	mov x2, 233
 	mov x3,	4
 	mov x4, 12
 	mov x5, 0
@@ -357,20 +320,12 @@ createArcadeTop:
 	bl createRectangleTriangle
 
 	//Creacion interior triang2 amarillo oscuro maq
-	movz x0, 0x00fe, lsl 16
-	movk x0, 0xea64, lsl 0
-	mov x1, 82
 	mov x2, 384
-	mov x3,	4
-	mov x4, 12
 	mov x5, 1
-	mov x6, 4
-	mov x7, 3
 	bl createRectangleTriangle
 
 	//Creacion interior amarillo oscuro maq
-	movz x0, 0x00ff, lsl 16
-	movk x0, 0xa200, lsl 0
+	ldr x0, machine_dark_yellow
 	mov x1, 191
 	mov x2, 245
 	mov x3,	13
@@ -378,8 +333,6 @@ createArcadeTop:
 	bl createVRectangle
 
 	//Creacion interior triang3 amarillo oscuro maq
-	movz x0, 0x00ff, lsl 16
-	movk x0, 0xa200, lsl 0
 	mov x1, 200
 	mov x2, 237
 	mov x3,	4
@@ -390,48 +343,33 @@ createArcadeTop:
 	bl createTriangle
 
 	//Creacion interior triang4 amarillo oscuro maq
-	movz x0, 0x00ff, lsl 16
-	movk x0, 0xa200, lsl 0
 	mov x1, 204
 	mov x2, 372
-	mov x3,	4
-	mov x4, 24
-	mov x5, 0
-	mov x6, 4
-	mov x7, 3
 	bl createTriangle
 
 	//Creacion interior amarillo oscuro maq
-	movz x0, 0x00ff, lsl 16
-	movk x0, 0xa200, lsl 0
-	mov x1, 204
 	mov x2, 233
 	mov x3,	9
 	mov x4, 163
 	bl createVRectangle
 
-	//Parte blanca logo nintendo
-	movz x0, 0x00f6, lsl 16
-	movk x0, 0x1b26, lsl 0
-	mov x5, 0
+	//Parte roja logo nintendo
+	ldr x0, frequent_red
 	bl createNintendoLogo
 
-	//Parte roja logo nintendo
-	movz x0, 0x00f9, lsl 16
-	movk x0, 0xfaf5, lsl 0
+	//Parte blanca logo nintendo
+	ldr x0, machine_white
 	mov x5, 2
 	bl createNintendoLogo
-
 	
-
 	ldr x30, [sp]
-	add sp, sp, 16
+	add sp, sp, 8
 	br x30
 
 
 createArcadePanel:
 	//Guardado registro return
-	sub sp, sp, 16
+	sub sp, sp, 8
 	str x30, [sp]
 
 	//Creacion panel
@@ -447,8 +385,7 @@ createArcadePanel:
 	bl createTriangle
 
 	//Creacion cuadrado amarillo panel
-	movz x0, 0x00fe, lsl 16
-	movk x0, 0xea64, lsl 0
+	ldr x0, machine_light_yellow
 	mov x1, 233
 	mov x2, 209
 	mov x3, 22
@@ -457,64 +394,44 @@ createArcadePanel:
 
 	//Aca empiezan los detalles del panel
 	//INICIO BOTONES AZULES
-	movz x0, 0x0029, lsl 16
-	movk x0, 0x62ff, lsl 0
+	ldr x0, panel_blue
 	mov x1, 218
 	mov x2, 238
 	mov x3, 4
 	mov x4, 20
 	bl createVRectangle
 
-	movz x0, 0x0029, lsl 16
-	movk x0, 0x62ff, lsl 0
 	mov x1, 222
 	mov x2, 235
-	mov x3, 4
-	mov x4, 20
 	bl createVRectangle
 	//FIN BOTONES AZULES
 
 	//INICIO BOTONES ROJOS
-	movz x0, 0x00ec, lsl 16
-	movk x0, 0x4738, lsl 0
+	ldr x0, frequent_red
 	mov x1, 218
 	mov x2, 266
-	mov x3, 4
-	mov x4, 20
 	bl createVRectangle
 
-	movz x0, 0x00ec, lsl 16
-	movk x0, 0x4738, lsl 0
 	mov x1, 222
 	mov x2, 262
-	mov x3, 4
-	mov x4, 20
 	bl createVRectangle
 	//FIN BOTONES ROJOS
 
 	//INICIO BASE CONTROLADOR
-	movz x0, 0x0029, lsl 16
-	movk x0, 0x62ff, lsl 0
+	ldr x0, panel_blue
 	mov x1, 213
 	mov x2, 308
 	mov x3, 13
 	mov x4, 20
 	bl createVRectangle
 
-	movz x0, 0x0029, lsl 16
-	movk x0, 0x62ff, lsl 0
 	mov x1, 217
 	mov x2, 305
 	mov x3, 4
 	mov x4, 3
 	bl createVRectangle
 
-	movz x0, 0x0029, lsl 16
-	movk x0, 0x62ff, lsl 0
-	mov x1, 217
 	mov x2, 328
-	mov x3, 4
-	mov x4, 3
 	bl createVRectangle
 	//FIN BASE DEL CONTROLADOR
 
@@ -524,7 +441,6 @@ createArcadePanel:
 	mov x1, 207
 	mov x2, 317
 	mov x3, 13
-	mov x4, 3
 	bl createVRectangle
 
 	movz x0, 0x00fb, lsl 16
@@ -537,20 +453,14 @@ createArcadePanel:
 	//FIN PALANCA
 
 	//BOTONES DERECHA
-	movz x0, 0x00fb, lsl 16
-	movk x0, 0x3e41, lsl 0
 	mov x1, 221
 	mov x2, 365
 	mov x3, 4
 	mov x4, 9
 	bl createVRectangle
 
-	movz x0, 0x0029, lsl 16
-	movk x0, 0x62ff, lsl 0
-	mov x1, 221
+	ldr x0, panel_blue
 	mov x2, 380
-	mov x3, 4
-	mov x4, 9
 	bl createVRectangle
 
 	//FIN BOTONES
@@ -559,23 +469,21 @@ createArcadePanel:
 	movk x0, 0x4d84, lsl 0
 	mov x1, 213
 	mov x2, 412
-	mov x3, 4
 	bl createVLine
 
 
 	ldr x30, [sp]
-	add sp, sp, 16
+	add sp, sp, 8
 	br x30
 
 
 createArcadeBottom:
 	//Guardado registro return
-	sub sp, sp, 16
+	sub sp, sp, 8
 	str x30, [sp]
 
 	//Creacion amarillo oscuro
-	movz x0, 0x00ff, lsl 16
-	movk x0, 0xa200, lsl 0
+	ldr x0, machine_dark_yellow
 	mov x1, 255
 	mov x2, 233
 	mov x3,	160
@@ -583,17 +491,12 @@ createArcadeBottom:
 	bl createVRectangle
 
 	//Creacion linea abajo amarillo claro
-	movz x0, 0x00fe, lsl 16
-	movk x0, 0xea64, lsl 0
+	ldr x0, machine_light_yellow
 	mov x1, 384
-	mov x2, 233
 	mov x3,	4
-	mov x4, 163
 	bl createVRectangle
 
 	//Creacion linea abajo amarillo claro
-	movz x0, 0x00fe, lsl 16
-	movk x0, 0xea64, lsl 0
 	mov x1, 275
 	mov x2, 248
 	mov x3,	109
@@ -601,17 +504,10 @@ createArcadeBottom:
 	bl createVRectangle
 
 	//Creacion linea abajo amarillo claro
-	movz x0, 0x00fe, lsl 16
-	movk x0, 0xea64, lsl 0
-	mov x1, 275
 	mov x2, 376
-	mov x3,	109
-	mov x4, 4
 	bl createVRectangle
 
 	//Creacion linea abajo amarillo claro
-	movz x0, 0x00fe, lsl 16
-	movk x0, 0xea64, lsl 0
 	mov x1, 267
 	mov x2, 256
 	mov x3,	4
@@ -619,21 +515,13 @@ createArcadeBottom:
 	bl createVRectangle
 
 	//Creacion triangulo abajo amarillo claro
-	movz x0, 0x00fe, lsl 16
-	movk x0, 0xea64, lsl 0
 	mov x1, 271
 	mov x2, 252
-	mov x3,	4
 	mov x4, 4
 	bl createVRectangle
 
 	//Creacion triangulo abajo amarillo claro
-	movz x0, 0x00fe, lsl 16
-	movk x0, 0xea64, lsl 0
-	mov x1, 271
 	mov x2, 372
-	mov x3,	4
-	mov x4, 4
 	bl createVRectangle
 
 	//Creacion llave puerta
@@ -646,8 +534,6 @@ createArcadeBottom:
 	bl createVRectangle
 
 	//Creacion llave puerta
-	movz x0, 0x00bf, lsl 16
-	movk x0, 0xbfbf, lsl 0
 	mov x1, 304
 	mov x2, 343
 	mov x3, 12
@@ -657,20 +543,18 @@ createArcadeBottom:
 	//Creacion llave puerta
 	movz x0, 0x0077, lsl 16
 	movk x0, 0x7777, lsl 0
-	mov x1, 304
 	mov x2, 351
-	mov x3, 12
 	mov x4, 4
 	bl createVRectangle
 
 	ldr x30, [sp]
-	add sp, sp, 16
+	add sp, sp, 8
 	br x30
 
 
 createArcadeScreen:
 	//Guardado registro return
-	sub sp, sp, 16
+	sub sp, sp, 8
 	str x30, [sp]
 
 	//Creacion bordes negros
@@ -685,9 +569,7 @@ createArcadeScreen:
 	//Creacion bordes negros
 	movz x0, 0x0072, lsl 16
 	movk x0, 0x4526, lsl 0
-	mov x1, 86
 	mov x2, 246
-	mov x3,	106
 	mov x4, 137
 	bl createVRectangle
 
@@ -695,21 +577,19 @@ createArcadeScreen:
 	movz x0, 0x0042, lsl 16
 	movk x0, 0x2d42, lsl 0
 	mov x1, 87
-	mov x2, 246
 	mov x3,	104
-	mov x4, 137
 	bl createVRectangle
 
 	bl powerOffScreen
 
 	ldr x30, [sp]
-	add sp, sp, 16
+	add sp, sp, 8
 	br x30
 
 .globl createArcade
 createArcade:
 	//Guardado registro return
-	sub sp, sp, 16
+	sub sp, sp, 8
 	str x30, [sp]
 
     bl createOffWire
@@ -720,6 +600,5 @@ createArcade:
 	bl createArcadeScreen
 
 	ldr x30, [sp]
-	add sp, sp, 16
+	add sp, sp, 8
 	br x30
-

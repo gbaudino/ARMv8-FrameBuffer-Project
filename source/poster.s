@@ -60,7 +60,6 @@ createMonkey:
 	bl createVRectangle
 
 	mov x1, 148
-	mov x2, 494
 	mov x3,	11
 	mov x4, 50
 	bl createVRectangle
@@ -200,8 +199,7 @@ createMonkey:
 	bl createVRectangle
 
 	//Creación corbata
-	movz x0, 0x00f6, lsl 16
-	movk x0, 0x1b26, lsl 0
+	ldr x0, red_tie
 	mov x2, 524
 	mov x3,	15
 	mov x4, 5
@@ -246,8 +244,7 @@ createMonkey:
 	mov x4, 6
 	bl createVRectangle
 
-	movz x0, 0x0000, lsl 16
-	movk x0, 0x0000, lsl 0
+	ldr x0, black
 	mov x2, 560
 	mov x4, 4
 	bl createVRectangle
@@ -273,7 +270,7 @@ createMonkey:
 .globl createPoster
 createPoster:
 	//Guardado registro return
-	sub sp, sp, 16
+	sub sp, sp, 8
 	str x30, [sp]
 
 	movz x0, 0x00f0, lsl 16
@@ -307,5 +304,5 @@ createPoster:
 	bl createMonkey
 
 	ldr x30, [sp]
-	add sp, sp, 16
+	add sp, sp, 8
 	br x30
