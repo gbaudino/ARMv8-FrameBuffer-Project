@@ -204,25 +204,24 @@ donkeySplashScreen:
 	mov x2, 301
 	mov x3,	20
 	mov x4, 27
-	mov x5, 102
+	mov x5, 89
 	bl screenExpansion
+
+	mov x1, 89
+	mov x2, 247
+	mov x3,	100
+	mov x4, 135
+	bl createVRectangle
 
 	ldr x30, [sp]
 	add sp, sp, 8
 	br x30
 
-
 donkeyFace:
 	sub sp, sp, 8
 	str x30, [sp]
 
-	    // - x0:    Color Base
-        // - x1:    Coord primero en y
-        // - x2:    Coord primero en x
-        // - x3:    Alto del rectangulo
-        // - x4:    Ancho del rectangulo
-
-	//eyes
+	//face
 	ldr x0, light_pink_monkey
 	mov x1, 114
 	mov x2, 300
@@ -269,6 +268,302 @@ donkeyFace:
 	mov x4, 73
 	bl createVRectangle
 
+	mov x1, 145
+	mov x3, 4
+	mov x4, 13
+	bl createVRectangle
+
+	mov x2, 338
+	bl createVRectangle
+
+	mov x1, 149
+	mov x2, 278
+	mov x3, 5
+	mov x4, 9
+	bl createVRectangle
+
+	mov x2, 342
+	bl createVRectangle
+
+	mov x1, 149
+	mov x2, 291
+	mov x4, 47
+	bl createVRectangle
+
+	mov x1, 154
+	mov x2, 287
+	mov x3, 8
+	mov x4, 55
+	bl createVRectangle
+
+	mov x1, 162
+	mov x2, 295
+	mov x3, 4
+	mov x4, 39
+	bl createVRectangle
+
+	//hears
+
+	mov x1, 123
+	mov x2, 282
+	mov x3, 5
+	mov x4, 4
+	bl createVRectangle
+
+	mov x2, 343
+	bl createVRectangle
+
+	mov x1, 128
+	mov x2, 278
+	mov x3, 8
+	mov x4, 8
+	bl createVRectangle
+
+	mov x2, 343
+	bl createVRectangle
+
+	//eyes
+	ldr x0, monkey_white
+	mov x1, 123
+	mov x2, 304
+	mov x3, 9
+	mov x4, 9
+	bl createVRectangle
+
+	mov x2, 317
+	bl createVRectangle
+
+	ldr x0, black
+	mov x1, 128
+	mov x2, 309
+	mov x3, 4
+	mov x4, 4
+	bl createVRectangle
+
+	mov x2, 317
+	bl createVRectangle
+
+	ldr x30, [sp]
+	add sp, sp, 8
+	br x30
+
+donkeyFace2:
+	sub sp, sp, 8
+	str x30, [sp]
+
+	//face
+	ldr x0, light_pink_monkey
+	mov x1, 114
+	mov x2, 300
+	mov x3, 4
+	mov x4, 8
+	bl createVRectangle
+
+	mov x2, 322
+	bl createVRectangle
+
+	mov x1, 118
+	mov x2, 295
+	mov x3, 5
+	mov x4, 18
+	bl createVRectangle
+
+	mov x2, 317
+	bl createVRectangle
+
+	mov x1, 123
+	mov x2, 291
+	mov x4, 47
+	bl createVRectangle
+
+	mov x1, 128
+	mov x2, 295
+	mov x3, 8
+	mov x4, 39
+	bl createVRectangle
+
+	//mouth
+
+	mov x1, 136
+	mov x2, 279
+	mov x3, 5
+	mov x4, 29
+	bl createVRectangle
+
+	mov x2, 321
+	bl createVRectangle
+
+	mov x1, 141
+	mov x2, 274
+	mov x3, 4
+	mov x4, 13
+	bl createVRectangle
+
+	mov x2, 296
+	bl createVRectangle
+
+	mov x2, 321
+	bl createVRectangle
+
+	mov x2, 343
+	bl createVRectangle
+
+	mov x1, 140
+	mov x2, 308
+	mov x3, 5
+	mov x4, 13
+	bl createVRectangle
+
+	mov x1, 145
+	mov x2, 274
+	mov x3, 9
+	mov x4, 9
+	bl createVRectangle
+
+	mov x2, 347
+	bl createVRectangle
+
+	mov x1, 154
+	mov x2, 279
+	mov x3, 4
+	mov x4, 8
+	bl createVRectangle
+
+	mov x2, 343
+	bl createVRectangle
+
+	mov x1, 159
+	mov x2, 287
+	mov x3, 3
+	mov x4, 13
+	bl createVRectangle
+
+	mov x2, 330
+	bl createVRectangle
+
+	mov x1, 158
+	mov x2, 283
+	mov x3, 4
+	mov x4, 4
+	bl createVRectangle
+
+	mov x2, 343
+	bl createVRectangle
+
+	mov x1, 162
+	mov x2, 296
+	mov x3, 5
+	mov x4, 38
+	bl createVRectangle
+
+	//hears
+
+	mov x1, 124
+	mov x2, 274
+	mov x3, 4
+	mov x4, 9
+	bl createVRectangle
+
+	mov x2, 347
+	bl createVRectangle
+
+	mov x1, 128
+	mov x2, 270
+	mov x3, 8
+	mov x4, 13
+	bl createVRectangle
+
+	mov x2, 347
+	bl createVRectangle
+
+	//smile
+
+	ldr x0, monkey_white
+	mov x1, 141
+	mov x2, 287
+	mov x3, 4
+	mov x4, 9
+	bl createVRectangle
+
+	mov x2, 334
+	bl createVRectangle
+
+	mov x1, 145
+	mov x2, 283
+	mov x3, 5
+	mov x4, 13
+	bl createVRectangle
+
+	mov x2, 300
+	bl createVRectangle
+
+	mov x2, 317
+	bl createVRectangle
+
+	mov x2, 334
+	bl createVRectangle
+
+	mov x1, 150
+	mov x2, 287
+	mov x3, 9
+	mov x4, 4
+	bl createVRectangle
+
+	mov x2, 339
+	bl createVRectangle
+
+	mov x1, 154
+	mov x2, 291
+	mov x3, 5
+	mov x4, 5
+	bl createVRectangle
+
+	mov x2, 334
+	bl createVRectangle
+
+	mov x1, 150
+	mov x2, 305
+	mov x3, 4
+	mov x4, 3
+	bl createVRectangle
+
+	mov x2, 322
+	bl createVRectangle
+
+	mov x1, 154
+	mov x2, 300
+	mov x3, 8
+	mov x4, 13
+	bl createVRectangle
+
+	mov x2, 317
+	bl createVRectangle
+
+	mov x1, 159
+	mov x2, 313
+	mov x3, 3
+	mov x4, 4
+	bl createVRectangle
+
+	//eyes
+	mov x1, 123
+	mov x2, 304
+	mov x3, 9
+	mov x4, 9
+	bl createVRectangle
+
+	mov x2, 317
+	bl createVRectangle
+
+	ldr x0, black
+	mov x1, 128
+	mov x2, 309
+	mov x3, 4
+	mov x4, 4
+	bl createVRectangle
+
+	mov x2, 317
+	bl createVRectangle
 
 	ldr x30, [sp]
 	add sp, sp, 8
@@ -338,6 +633,20 @@ transitionToTheGame:
 	bl donkeySplashScreen
 
 	bl donkeyFace
+
+	movz x7, 0x4000, lsl 16
+	movk x7, 0x0, lsl 0
+	bl delay
+
+	movz x0, 0x0038, lsl 16
+	movk x0, 0x1503, lsl 0
+	mov x1, 105
+	mov x2, 269
+	mov x3,	68
+	mov x4, 91
+	bl createVRectangle
+
+	bl donkeyFace2
 
 	bl reduceToZeroScreen
 

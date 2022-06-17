@@ -1,6 +1,7 @@
 
 .include "utilities.s"
 .include "data.s"
+.include "nintendoLetters.s"
 
 createArcadeBase:
 	//Guardado registro return
@@ -314,6 +315,20 @@ createArcadeTop:
 	mov x5, 2
 	bl createNintendoLogo
 	
+	ldr x0, frequent_red
+	bl createMayusNLetterLogo
+	bl createILetterLogo
+	add x2, x2, x4
+	add x2, x2, 4
+	bl createNLetterLogo
+	bl createTLetterLogo
+	bl createELetterLogo
+	sub x1, x1, 9
+	add x2, x2, 13
+	bl createNLetterLogo
+	bl createDLetterLogo
+	bl createOLetterLogo
+
 	ldr x30, [sp]
 	add sp, sp, 8
 	br x30
