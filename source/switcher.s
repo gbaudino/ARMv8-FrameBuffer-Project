@@ -135,16 +135,15 @@ breakSwitcher:
 	bl saveTempValues
 
 	mov x9, 3
-	movz x7, 0x100, lsl 16
-	movk x7, 0x0000, lsl 0
-
 	repeatBreak:
 		bl createOffSwitcher
+		bl createOffWire
 		movz x7, 0xA00, lsl 16
 		movk x7, 0x0000, lsl 0
 		bl delay
 
 		bl createOnSwitcher
+		bl createOnWire
 		movz x7, 0xA00, lsl 16
 		movk x7, 0x0000, lsl 0
 		bl delay

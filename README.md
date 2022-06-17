@@ -1,7 +1,7 @@
 # ARMv8 FrameBuffer Project
 
 ### Overview
-This project wants to take us back to the nostalgic era of the arcade machines where we enjoyed each of their games without the best graphics. In this mini example, alluding to the work of past years (as a legacy) and the great game "Donkey Kong". We have created the animation where we turn on one of these machines, we want to start the game but it breaks and we can't use it anymore, its screen now flickers randomly for eternity.
+This project wants to take us back to the nostalgic era of the arcade machines where we enjoyed each of their games without the best graphics. In this mini example, alluding to the work of past years (as a legacy) and the great game "Donkey Kong". We have created the animation where we turn on one of these machines, we want to start the game but it breaks and we can't use it anymore, its screen now flickers for eternity.
 
 ### Code particularities
 - [x] Code portability
