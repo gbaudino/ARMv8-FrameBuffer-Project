@@ -1,4 +1,6 @@
 .globl logoDK
+.include "utilities.s"
+
 
 logoD:
 	//Guardado registro 
@@ -599,6 +601,43 @@ logoDK:
 	mov x5, 2
 	bl logoK
 
+	bl showInsertCoin
+
+	mov x7, 8
+	bl insertCoinBlinking
+
+
+
+	ldr x30, [sp]
+	add sp, sp, 16
+	br x30
+
+hideInsertCoin:
+	sub sp, sp, 16
+	str x30, [sp]
+
+		// Input values:
+	    // - x0:    Color Base
+        // - x1:    Coord primero en y
+        // - x2:    Coord primero en x
+        // - x3:    Alto del rectangulo
+        // - x4:    Ancho del rectangulo
+	movz x0, 0x0000, lsl 16
+	movz x0, 0x0000, lsl 0
+	mov x1, 170
+	mov x2, 260
+	mov x3, 20
+	mov x4, 100
+	bl createVRectangle
+
+	ldr x30, [sp]
+	add sp, sp, 16
+	br x30
+
+showInsertCoin:
+	sub sp, sp, 16
+	str x30, [sp]
+
 	//Fondo InsertCoin
 	movz x0, 0x00c4, lsl 16
 	movk x0, 0x0424, lsl 0
@@ -614,5 +653,32 @@ logoDK:
 	ldr x30, [sp]
 	add sp, sp, 16
 	br x30
+insertCoinBlinking:
+	//Guardado registro ret
+	sub sp, sp, 16
+	str x30, [sp]
+	str x9, [sp, #8]
 
+	//INPUT:
+	// X7 = Cantidad de repeticiones
+	mov x9, x7
+
+	loop: 
+		bl hideInsertCoin
+		movz x7, 0x2000, lsl 16
+		movk x7, 0x0000, lsl 0
+	    bl delay
+		bl showInsertCoin
+		movz x7, 0x2000, lsl 16
+		movk x7, 0x0000, lsl 0
+		bl delay
+		subs x9, x9, 1
+		b.ne loop
+
+
+
+	ldr x30, [sp]
+	ldr x9, [sp, #8]
+	add sp, sp, 16
+	br x30
 
