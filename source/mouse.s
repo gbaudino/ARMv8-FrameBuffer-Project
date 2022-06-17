@@ -1,15 +1,18 @@
 .include "data.s"
 .include "utilities.s"
 
-.globl createCuevaRaton
-createCuevaRaton:
+.globl createMouseCave
+createMouseCave:
 	//Guardado registro return
 	sub sp, sp, 8
 	str x30, [sp]
 
 	// Input values:
-	// - x0: 	Color of Base
-	// - x5:	Variacion tamano
+		// - x0: 	Color of Base
+		// - x5:	Variacion tamano
+
+	// Temporary values:
+		// - x9:	Temp cantidad de ejecuciones del loop
 
 	mov x1, 379
 	mov x2, 120
@@ -20,37 +23,15 @@ createCuevaRaton:
 	sub x4, x4, x5
 	bl createVRectangle
 
-	mov x1, 378
-	mov x2, 121
-	add x2, x2, x5
 	mov x3, 1
-	mov x4, 14
-	sub x4, x4, x5
-	bl createVRectangle
-
-	mov x1, 377
-	mov x2, 122
-	add x2, x2, x5
-	mov x3, 1
-	mov x4, 12
-	sub x4, x4, x5
-	bl createVRectangle
-
-	mov x1, 376
-	mov x2, 123
-	add x2, x2, x5
-	mov x3, 1
-	mov x4, 10
-	sub x4, x4, x5
-	bl createVRectangle
-	
-	mov x1, 375
-	mov x2, 124
-	add x2, x2, x5
-	mov x3, 1
-	mov x4, 8
-	sub x4, x4, x5
-	bl createVRectangle
+	mov x9, 4
+	loopMouseCave:
+		sub x1, x1, 1
+		add x2, x2, 1
+		sub x4, x4, 2
+		bl createVRectangle
+		sub x9, x9, 1
+		cbnz x9, loopMouseCave
 
 	//Carga del registro de return y devolucion del siguiente
 	ldr x30, [sp]
@@ -58,8 +39,8 @@ createCuevaRaton:
 	br x30
 
 
-.globl createRatonEyes
-createRatonEyes:
+.globl createMouseEyes
+createMouseEyes:
 	//Guardado registro return
 	sub sp, sp, 8
 	str x30, [sp] 
@@ -91,14 +72,14 @@ createRatonEyes:
 	br x30
 
 
-.globl genParpadoRaton
-genParpadoRaton:
+.globl generateMouseBlinking
+generateMouseBlinking:
 	//Guardado registro return
 	sub sp, sp, 8
 	str x30, [sp]
 
 	// Input values:
-	// - x5: 	Variación Y
+		// - x5: 	Variación Y
 	
     ldr x0, black
     mov x1, 384
@@ -120,27 +101,27 @@ genParpadoRaton:
 	br x30
 
 
-.globl parpadeoRaton
-parpadeoRaton:
+.globl mouseBlinking
+mouseBlinking:
 	//Guardado registro return
 	sub sp, sp, 8
 	str x30, [sp]
 	
     mov x5,0
-	repParpadeo:
-        bl genParpadoRaton
+	repBlinking:
+        bl generateMouseBlinking
         movz x7, 0x00fa, lsl 16
         movk x7, 0x0000, lsl 0
         bl delay
         add x5 , x5, 1
         cmp x5, 4
-        bne repParpadeo
+        bne repBlinking
     
     movz x7, 0x00ff, lsl 16
     movk x7, 0xff00, lsl 0
     bl delay
 	
-    bl createRatonEyes
+    bl createMouseEyes
 
 	movz x7, 0x0fff, lsl 16
     movk x7, 0xf000, lsl 0

@@ -24,13 +24,13 @@ createBackground:
 	//Cueva raton
 	ldr x0, dark_grey_cave
 	mov x5, 0
-	bl createCuevaRaton
+	bl createMouseCave
 
 	//Cueva raton
 	ldr x0, black
 	mov x5, 2
-	bl createCuevaRaton
-   	bl createRatonEyes
+	bl createMouseCave
+   	bl createMouseEyes
 
     //Enchufe Maquina
     ldr x0, light_grey_socket

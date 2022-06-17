@@ -6,11 +6,11 @@ dynamic:
 
 	bl createOnSwitcher
 	
-	bl parpadeoRaton
+	bl mouseBlinking
 	
 	bl generateCurrent
 	
-	bl parpadeoRaton
+	bl mouseBlinking
 	
 	bl powerOnScreen
 	
@@ -18,13 +18,13 @@ dynamic:
 	movk x7, 0x0000, lsl 0
 	bl delay
 
-	bl parpadeoRaton
+	bl mouseBlinking
 	
 	bl transitionToTheGame
 	
 	bl breakSwitcher
 
-	bl parpadeoRaton
+	bl mouseBlinking
 	
 	
 	
@@ -37,7 +37,7 @@ dynamic:
 
 		bl climbingDonkey
 
-		bl parpadeoRaton
+		bl mouseBlinking
 		
 		
 

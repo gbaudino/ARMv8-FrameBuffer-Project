@@ -36,11 +36,11 @@ panel_blue: .dword 0x002962ff
 
 
 //Poster
-brown_monkey: .dword 0x004e2005
-dark_brown_monkey: .dword 0x00381503
-light_pink_monkey: .dword 0x00e9c8a5
+brown_donkey: .dword 0x004e2005
+dark_brown_donkey: .dword 0x00381503
+light_pink_donkey: .dword 0x00e9c8a5
 red_tie: .dword 0x00f61b26
-monkey_white: .dword 0x00ececec
+donkey_white: .dword 0x00ececec
 yellow_poster: .dword 0x00f0ac14
 
 //Background
@@ -49,7 +49,9 @@ light_brown_floor: .dword 0x00795548
 dark_grey_cave: .dword 0x00222222
 light_grey_socket: .dword 0x00bfbfbb
 
-//Screen
+//Screen-Glitch
 pink_glitch_screen: .dword 0x00f700ff
+light_brown_palm: .dword 0x00ae5020
+cream_palm: .dword 0x00ffdba6
 
 .endif

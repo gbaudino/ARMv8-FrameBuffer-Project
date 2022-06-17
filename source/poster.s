@@ -1,13 +1,13 @@
 .include "data.s"
 .include "utilities.s"
 
-createMonkey:
+createDonkey:
 	//Guardado registro return
 	sub sp, sp, 8
 	str x30, [sp]
 
 	//Creación de la parte marrón
-	ldr x0, brown_monkey
+	ldr x0, brown_donkey
 	mov x1, 103
 	mov x2, 539
 	mov x3,	4
@@ -109,7 +109,7 @@ createMonkey:
 	mov x3,	5
 	bl createVRectangle
 
-	ldr x0, dark_brown_monkey
+	ldr x0, dark_brown_donkey
 	mov x1, 154
 	mov x2, 514
 	mov x3,	15
@@ -122,7 +122,7 @@ createMonkey:
 
 
 	//Creación parte rosa
-	ldr x0, light_pink_monkey
+	ldr x0, light_pink_donkey
 	mov x1, 184
 	mov x2, 560
 	mov x4, 9
@@ -233,7 +233,7 @@ createMonkey:
 	bl createVRectangle
 
 	//Creación de ojos y boca
-	ldr x0, monkey_white
+	ldr x0, donkey_white
 	mov x1, 122
 	mov x2, 554
 	mov x3,	11
@@ -276,7 +276,7 @@ createPoster:
 	mov x4, 127
 	bl createVRectangle
 
-	ldr x0, monkey_white
+	ldr x0, donkey_white
 	mov x1, 85
 	mov x2, 465
 	mov x3,	4
@@ -295,7 +295,7 @@ createPoster:
 	mov x2, 596
 	bl createVRectangle
 	
-	bl createMonkey
+	bl createDonkey
 
 	ldr x30, [sp]
 	add sp, sp, 8

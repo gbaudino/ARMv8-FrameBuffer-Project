@@ -191,8 +191,12 @@ createNintendoLogo:
 	str x30, [sp]
 
 	// Input values:
-	// - x0: 	Color of Base
-	// - x5:	Variacion tamano
+		// - x0: 	Color of Base
+		// - x5:	Variacion tamano
+
+	// Temporary values:
+		// - x9:	Temp repetitions
+
 	mov x1, 32
 	add x1, x1, x5
 	mov x2, 242
@@ -205,37 +209,29 @@ createNintendoLogo:
 	sub x4, x4, x5
 	bl createVRectangle
 
-	sub x1, x1, 2 //30
-	add x2, x2, 2 //244
 	mov x3, 2
-	sub x4, x4, 4 //140
-	bl createVRectangle
-
-	sub x1, x1, 2 //28
-	add x2, x2, 2 //246
-	sub x4, x4, 4 //136
-	bl createVRectangle
-
-	sub x1, x1, 2 //26
-	add x2, x2, 2 //248
-	sub x4, x4, 4 //132
-	bl createVRectangle
+	mov x9, 3
+	repeatNintendoLogo:
+		sub x1, x1, 2
+		add x2, x2, 2
+		sub x4, x4, 4
+		bl createVRectangle
+		sub x9, x9, 1
+		cbnz repeatNintendoLogo
 
 	mov x1, 52
 	sub x1, x1, x5
-	sub x2, x2, 4 //244
-	add x4, x4, 8 //140
+	sub x2, x2, 4
 	bl createVRectangle
 
-	add x1, x1, 2 //54
-	add x2, x2, 2 //246
-	sub x4, x4, 4 //136
-	bl createVRectangle
-
-	add x1, x1, 2 //56
-	add x2, x2, 2 //248
-	sub x4, x4, 4 //132
-	bl createVRectangle
+	mov x9, 2
+	repNintendoLogo:
+		add x1, x1, 2
+		add x2, x2, 2
+		sub x4, x4, 4
+		bl createVRectangle
+		sub x9, x9, 1
+		cbnz repNintendoLogo
 
 	ldr x30, [sp]
 	add sp, sp, 8

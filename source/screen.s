@@ -223,7 +223,7 @@ donkeyFace:
 	str x30, [sp]
 
 	//face
-	ldr x0, light_pink_monkey
+	ldr x0, light_pink_donkey
 	mov x1, 114
 	mov x2, 300
 	mov x3, 4
@@ -304,7 +304,6 @@ donkeyFace:
 	bl createVRectangle
 
 	//hears
-
 	mov x1, 123
 	mov x2, 282
 	mov x3, 5
@@ -324,7 +323,7 @@ donkeyFace:
 	bl createVRectangle
 
 	//eyes
-	ldr x0, monkey_white
+	ldr x0, donkey_white
 	mov x1, 123
 	mov x2, 304
 	mov x3, 9
@@ -353,7 +352,7 @@ donkeyFace2:
 	str x30, [sp]
 
 	//face
-	ldr x0, light_pink_monkey
+	ldr x0, light_pink_donkey
 	mov x1, 114
 	mov x2, 300
 	mov x3, 4
@@ -384,7 +383,6 @@ donkeyFace2:
 	bl createVRectangle
 
 	//mouth
-
 	mov x1, 136
 	mov x2, 279
 	mov x3, 5
@@ -458,7 +456,6 @@ donkeyFace2:
 	bl createVRectangle
 
 	//hears
-
 	mov x1, 124
 	mov x2, 274
 	mov x3, 4
@@ -479,7 +476,7 @@ donkeyFace2:
 
 	//smile
 
-	ldr x0, monkey_white
+	ldr x0, donkey_white
 	mov x1, 141
 	mov x2, 287
 	mov x3, 4
