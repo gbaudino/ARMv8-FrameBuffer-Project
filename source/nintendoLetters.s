@@ -10,7 +10,6 @@ createMayusNLetterLogo:
 	// - x1:	y base
 	// - x2:	x base
 
-	ldr x0, frequent_red
 	mov x1, 33
 	mov x2, 256
 	mov x3, 17

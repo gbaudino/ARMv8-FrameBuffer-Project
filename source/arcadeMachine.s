@@ -336,8 +336,7 @@ createArcadePanel:
 	str x30, [sp]
 
 	//Creacion panel
-	movz x0, 0x0026, lsl 16
-	movk x0, 0x3b59, lsl 0
+	ldr x0, panel_blue
 	mov x1, 229
 	mov x2, 213
 	mov x3, 4
@@ -357,7 +356,7 @@ createArcadePanel:
 
 	//Detalles del panel
 	//INICIO BOTONES AZULES
-	ldr x0, panel_blue
+	ldr x0, panel_light_blue
 	mov x1, 218
 	mov x2, 238
 	mov x3, 4
@@ -381,7 +380,7 @@ createArcadePanel:
 	//FIN BOTONES ROJOS
 
 	//INICIO BASE CONTROLADOR
-	ldr x0, panel_blue
+	ldr x0, panel_light_blue
 	mov x1, 213
 	mov x2, 308
 	mov x3, 13
@@ -422,7 +421,7 @@ createArcadePanel:
 	mov x4, 9
 	bl createVRectangle
 
-	ldr x0, panel_blue
+	ldr x0, panel_light_blue
 	mov x2, 380
 	bl createVRectangle
 

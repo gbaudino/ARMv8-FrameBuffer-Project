@@ -39,8 +39,9 @@ dynamic:
 		mov x1, x9
 		bl climber
 
-		movz x7, 0x1000, lsl 16
+		movz x7, 0x2000, lsl 16
 		movk x7, 0x0, lsl 0
+		bl delay
 
 		bl glitchScreen
 
@@ -52,8 +53,9 @@ dynamic:
 		sub x1, x9, x5
 		bl climber
 
-		movz x7, 0x1000, lsl 16
+		movz x7, 0x2000, lsl 16
 		movk x7, 0x0, lsl 0
+		bl delay
 
 		bl glitchScreen
 

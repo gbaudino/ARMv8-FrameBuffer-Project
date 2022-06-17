@@ -32,7 +32,8 @@ machine_cyan: .dword 0x0064defe
 machine_grey: .dword 0x00bebebe
 machine_light_yellow: .dword 0x00feea64
 machine_dark_yellow: .dword 0x00ffa200
-panel_blue: .dword 0x002962ff
+panel_blue: .dword 0x00263b59
+panel_light_blue: .dword 0x002962ff
 
 
 //Poster

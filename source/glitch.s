@@ -8,8 +8,6 @@ glitchScreen:
 	str x30, [sp, 8]
 	str x1, [sp]
 
-	bl saveTempValues
-
 	ldr x0, black
 	mov x1, 89
 	mov x2, 247
@@ -26,8 +24,6 @@ glitchScreen:
 		blt repeatGlitch
     sub x1, x1, 1
 	bl createHLine
-
-	bl loadTempValues
 	
 	ldr x1, [sp]
 	ldr x30, [sp, 8]
@@ -39,8 +35,6 @@ climber:
     //Guardado registros usados
     sub sp, sp, 8
 	str x30, [sp]
-	
-	bl mouseBlinking
 
     // Input values:
 		// - x1:	Altura inicial
@@ -63,11 +57,11 @@ climbingPalm:
     mov x1, 89
 	mov x2, 275
 	mov x3,	100
-	mov x4, 2
+	mov x4, 3
 	bl createVRectangle
 
     ldr x0, light_brown_palm
-	add x2, x2, 2
+	add x2, x2, x4
 	bl createVRectangle
 
     ldr x30, [sp]

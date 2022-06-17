@@ -128,8 +128,8 @@ wire:
 
 	//Interior cable horizontal
 	mov x1, 375
-	mov x2, 404
-	mov x4, 119
+	mov x2, 408
+	mov x4, 115
 	bl createVRectangle
 
     wireOnStatus:
@@ -156,8 +156,8 @@ wire:
 
 	//Interior cable horizontal
 	mov x1, 375
-	mov x2, 404
-	mov x4, 119
+	mov x2, 408
+	mov x4, 115
 	bl createVRectangle
     
     doneWire:
@@ -197,8 +197,8 @@ createWire:
 	bl createVRectangle
 
 	mov x1, 374
-	mov x2, 404
-	mov x4, 120
+	mov x2, 408
+	mov x4, 116
 	bl createVRectangle
 
     ldr x0, [sp]
