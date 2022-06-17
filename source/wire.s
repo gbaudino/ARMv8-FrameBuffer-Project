@@ -1,4 +1,4 @@
-
+.include "data.s"
 .include "utilities.s"
 
 .globl generateVerticalCurrent

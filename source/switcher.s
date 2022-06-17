@@ -1,4 +1,4 @@
-
+.include "data.s"
 .include "utilities.s"
 
 switcher:
@@ -133,10 +133,25 @@ breakSwitcher:
 	sub sp, sp, 8
 	str x30, [sp]
 
+	bl saveTempValues
 
-	bl createOffSwitcher
+	mov x9, 3
+	movz x7, 0x100, lsl 16
+	movk x7, 0x0000, lsl 0
 
-	bl createOnSwitcher
+	repeatBreak:
+		bl createOffSwitcher
+		movz x7, 0xA00, lsl 16
+		movk x7, 0x0000, lsl 0
+		bl delay
+
+		bl createOnSwitcher
+		movz x7, 0xA00, lsl 16
+		movk x7, 0x0000, lsl 0
+		bl delay
+		
+		sub x9, x9, 1
+		cbnz x9, repeatBreak
 
 	ldr x0, black
 	mov x1, 129
@@ -144,6 +159,8 @@ breakSwitcher:
 	mov x3,	12
 	mov x4, 12
 	bl createVRectangle
+
+	bl loadTempValues
 
 	ldr x30, [sp]
 	add sp, sp, 8

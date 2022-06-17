@@ -1,6 +1,5 @@
-
-.include "utilities.s"
 .include "data.s"
+.include "utilities.s"
 
 .globl createBackground
 createBackground:

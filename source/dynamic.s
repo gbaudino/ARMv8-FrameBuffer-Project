@@ -1,6 +1,5 @@
-
-.include "utilities.s"
 .include "data.s"
+.include "utilities.s"
 
 .globl dynamic
 dynamic:
@@ -24,19 +23,22 @@ dynamic:
 	bl transitionToTheGame
 	
 	bl breakSwitcher
-	
 
 	bl parpadeoRaton
 	
-	bl glitchScreen
-
-	bl parpadeoRaton
+	
 	
 	infCycle:
+		bl glitchScreen
+
+		movz x7, 0x4000, lsl 16
+		movk x7, 0x0, lsl 0
+		bl delay
+
+		bl climbingDonkey
+
 		bl parpadeoRaton
 		
-		movz x7, 0x00ff, lsl 16
-		movk x7, 0xffff, lsl 0
-		bl delay
+		
 
 		b infCycle

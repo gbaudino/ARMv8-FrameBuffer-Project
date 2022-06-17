@@ -1,6 +1,7 @@
-
+.include "data.s"
 .include "utilities.s"
 
+.globl resetScreen
 resetScreen:
     //Guardado registro return
 	sub sp, sp, 8
@@ -608,7 +609,7 @@ reduceToZeroScreen:
 		bl createHLine
 		add x11, x11, 1
 		cmp x11, 68
-		movz x7, 0x2f0, lsl 16
+		movz x7, 0x280, lsl 16
 		movk x7, 0x0, lsl 0
 		bl delay
 		ble repeatReduce
@@ -651,40 +652,6 @@ transitionToTheGame:
 	bl reduceToZeroScreen
 
 	bl logoDK
-
-	ldr x30, [sp]
-	add sp, sp, 8
-	br x30
-
-.globl glitchScreen
-glitchScreen:
-	//Guardado registros usados
-	sub sp, sp, 8
-	str x30, [sp]
-
-	bl saveTempValues
-
-	//Temporary Values
-		// - x9: 	Temp Line
-
-	ldr x0, black
-	mov x1, 89
-	mov x2, 247
-	mov x3,	100
-	mov x4, 135
-	bl createVRectangle
-	mov x9, x1
-	ldr x0, pink_glitch_screen
-	repeatGlitch:
-		bl createHLine
-		add x9, x9, 1
-		bl createHLine
-		add x9, x9, 3
-		cmp x9, 189
-		blt repeatGlitch
-	bl createHLine
-
-	bl loadTempValues
 
 	ldr x30, [sp]
 	add sp, sp, 8
