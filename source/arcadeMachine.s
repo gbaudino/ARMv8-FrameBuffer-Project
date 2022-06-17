@@ -217,11 +217,12 @@ createNintendoLogo:
 		sub x4, x4, 4
 		bl createVRectangle
 		sub x9, x9, 1
-		cbnz repeatNintendoLogo
+		cbnz x9, repeatNintendoLogo
 
 	mov x1, 52
 	sub x1, x1, x5
 	sub x2, x2, 4
+	add x4, x4, 8
 	bl createVRectangle
 
 	mov x9, 2
@@ -231,7 +232,7 @@ createNintendoLogo:
 		sub x4, x4, 4
 		bl createVRectangle
 		sub x9, x9, 1
-		cbnz repNintendoLogo
+		cbnz x9, repNintendoLogo
 
 	ldr x30, [sp]
 	add sp, sp, 8

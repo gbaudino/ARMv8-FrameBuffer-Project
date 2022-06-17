@@ -51,8 +51,9 @@ climber:
 .globl climbingDonkey
 climbingDonkey:
     //Guardado registros usados
-    sub sp, sp, 8
-	str x30, [sp]
+    sub sp, sp, 16
+	str x30, [sp, 8]
+	str x7, [sp]
 
     bl resetScreen
 
@@ -66,16 +67,19 @@ climbingDonkey:
     ldr x0, light_brown_palm
 	add x2, x2, 2
 	bl createVRectangle
-
+	
+	/*
     mov x1, 75
     mov x2, 25
     bl randomNumberBetween
-    mov x1, 189
-    sub x1, x1, x7
+    */
+	mov x7, 40
+	mov x1, 189
+	sub x1, x1, x7
+	bl climber
 
-    bl climber
 
-
-    ldr x30, [sp]
-    add sp, sp, 8
+	ldr x7, [sp]
+    ldr x30, [sp, 8]
+    add sp, sp, 16
     br x30

@@ -71,15 +71,21 @@ loadTempValues:
 	br x30
 
 generateRandomNumber:
+	sub sp, sp, 16
+	str x30, [sp, 8]
+	str x9, [sp]
+
+
 	// Input values:
         // - x7:	Numero cualquiera
 	
 	// Output values:
 		// - x7: 	New random number
 
-	//Guardado registro temporal x9
-	sub sp, sp, 8
-	str x9, [sp]
+	// Temporary values:
+		// - x9:	Temp calc for pseudo-randomize
+
+	
 
     cmp x7, 0
     csinc x7, x7, xzr, ne
@@ -90,15 +96,20 @@ generateRandomNumber:
     orr x7, x9, x7, lsr 1
 
 	ldr x9, [sp]
-	add sp, sp, 8
+	ldr x30, [sp, 8]
+	add sp, sp, 16
 	br x30
 	
 randomNumber:
 	sub sp, sp, 8
     str x30, [sp]
 
+	bl mouseBlinking
+
     ldr x7, seed
     bl generateRandomNumber	// Pongo en x7 un nuevo número aleatorio
+
+	bl mouseBlinking
 
     adr x9, seed			// Guardo en x9 el address de "seed"
     str x7, [x9] 			// Actualizo la semilla
@@ -107,12 +118,9 @@ randomNumber:
     add sp, sp, 8 
     br x30
 
-
 randomNumberBetween:
-	sub sp, sp, 24
-    str x30, [sp, 16]
-    str x2, [sp, 8]
-	str x1, [sp]
+	sub sp, sp, 8
+    str x30, [sp]
 
 	// Input values:
         // - x1:	Numero del cual debe ser menor
@@ -122,7 +130,7 @@ randomNumberBetween:
 		// - x7:	Numero aleatorio entre x1 y x2
 	
 	regenerate:
-	bl randomNumber
+		bl randomNumber
 	
 	cmp x7, x1
 	blt yaEsMenorQue
@@ -133,11 +141,9 @@ randomNumberBetween:
 	bgt yaEsMayorQue
 	b regenerate
 	yaEsMayorQue:
-    
-	ldr x1, [sp]
-	ldr x2, [sp, 8]
-	ldr x30, [sp, 16]
-	add sp, sp, 24
+			
+	ldr x30, [sp]
+	add sp, sp, 8
 	br x30
 
 
