@@ -71,21 +71,74 @@ loadTempValues:
 	br x30
 
 generateRandomNumber:
+	// Input values:
+        // - x7:	Numero cualquiera
+	
+	// Output values:
+		// - x7: 	New random number
+
 	//Guardado registro temporal x9
 	sub sp, sp, 8
 	str x9, [sp]
 
-    cmp x7, #0
+    cmp x7, 0
     csinc x7, x7, xzr, ne
-    eor x9, x7, x7, lsr #2
-    eor x9, x9, x7, lsr #3
-    eor x9, x9, x7, lsr #5
-    lsl x9, x9, #15
-    orr x7, x9, x7, lsr #1
+    eor x9, x7, x7, lsr 2
+    eor x9, x9, x7, lsr 3
+    eor x9, x9, x7, lsr 5
+    lsl x9, x9, 15
+    orr x7, x9, x7, lsr 1
 
 	ldr x9, [sp]
 	add sp, sp, 8
-	
 	br x30
 	
+randomNumber:
+	sub sp, sp, 8
+    str x30, [sp]
+
+    ldr x7, seed
+    bl generateRandomNumber	// Pongo en x7 un nuevo número aleatorio
+
+    adr x9, seed			// Guardo en x9 el address de "seed"
+    str x7, [x9] 			// Actualizo la semilla
+
+    ldr x30, [sp]
+    add sp, sp, 8 
+    br x30
+
+
+randomNumberBetween:
+	sub sp, sp, 24
+    str x30, [sp, 16]
+    str x2, [sp, 8]
+	str x1, [sp]
+
+	// Input values:
+        // - x1:	Numero del cual debe ser menor
+		// - x2:	Numero del cual debe ser mayor
+
+	// Output values:
+		// - x7:	Numero aleatorio entre x1 y x2
+	
+	regenerate:
+	bl randomNumber
+	
+	cmp x7, x1
+	blt yaEsMenorQue
+	b regenerate
+	yaEsMenorQue:
+
+	cmp x7, x2
+	bgt yaEsMayorQue
+	b regenerate
+	yaEsMayorQue:
+    
+	ldr x1, [sp]
+	ldr x2, [sp, 8]
+	ldr x30, [sp, 16]
+	add sp, sp, 24
+	br x30
+
+
 .endif

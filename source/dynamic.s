@@ -22,18 +22,14 @@ dynamic:
 	bl parpadeoRaton
 	
 	bl transitionToTheGame
-
-	movz x7, 0x1000, lsl 16
-	movk x7, 0x0000, lsl 0
-	bl delay
-
-	bl parpadeoRaton
-
-	bl parpadeoRaton
 	
 	bl breakSwitcher
 	
+
 	bl parpadeoRaton
+	
+	bl glitchScreen
+
 	bl parpadeoRaton
 	
 	infCycle:

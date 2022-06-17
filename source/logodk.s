@@ -1,11 +1,10 @@
-.globl logoDK
+
 .include "utilities.s"
 
 
 logoD:
 	//Guardado registro 
-
-	sub sp, sp, 16
+	sub sp, sp, 8
 	str x30, [sp]
 
 
@@ -13,7 +12,7 @@ logoD:
 	    // - x0:    Color Base
 		// - x5:	Desplazamiento
 	
-	//PALO IZQUIERDO |
+	//PALO IZQUIERDO
 	mov x1, 110
 	add x1, x1, x5
 	mov x2, 290
@@ -51,15 +50,14 @@ logoD:
 	sub x3, x3, x5
 	bl createVRectangle
 
-	//Carga del registro de br x30
 	ldr x30, [sp]
-	add sp, sp, 16
+	add sp, sp, 8
 	br x30
 
 
 logoK:
 	//Guardado registro br x30
-	sub sp, sp, 16
+	sub sp, sp, 8
 	str x30, [sp]
 
 	
@@ -106,14 +104,14 @@ logoK:
 	bl createVRectangle
 
 	ldr x30, [sp]
-	add sp, sp, 16
+	add sp, sp, 8
 	br x30
 
 
 
 logoInsertCoin:
 	//Guardado registro br x30
-	sub sp, sp, 16
+	sub sp, sp, 8
 	str x30, [sp]
 
 	//INPUT
@@ -510,7 +508,6 @@ logoInsertCoin:
 	sub x4, x4, x5
 	bl createVRectangle
 
-
 	//MEDIO N
 	mov x2, 353
 	add x2, x2, x5
@@ -542,23 +539,19 @@ logoInsertCoin:
 	sub x3, x3, x5
 	bl createVRectangle
 
-
-
-
 	ldr x30, [sp]
-	add sp, sp, 16
+	add sp, sp, 8
 	br x30
 
 
-
+.globl logoDK
 logoDK:
 		//Guardado registro ret
-	sub sp, sp, 16
+	sub sp, sp, 8
 	str x30, [sp]
 
 	//Creacion fondo
-	movz x0, 0x0000, lsl 16
-	movk x0, 0x0000, lsl 0
+	ldr x0, black
 	mov x1, 89
 	mov x2, 247
 	mov x3,	100
@@ -603,27 +596,25 @@ logoDK:
 
 	bl showInsertCoin
 
-	mov x7, 8
+	mov x7, 4
 	bl insertCoinBlinking
 
-
-
 	ldr x30, [sp]
-	add sp, sp, 16
+	add sp, sp, 8
 	br x30
 
 hideInsertCoin:
-	sub sp, sp, 16
+	sub sp, sp, 8
 	str x30, [sp]
 
-		// Input values:
+	// Input values:
 	    // - x0:    Color Base
         // - x1:    Coord primero en y
         // - x2:    Coord primero en x
         // - x3:    Alto del rectangulo
         // - x4:    Ancho del rectangulo
-	movz x0, 0x0000, lsl 16
-	movz x0, 0x0000, lsl 0
+	
+	ldr x0, black
 	mov x1, 170
 	mov x2, 260
 	mov x3, 20
@@ -631,11 +622,11 @@ hideInsertCoin:
 	bl createVRectangle
 
 	ldr x30, [sp]
-	add sp, sp, 16
+	add sp, sp, 8
 	br x30
 
 showInsertCoin:
-	sub sp, sp, 16
+	sub sp, sp, 8
 	str x30, [sp]
 
 	//Fondo InsertCoin
@@ -651,16 +642,16 @@ showInsertCoin:
 	bl logoInsertCoin
 
 	ldr x30, [sp]
-	add sp, sp, 16
+	add sp, sp, 8
 	br x30
+
+
 insertCoinBlinking:
 	//Guardado registro ret
 	sub sp, sp, 16
-	str x30, [sp]
-	str x9, [sp, #8]
+	str x30, [sp, 8]
+	str x9, [sp]
 
-	//INPUT:
-	// X7 = Cantidad de repeticiones
 	mov x9, x7
 
 	loop: 
@@ -675,10 +666,8 @@ insertCoinBlinking:
 		subs x9, x9, 1
 		b.ne loop
 
-
-
-	ldr x30, [sp]
-	ldr x9, [sp, #8]
+	ldr x9, [sp]
+	ldr x30, [sp, 8]
 	add sp, sp, 16
 	br x30
 

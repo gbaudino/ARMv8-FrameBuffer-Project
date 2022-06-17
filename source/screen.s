@@ -276,11 +276,50 @@ donkeyFace:
 
 
 reduceToZeroScreen:
-	sub sp, sp, 8
-	str x30, [sp]
+	sub sp, sp, 40
+	str x30, [sp, 32]
+	str x4, [sp, 24]
+	str x3, [sp, 16]
+	str x2, [sp, 8]
+	str x1, [sp]
 
-	ldr x30, [sp]
-	add sp, sp, 8
+	// Temporary values
+		// - x9: 	Temp save Y
+		// - x10: 	Temp save X
+		// - x11: 	Temp Line
+	
+	ldr x0, black
+	mov x3, 100
+	mov x4, 135
+	mov x9, 89
+	mov x10, 247
+	mov x11, 0
+	repeatReduce:
+		mov x1, x9
+		mov x2, x10
+		add x2, x2, x11
+		bl createVLine
+		mov x2, x10
+		add x2, x2, x4
+		sub x2, x2, x11
+		bl createVLine
+		mov x2, x10
+		mov x1, x9
+		add x1, x1, x11
+		bl createHLine
+		mov x1, x9
+		add x1, x1, x3
+		sub x1, x1, x11	
+		bl createHLine
+		add x11, x11, 1
+		cmp x11, 68
+		movz x7, 0x2f0, lsl 16
+		movk x7, 0x0, lsl 0
+		bl delay
+		ble repeatReduce
+	
+	ldr x30, [sp, 32]
+	add sp, sp, 40
 	br x30
 
 
@@ -302,7 +341,7 @@ transitionToTheGame:
 
 	bl reduceToZeroScreen
 
-	bl loadTempValues
+	bl logoDK
 
 	ldr x30, [sp]
 	add sp, sp, 8
@@ -313,6 +352,30 @@ glitchScreen:
 	//Guardado registros usados
 	sub sp, sp, 8
 	str x30, [sp]
+
+	bl saveTempValues
+
+	//Temporary Values
+		// - x9: 	Temp Line
+
+	ldr x0, black
+	mov x1, 89
+	mov x2, 247
+	mov x3,	100
+	mov x4, 135
+	bl createVRectangle
+	mov x9, x1
+	ldr x0, pink_glitch_screen
+	repeatGlitch:
+		bl createHLine
+		add x9, x9, 1
+		bl createHLine
+		add x9, x9, 3
+		cmp x9, 189
+		blt repeatGlitch
+	bl createHLine
+
+	bl loadTempValues
 
 	ldr x30, [sp]
 	add sp, sp, 8

@@ -49,4 +49,7 @@ light_brown_floor: .dword 0x00795548
 dark_grey_cave: .dword 0x00222222
 light_grey_socket: .dword 0x00bfbfbb
 
+//Screen
+pink_glitch_screen: .dword 0x00f700ff
+
 .endif
