@@ -23,54 +23,34 @@ createArcadeBase:
 	sub x4, x4, x5
 	bl createVRectangle
 
-	mov x1, 393
-	add x1, x1, x5
-	mov x2, 216
-	add x2, x2, x5
-	mov x3,	4
-	mov x4, 197
-	sub x4, x4, x5
-	sub x4, x4, x5
+	sub x1, x1, 12 //393
+	add x2, x2, 12 //216
+	mov x3,	4      //4
+	sub x4, x4, 24 //197  
 	bl createVRectangle
 
-	mov x1, 397
-	add x1, x1, x5
-	mov x2, 212
-	add x2, x2, x5
-	mov x4, 205
-	sub x4, x4, x5
-	sub x4, x4, x5
+	add x1, x1, 4 //397
+	sub x2, x2, 4 //212
+	add x4, x4, 8 //205
 	bl createVRectangle
 
-	mov x1, 401
-	add x1, x1, x5
-	mov x2, 208
-	add x2, x2, x5
-	mov x4, 213
-	sub x4, x4, x5
-	sub x4, x4, x5
+	add x1, x1, 4 //401
+	sub x2, x2, 4 //208
+	add x4, x4, 8 //213
 	bl createVRectangle
 
 	mov x1, 425
 	sub x1, x1, x5
 	bl createVRectangle
 
-	mov x1, 429
-	sub x1, x1, x5
-	mov x2, 212
-	add x2, x2, x5
-	mov x4, 205
-	sub x4, x4, x5
-	sub x4, x4, x5
+	add x1, x1, 4 //429
+	add x2, x2, 4 //212
+	sub x4, x4, 8 //205
 	bl createVRectangle
 
-	mov x1, 433
-	sub x1, x1, x5
-	mov x2, 216
-	add x2, x2, x5
-	mov x4, 197
-	sub x4, x4, x5
-	sub x4, x4, x5
+	add x1, x1, 4 //433
+	add x2, x2, 4 //216
+	sub x4, x4, 8 //197
 	bl createVRectangle
 
 	ldr x30, [sp]
@@ -225,64 +205,36 @@ createNintendoLogo:
 	sub x4, x4, x5
 	bl createVRectangle
 
-	mov x1, 30
-	add x1, x1, x5
-	mov x2, 244
-	add x2, x2, x5
-	mov x3,	2
-	mov x4, 140
-	sub x4, x4, x5
-	sub x4, x4, x5
+	sub x1, x1, 2 //30
+	add x2, x2, 2 //244
+	mov x3, 2
+	sub x4, x4, 4 //140
 	bl createVRectangle
 
-	mov x1, 28
-	add x1, x1, x5
-	mov x2, 246
-	add x2, x2, x5
-	mov x3,	2
-	mov x4, 136
-	sub x4, x4, x5
-	sub x4, x4, x5
+	sub x1, x1, 2 //28
+	add x2, x2, 2 //246
+	sub x4, x4, 4 //136
 	bl createVRectangle
 
-	mov x1, 26
-	add x1, x1, x5
-	mov x2, 248
-	add x2, x2, x5
-	mov x3,	2
-	mov x4, 132
-	sub x4, x4, x5
-	sub x4, x4, x5
+	sub x1, x1, 2 //26
+	add x2, x2, 2 //248
+	sub x4, x4, 4 //132
 	bl createVRectangle
 
 	mov x1, 52
 	sub x1, x1, x5
-	mov x2, 244
-	add x2, x2, x5
-	mov x3,	2
-	mov x4, 140
-	sub x4, x4, x5
-	sub x4, x4, x5
+	sub x2, x2, 4 //244
+	add x4, x4, 8 //140
 	bl createVRectangle
 
-	mov x1, 54
-	sub x1, x1, x5
-	mov x2, 246
-	add x2, x2, x5
-	mov x3,	2
-	mov x4, 136
-	sub x4, x4, x5
-	sub x4, x4, x5
+	add x1, x1, 2 //54
+	add x2, x2, 2 //246
+	sub x4, x4, 4 //136
 	bl createVRectangle
 
-	mov x1, 56
-	sub x1, x1, x5
-	mov x2, 248
-	add x2, x2, x5
-	mov x3,	2
-	mov x4, 132
-	sub x4, x4, x5
-	sub x4, x4, x5
+	add x1, x1, 2 //56
+	add x2, x2, 2 //248
+	sub x4, x4, 4 //132
 	bl createVRectangle
 
 	ldr x30, [sp]
@@ -392,7 +344,7 @@ createArcadePanel:
 	mov x4, 212
 	bl createVRectangle
 
-	//Aca empiezan los detalles del panel
+	//Detalles del panel
 	//INICIO BOTONES AZULES
 	ldr x0, panel_blue
 	mov x1, 218
@@ -435,7 +387,7 @@ createArcadePanel:
 	bl createVRectangle
 	//FIN BASE DEL CONTROLADOR
 
-	//INICIO PAlANCA
+	//INICIO PALANCA
 	movz x0, 0x00ec, lsl 16
 	movk x0, 0xfbef, lsl 0
 	mov x1, 207

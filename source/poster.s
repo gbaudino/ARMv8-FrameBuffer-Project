@@ -1,4 +1,4 @@
-
+.include "data.s"
 .include "utilities.s"
 
 createMonkey:
@@ -7,8 +7,7 @@ createMonkey:
 	str x30, [sp]
 
 	//Creación de la parte marrón
-	movz x0, 0x004e, lsl 16
-	movk x0, 0x2005, lsl 0
+	ldr x0, brown_monkey
 	mov x1, 103
 	mov x2, 539
 	mov x3,	4
@@ -110,8 +109,7 @@ createMonkey:
 	mov x3,	5
 	bl createVRectangle
 
-	movz x0, 0x0038, lsl 16
-	movk x0, 0x1503, lsl 0
+	ldr x0, dark_brown_monkey
 	mov x1, 154
 	mov x2, 514
 	mov x3,	15
@@ -124,8 +122,7 @@ createMonkey:
 
 
 	//Creación parte rosa
-	movz x0, 0x00e9, lsl 16
-	movk x0, 0xc8a5, lsl 0
+	ldr x0, light_pink_monkey
 	mov x1, 184
 	mov x2, 560
 	mov x4, 9
@@ -236,8 +233,7 @@ createMonkey:
 	bl createVRectangle
 
 	//Creación de ojos y boca
-	movz x0, 0x00ec, lsl 16
-	movk x0, 0xecec, lsl 0
+	ldr x0, monkey_white
 	mov x1, 122
 	mov x2, 554
 	mov x3,	11
@@ -273,16 +269,14 @@ createPoster:
 	sub sp, sp, 8
 	str x30, [sp]
 
-	movz x0, 0x00f0, lsl 16
-	movk x0, 0xac14, lsl 0
+	ldr x0, yellow_poster
 	mov x1, 88
 	mov x2, 470
 	mov x3,	116
 	mov x4, 127
 	bl createVRectangle
 
-	movz x0, 0x00fb, lsl 16
-	movk x0, 0xfcf9, lsl 0
+	ldr x0, monkey_white
 	mov x1, 85
 	mov x2, 465
 	mov x3,	4

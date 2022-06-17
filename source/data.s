@@ -12,9 +12,10 @@ seed: .dword 0xbed6d5055ff3ed40
 .equ SCREEN_HEIGHT, 	480
 
 
+//Constants
+
 
 // Delay times
-
 delay_start_dynamic: .dword 0x90000000
 
 
@@ -45,7 +46,7 @@ yellow_poster: .dword 0x00f0ac14
 //Background
 purple_wall : .dword 0x005f4d84
 light_brown_floor: .dword 0x00795548
-darkgrey: .dword 0x00222222
-light_grey: .dword 0x00bfbfbb
+dark_grey_cave: .dword 0x00222222
+light_grey_socket: .dword 0x00bfbfbb
 
 .endif

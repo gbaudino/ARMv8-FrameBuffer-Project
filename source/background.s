@@ -9,8 +9,7 @@ createBackground:
 	str x30, [sp]
 
 	//Pared
-	movz x0, 0x005f, lsl 16
-	movk x0, 0x4d84, lsl 0
+	ldr x0, purple_wall
 	mov x1, 0
 	mov x2, 0
 	mov x3, 397
@@ -18,16 +17,13 @@ createBackground:
 	bl createVRectangle
 
 	//Suelo
-	movz x0, 0x0079, lsl 16
-	movk x0, 0x5548, lsl 0
+	ldr x0, light_brown_floor
 	mov x1, x3
 	mov x3, 83
-	mov x4, x21
 	bl createVRectangle
 
 	//Cueva raton
-	movz x0, 0x0022, lsl 16
-	movk x0, 0x2222, lsl 0
+	ldr x0, dark_grey_cave
 	mov x5, 0
 	bl createCuevaRaton
 
@@ -38,8 +34,7 @@ createBackground:
    	bl createRatonEyes
 
     //Enchufe Maquina
-    movz x0, 0x00bf, lsl 16
-	movk x0, 0xbfbb, lsl 0
+    ldr x0, light_grey_socket
 	mov x1, 310
 	mov x2, 515
 	mov x3,	18

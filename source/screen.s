@@ -207,7 +207,7 @@ donkeySplashScreen:
 	mov x5, 102
 	bl screenExpansion
 
-	ldr x30, [sp, #8]
+	ldr x30, [sp]
 	add sp, sp, 8
 	br x30
 
@@ -215,6 +215,60 @@ donkeySplashScreen:
 donkeyFace:
 	sub sp, sp, 8
 	str x30, [sp]
+
+	    // - x0:    Color Base
+        // - x1:    Coord primero en y
+        // - x2:    Coord primero en x
+        // - x3:    Alto del rectangulo
+        // - x4:    Ancho del rectangulo
+
+	//eyes
+	ldr x0, light_pink_monkey
+	mov x1, 114
+	mov x2, 300
+	mov x3, 4
+	mov x4, 8
+	bl createVRectangle
+
+	mov x2, 322
+	bl createVRectangle
+
+	mov x1, 118
+	mov x2, 295
+	mov x3, 5
+	mov x4, 18
+	bl createVRectangle
+
+	mov x2, 317
+	bl createVRectangle
+
+	mov x1, 123
+	mov x2, 291
+	mov x4, 47
+	bl createVRectangle
+
+	mov x1, 128
+	mov x2, 295
+	mov x3, 8
+	mov x4, 39
+	bl createVRectangle
+
+	//mouth
+	mov x1, 136
+	mov x2, 282
+	mov x3, 4
+	mov x4, 26
+	bl createVRectangle
+
+	mov x2, 321
+	bl createVRectangle
+
+	mov x1, 140
+	mov x2, 278
+	mov x3, 5
+	mov x4, 73
+	bl createVRectangle
+
 
 	ldr x30, [sp]
 	add sp, sp, 8
