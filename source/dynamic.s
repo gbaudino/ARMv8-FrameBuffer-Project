@@ -12,8 +12,7 @@ dynamic:
 	
 	bl powerOnScreen
 	
-	movz x7, 0x1000, lsl 16
-	movk x7, 0x0000, lsl 0
+	ldr x7, delay_dynamic_short
 	bl delay
 
 	bl mouseBlinking
@@ -29,44 +28,38 @@ dynamic:
 	infCycle:
 		bl glitchScreen
 
-		movz x7, 0x3000, lsl 16
-		movk x7, 0x0, lsl 0
+		ldr x7, delay_dynamic_long
 		bl delay
 		
 		bl climbingPalm
 		mov x1, x9
 		bl climber
 
-		movz x7, 0x1800, lsl 16
-		movk x7, 0x0, lsl 0
+		ldr x7, delay_dynamic_medium
 		bl delay
 
 		bl glitchScreen
 
-		movz x7, 0x3000, lsl 16
-		movk x7, 0x0, lsl 0
+		ldr x7, delay_dynamic_long
 		bl delay
 
 		bl climbingPalm
 		sub x1, x9, x5
 		bl climber
 
-		movz x7, 0x1800, lsl 16
-		movk x7, 0x0, lsl 0
+		ldr x7, delay_dynamic_medium
 		bl delay
 
 		bl glitchScreen
 
-		movz x7, 0x3000, lsl 16
-		movk x7, 0x0, lsl 0
+		ldr x7, delay_dynamic_long
 		bl delay
 
 		bl climbingPalm
 		add x1, x9, x5
 		bl climber
 
-		movz x7, 0x1800, lsl 16
-		movk x7, 0x0, lsl 0
+		ldr x7, delay_dynamic_medium
 		bl delay
 
 		sub x5, x5, 3

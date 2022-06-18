@@ -640,12 +640,10 @@ insertCoinBlinking:
 
 	loop: 
 		bl hideInsertCoin
-		movz x7, 0x2000, lsl 16
-		movk x7, 0x0000, lsl 0
+		ldr x7, delay_logo_long
 	    bl delay
 		bl showInsertCoin
-		movz x7, 0x2000, lsl 16
-		movk x7, 0x0000, lsl 0
+		ldr x7, delay_logo_long
 		bl delay
 		subs x9, x9, 1
 		b.ne loop

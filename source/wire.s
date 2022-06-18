@@ -17,8 +17,7 @@ generateVerticalCurrent:
 		bl createVRectangle
 		add x3, x3, 1
 		cmp x3, 39
-		movz x7, 0x00ff, lsl 16
-    	movk x7, 0x0000, lsl 0
+		ldr x7, delay_wire
         bl delay
 		blt loopVCurrent
 	
@@ -32,8 +31,7 @@ generateCurveCurrent:
 	sub sp, sp, 8
 	str x30, [sp]
 
-	movz x7, 0x00ff, lsl 16
-	movk x7, 0x0000, lsl 0
+	ldr x7, delay_wire
 	bl delay
 
 	//Interior cable cuadradito curva
@@ -44,8 +42,7 @@ generateCurveCurrent:
 	mov x4, 4
 	bl createVRectangle
 
-	movz x7, 0x00ff, lsl 16
-	movk x7, 0x0000, lsl 0
+	ldr x7, delay_wire
 	bl delay
 
 	ldr x30, [sp]
@@ -58,8 +55,7 @@ generateHorizontalCurrent:
 	sub sp, sp, 8
 	str x30, [sp]
 
-	movz x7, 0x00ff, lsl 16
-	movk x7, 0x0000, lsl 0
+	ldr x7, delay_wire
 	bl delay
 
 	//Interior cable horizontal
@@ -72,8 +68,7 @@ generateHorizontalCurrent:
 		bl createVLine
 		sub x4, x4, 1
 		sub x2, x2, 1
-		movz x7, 0x00f0, lsl 16
-    	movk x7, 0x0000, lsl 0
+		ldr x7, delay_wire
         bl delay
 		cbnz x4, loopHCurrent
 

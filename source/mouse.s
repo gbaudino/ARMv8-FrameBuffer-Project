@@ -91,8 +91,7 @@ generateMouseBlinking:
     mov x2, 129
     bl createHLine
 
-    movz x7, 0x00ff, lsl 16
-    movk x7, 0xf000, lsl 0
+    ldr x7, delay_mouse_long
     bl delay
 
 	ldr x30, [sp]
@@ -109,21 +108,18 @@ mouseBlinking:
     mov x5,0
 	repBlinking:
         bl generateMouseBlinking
-        movz x7, 0x00fa, lsl 16
-        movk x7, 0x0000, lsl 0
+        ldr x7, delay_mouse_blinking
         bl delay
         add x5 , x5, 1
         cmp x5, 4
         bne repBlinking
     
-    movz x7, 0x00ff, lsl 16
-    movk x7, 0xff00, lsl 0
+    ldr x7, delay_mouse_longlong
     bl delay
 	
     bl createMouseEyes
 
-	movz x7, 0x0fff, lsl 16
-    movk x7, 0xf000, lsl 0
+	ldr x7, delay_mouse_pause
     bl delay
 
 	ldr x30, [sp]

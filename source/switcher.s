@@ -135,14 +135,12 @@ breakSwitcher:
 	repeatBreak:
 		bl createOffSwitcher
 		bl createOffWire
-		movz x7, 0xA00, lsl 16
-		movk x7, 0x0000, lsl 0
+		ldr x7, delay_switcher
 		bl delay
 
 		bl createOnSwitcher
 		bl createOnWire
-		movz x7, 0xA00, lsl 16
-		movk x7, 0x0000, lsl 0
+		ldr x7, delay_switcher
 		bl delay
 		
 		sub x9, x9, 1

@@ -4,6 +4,7 @@
 
 .include "data.s"
 
+//Setea todas las configuraciones previas a la ejecución
 config:
 	// Input values:
 		// the function does not receive any value
@@ -15,6 +16,7 @@ config:
 
 	br x30
 
+//Realiza un delay haciendo uso de un loop hasta un parametro dado
 delay:
     // Input values:
         // - x7: Limit to repeat
@@ -26,6 +28,7 @@ delay:
     br x30
 
 
+//Genera la memoria de la coordenada que se le pase en x1 y x2
 generateFrstPixelCoord:
 	// Input values:
         // - x1:    Coord primero en y
@@ -48,6 +51,7 @@ generateFrstPixelCoord:
 	br x30
 
 
+//Guarda todos los valores temporales
 saveTempValues:
 	sub sp, sp, 56
 	str x9, [sp, #48]
@@ -59,6 +63,8 @@ saveTempValues:
 	str x15, [sp]
 	br x30
 
+
+//Carga todos los valores temporales
 loadTempValues:
 	ldr x15, [sp]
 	ldr x14, [sp, #8]

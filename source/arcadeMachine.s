@@ -422,14 +422,12 @@ createArcadePanel:
 	ldr x0, panel_light_blue
 	mov x2, 380
 	bl createVRectangle
-
 	//FIN BOTONES
 	
 	ldr x0, purple_wall
 	mov x1, 213
 	mov x2, 412
 	bl createVLine
-
 
 	ldr x30, [sp]
 	add sp, sp, 8

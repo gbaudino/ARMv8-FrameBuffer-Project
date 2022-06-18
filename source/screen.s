@@ -101,8 +101,7 @@ screenExpansion:
 		add x4, x4, 8
 		cmp x1, x5
 
-		movz x7, 0x0100, lsl 16
-        movk x7, 0x0000, lsl 0
+		ldr x7, delay_screen_short
         
 		bl delay
 		bgt loopScreenExpansion
@@ -145,8 +144,7 @@ powerOnScreen:
 
 	bl resetScreen
 
-	movz x7, 0x0100, lsl 16
-	movk x7, 0x0000, lsl 0
+	ldr x7, delay_screen_short
 	bl delay
 
 	bl powerOnEffect
@@ -176,8 +174,7 @@ gradientScreen:
 	mov x4, 135
 	gradient:
 		bl createVRectangle
-		movz x7, 0x0100, lsl 16
-		movk x7, 0x0000, lsl 0
+		ldr x7, delay_screen_short
 		bl delay
 		sub x0, x0, x9
 		cmp x0, 0x0
@@ -603,8 +600,7 @@ reduceToZeroScreen:
 		bl createHLine
 		add x11, x11, 1
 		cmp x11, 68
-		movz x7, 0x280, lsl 16
-		movk x7, 0x0, lsl 0
+		ldr x7, delay_screen_long
 		bl delay
 		ble repeatReduce
 	
@@ -621,20 +617,17 @@ transitionToTheGame:
 
 	bl gradientScreen
 
-	movz x7, 0x4000, lsl 16
-	movk x7, 0x0, lsl 0
+	ldr x7, delay_screen_longlong
 	bl delay
 
 	bl donkeySplashScreen
 
-	movz x7, 0x800, lsl 16
-	movk x7, 0x0, lsl 0
+	ldr x7, delay_screen_final
 	bl delay
 
 	bl donkeyFace
 
-	movz x7, 0x4000, lsl 16
-	movk x7, 0x0, lsl 0
+	ldr x7, delay_screen_longlong
 	bl delay
 
 	ldr x0, dark_brown_donkey
@@ -646,8 +639,7 @@ transitionToTheGame:
 
 	bl donkeyFace2
 
-	movz x7, 0x4000, lsl 16
-	movk x7, 0x0, lsl 0
+	ldr x7, delay_screen_longlong
 	bl delay
 
 	bl reduceToZeroScreen

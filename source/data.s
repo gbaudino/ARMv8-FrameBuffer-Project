@@ -18,6 +18,20 @@
 
 // Delay times
 delay_start_dynamic: .dword 0x90000000 - DELAY_ADJUST
+delay_dynamic_short: .dword 0x10000000 - DELAY_ADJUST
+delay_dynamic_long: .dword 0x30000000 - DELAY_ADJUST
+delay_dynamic_medium: .dword 0x18000000 - DELAY_ADJUST
+delay_logo_long: .dword 0x20000000 - DELAY_ADJUST
+delay_mouse_long: .dword 0x00fff000 - DELAY_ADJUST
+delay_mouse_longlong: .dword 0x00ffff00 - DELAY_ADJUST
+delay_mouse_pause: .dword 0x0ffff000 - DELAY_ADJUST
+delay_mouse_blinking: .dword 0x00fa0000 - DELAY_ADJUST
+delay_screen_short: .dword 0x01000000 - DELAY_ADJUST
+delay_screen_long: .dword 0x02800000 - DELAY_ADJUST
+delay_screen_longlong: .dword 0x40000000 - DELAY_ADJUST
+delay_screen_final: .dword 0x08000000 - DELAY_ADJUST
+delay_switcher: .dword 0x0A000000 - DELAY_ADJUST
+delay_wire: .dword 0x00ff0000 - DELAY_ADJUST
 
 
 // Colors
