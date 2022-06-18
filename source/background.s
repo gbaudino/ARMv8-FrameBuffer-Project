@@ -33,7 +33,7 @@ createBackground:
    	bl createMouseEyes
 
     //Enchufe Maquina
-    ldr x0, light_grey_socket
+    ldr x0, light_grey
 	mov x1, 310
 	mov x2, 515
 	mov x3,	18

@@ -26,8 +26,8 @@ dynamic:
 
 	bl mouseBlinking
 	
-	mov x5, 0
-	mov x9, 189
+	mov x5, 27
+	mov x9, 126
 	infCycle:
 		bl glitchScreen
 
@@ -67,11 +67,15 @@ dynamic:
 		add x1, x9, x5
 		bl climber
 
-		add x5, x5, 2
-		cmp x5, 30
+		movz x7, 0x2000, lsl 16
+		movk x7, 0x0, lsl 0
+		bl delay
+
+		sub x5, x5, 3
+		cmp x5, 6
 		bne continue
 		reinit:
-		mov x5, 0
+		mov x5, 27
 		continue:
 		
 

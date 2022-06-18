@@ -19,7 +19,7 @@ switcher:
 	mov x4, 12
 	bl createVRectangle
 
-	ldr x0, frequent_red
+	ldr x0, red
 	mov x1, 147
 	bl createVRectangle
 

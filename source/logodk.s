@@ -7,7 +7,6 @@ logoD:
 	sub sp, sp, 8
 	str x30, [sp]
 
-
 	// Input values:
 	    // - x0:    Color Base
 		// - x5:	Desplazamiento
@@ -24,7 +23,7 @@ logoD:
 	sub x4, x4, x5
 	bl createVRectangle
 
-	//Parte superior D ⁻⁻
+	//Parte superior D
 	mov x1, 110
 	add x1, x1, x5
 	mov x2, 298
@@ -33,7 +32,7 @@ logoD:
 	sub x3, x3, x5
 	bl createVRectangle
 
-	//PARTE INFERIOR D __
+	//PARTE INFERIOR D
 	mov x1, 134
 	add x1, x1, x5
 	mov x2, 298
@@ -56,12 +55,15 @@ logoD:
 
 
 logoK:
-	//Guardado registro br x30
+	//Guardado registro x30
 	sub sp, sp, 8
 	str x30, [sp]
 
+	// Input values:
+	    // - x0:    Color Base
+		// - x5:	Desplazamiento
 	
-	//PALO IZQUIERDO |
+	//PALO IZQUIERDO
 	mov x1, 110
 	add x1, x1, x5
 	mov x2, 315
@@ -114,10 +116,9 @@ logoInsertCoin:
 	sub sp, sp, 8
 	str x30, [sp]
 
-	//INPUT
-		//X0 = Color 
-		//X5 = Desplazamiento
-
+	// Input values:
+	    // - x0:    Color Base
+		// - x5:	Desplazamiento
 
 	//Sombrero I
 	mov x1, 170
@@ -559,38 +560,32 @@ logoDK:
 	bl createVRectangle
 
 	//Fondo D
-	movz x0, 0x00c4, lsl 16
-	movk x0, 0x0424, lsl 0
+	ldr x0, red_tie
 	mov x5, 0
 	bl logoD
 
 	//Capa intermedia D
-	movz x0, 0x00ff, lsl 16
-	movk x0, 0xc107, lsl 0
+	ldr x0, machine_dark_yellow
 	mov x5, 1
 	bl logoD
 
 	//Capa superior D
-	movz x0, 0x00c4, lsl 16
-	movk x0, 0x0424, lsl 0
+	ldr x0, red_tie
 	mov x5, 2
 	bl logoD
 
 	//Fondo K
-	movz x0, 0x00c4, lsl 16
-	movk x0, 0x0424, lsl 0
+	ldr x0, red_tie
 	mov x5, 0
 	bl logoK
 
 	//Capa intermedia K
-	movz x0, 0x00ff, lsl 16
-	movk x0, 0xc107, lsl 0
+	ldr x0, machine_dark_yellow
 	mov x5, 1
 	bl logoK
 
 	//Capa superior K
-	movz x0, 0x00c4, lsl 16
-	movk x0, 0x0424, lsl 0
+	ldr x0, red_tie
 	mov x5, 2
 	bl logoK
 
@@ -606,18 +601,11 @@ logoDK:
 hideInsertCoin:
 	sub sp, sp, 8
 	str x30, [sp]
-
-	// Input values:
-	    // - x0:    Color Base
-        // - x1:    Coord primero en y
-        // - x2:    Coord primero en x
-        // - x3:    Alto del rectangulo
-        // - x4:    Ancho del rectangulo
 	
 	ldr x0, black
 	mov x1, 170
 	mov x2, 260
-	mov x3, 20
+	mov x3, 18
 	mov x4, 100
 	bl createVRectangle
 
@@ -630,14 +618,12 @@ showInsertCoin:
 	str x30, [sp]
 
 	//Fondo InsertCoin
-	movz x0, 0x00c4, lsl 16
-	movk x0, 0x0424, lsl 0
+	ldr x0, red_tie
 	mov x5,0
 	bl logoInsertCoin
 
 	//Capa superior InsertCoin
-	movz x0, 0x00ff, lsl 16
-	movk x0, 0xc107, lsl 0
+	ldr x0, machine_dark_yellow
 	mov x5,1
 	bl logoInsertCoin
 

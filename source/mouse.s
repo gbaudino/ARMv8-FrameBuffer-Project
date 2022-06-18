@@ -56,7 +56,7 @@ createMouseEyes:
 	mov x2, 129
 	bl createVRectangle
 
-	ldr x0, frequent_red
+	ldr x0, red
 	mov x1, 386
 	mov x2, 125
 	mov x3, 2

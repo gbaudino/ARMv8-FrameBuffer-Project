@@ -303,7 +303,7 @@ createArcadeTop:
 	bl createVRectangle
 
 	//Parte roja logo nintendo
-	ldr x0, frequent_red
+	ldr x0, red
 	bl createNintendoLogo
 
 	//Parte blanca logo nintendo
@@ -311,7 +311,7 @@ createArcadeTop:
 	mov x5, 2
 	bl createNintendoLogo
 	
-	ldr x0, frequent_red
+	ldr x0, red
 	bl createMayusNLetterLogo
 	bl createILetterLogo
 	add x2, x2, x4
@@ -369,7 +369,7 @@ createArcadePanel:
 	//FIN BOTONES AZULES
 
 	//INICIO BOTONES ROJOS
-	ldr x0, frequent_red
+	ldr x0, red
 	mov x1, 218
 	mov x2, 266
 	bl createVRectangle
@@ -398,15 +398,13 @@ createArcadePanel:
 	//FIN BASE DEL CONTROLADOR
 
 	//INICIO PALANCA
-	movz x0, 0x00ec, lsl 16
-	movk x0, 0xfbef, lsl 0
+	ldr x0, panel_joystick_silver
 	mov x1, 207
 	mov x2, 317
 	mov x3, 13
 	bl createVRectangle
 
-	movz x0, 0x00fb, lsl 16
-	movk x0, 0x3e41, lsl 0
+	ldr x0, red
 	mov x1, 200
 	mov x2, 313
 	mov x3, 7
@@ -427,8 +425,7 @@ createArcadePanel:
 
 	//FIN BOTONES
 	
-	movz x0, 0x005f, lsl 16
-	movk x0, 0x4d84, lsl 0
+	ldr x0, purple_wall
 	mov x1, 213
 	mov x2, 412
 	bl createVLine
@@ -487,8 +484,7 @@ createArcadeBottom:
 	bl createVRectangle
 
 	//Creacion llave puerta
-	movz x0, 0x00bf, lsl 16
-	movk x0, 0xbfbf, lsl 0
+	ldr x0, light_grey
 	mov x1, 300
 	mov x2, 347
 	mov x3, 20
@@ -503,8 +499,7 @@ createArcadeBottom:
 	bl createVRectangle
 
 	//Creacion llave puerta
-	movz x0, 0x0077, lsl 16
-	movk x0, 0x7777, lsl 0
+	ldr x0, machine_door_grey
 	mov x2, 351
 	mov x4, 4
 	bl createVRectangle
@@ -519,25 +514,22 @@ createArcadeScreen:
 	sub sp, sp, 8
 	str x30, [sp]
 
-	//Creacion bordes negros
-	movz x0, 0x0051, lsl 16
-	movk x0, 0x4621, lsl 0
+	//Creacion borde pantalla
+	ldr x0, screen_border_golden
 	mov x1, 86
 	mov x2, 245
 	mov x3,	106
 	mov x4, 139
 	bl createVRectangle
 
-	//Creacion bordes negros
-	movz x0, 0x0072, lsl 16
-	movk x0, 0x4526, lsl 0
+	//Creacion borde pantalla
+	ldr x0, screen_border_brown
 	mov x2, 246
 	mov x4, 137
 	bl createVRectangle
 
-	//Creacion borde negro
-	movz x0, 0x0042, lsl 16
-	movk x0, 0x2d42, lsl 0
+	//Creacion borde pantalla
+	ldr x0, screen_border_purple
 	mov x1, 87
 	mov x3,	104
 	bl createVRectangle

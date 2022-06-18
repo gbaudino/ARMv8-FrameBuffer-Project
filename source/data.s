@@ -5,26 +5,27 @@
 
 .data
 
-seed: .dword 0xbed6d5055ff3ed40
+//Configs
+    //Modifique segun la velocidad en su procesador
+    //un mayor numero implica una velocidad mas alta,
+    //uno menor implica una velocidad mas baja
+.equ DELAY_ADJUST,      0x0
 
 // Screen
 .equ SCREEN_WIDTH, 		640
 .equ SCREEN_HEIGHT, 	480
 
 
-//Constants
-
-
 // Delay times
-delay_start_dynamic: .dword 0x90000000
+delay_start_dynamic: .dword 0x90000000 - DELAY_ADJUST
 
 
 // Colors
 // Frequents
-frequent_red: .dword 0x00ec4738 //used in nintendo logo, machine panel, mouse eyes...
+red: .dword 0x00ec4738 //used in nintendo logo, machine panel, mouse eyes...
 black: .dword 0x0
 white: .dword 0xffffffff
-
+light_grey: .dword 0x00bfbfbf
 
 // Machine
 machine_white: .dword 0x00f9faf5
@@ -32,8 +33,17 @@ machine_cyan: .dword 0x0064defe
 machine_grey: .dword 0x00bebebe
 machine_light_yellow: .dword 0x00feea64
 machine_dark_yellow: .dword 0x00ffa200
+machine_door_grey: .dword 0x00777777
+
+//Panel
 panel_blue: .dword 0x00263b59
 panel_light_blue: .dword 0x002962ff
+panel_joystick_silver: .dword 0x00ecfbef
+
+//Screen
+screen_border_golden: .dword 0x00514621
+screen_border_brown: .dword 0x00724526
+screen_border_purple: .dword 0x00422d42
 
 
 //Poster
@@ -48,7 +58,7 @@ yellow_poster: .dword 0x00f0ac14
 purple_wall : .dword 0x005f4d84
 light_brown_floor: .dword 0x00795548
 dark_grey_cave: .dword 0x00222222
-light_grey_socket: .dword 0x00bfbfbb
+
 
 //Screen-Glitch
 pink_glitch_screen: .dword 0x00f700ff

@@ -594,6 +594,7 @@ reduceToZeroScreen:
 		bl createVLine
 		mov x2, x10
 		add x2, x2, x4
+		sub x2, x2, 1
 		sub x2, x2, x11
 		bl createVLine
 		mov x2, x10
@@ -602,6 +603,7 @@ reduceToZeroScreen:
 		bl createHLine
 		mov x1, x9
 		add x1, x1, x3
+		sub x1, x1, 1
 		sub x1, x1, x11	
 		bl createHLine
 		add x11, x11, 1
