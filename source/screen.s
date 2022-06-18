@@ -8,8 +8,8 @@ resetScreen:
 	str x30, [sp]
 
     //Creacion parte del vidrio (Verde oscuro)
-	movz x0, 0x0000, lsl 16
-	movk x0, 0x1a0d, lsl 0
+	ldr x0, screen_off
+	
 	mov x1, 89
 	mov x2, 247
 	mov x3,	100
@@ -30,8 +30,7 @@ powerOffScreen:
     bl resetScreen
 
 	//Creacion reflejo del vidrio
-    movz x0, 0x0001, lsl 16
-    movk x0, 0x2413, lsl 0
+	ldr x0,screen_short_reflex
     mov x1, 101
     mov x2, 258
     mov x3, 36
@@ -39,8 +38,7 @@ powerOffScreen:
     bl createVRectangle
 
     //Creacion triangulo reflejo del vidrio
-    movz x0, 0x0000, lsl 16
-    movk x0, 0x1a0d, lsl 0
+	ldr x0, screen_off
     mov x1, 125
     mov x2, 270
     mov x3, 12
@@ -51,8 +49,7 @@ powerOffScreen:
     bl createTriangle
 
     //Creacion reflejo del vidrio
-    movz x0, 0x0000, lsl 16
-    movk x0, 0x542a, lsl 0 
+	ldr x0, screen_large_reflex
     mov x1, 101
     mov x2, 258
     mov x3, 10
@@ -60,8 +57,7 @@ powerOffScreen:
     bl createVRectangle
 
     //Creacion reflejo del vidrio
-    movz x0, 0x0001, lsl 16
-    movk x0, 0x2413, lsl 0
+	ldr x0, screen_short_reflex
     mov x1, 166
     mov x2, 260
     mov x3, 12
@@ -199,8 +195,7 @@ donkeySplashScreen:
 	sub sp, sp, 8
 	str x30, [sp]
 
-	movz x0, 0x0038, lsl 16
-	movk x0, 0x1503, lsl 0
+	ldr x0, dark_brown_donkey
 	mov x1, 129
 	mov x2, 301
 	mov x3,	20
@@ -638,8 +633,7 @@ transitionToTheGame:
 	movk x7, 0x0, lsl 0
 	bl delay
 
-	movz x0, 0x0038, lsl 16
-	movk x0, 0x1503, lsl 0
+	ldr x0, dark_brown_donkey
 	mov x1, 105
 	mov x2, 269
 	mov x3,	68

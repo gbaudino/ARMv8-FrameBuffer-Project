@@ -45,8 +45,7 @@ createMouseEyes:
 	sub sp, sp, 8
 	str x30, [sp] 
 
-	movz x0, 0xdddd, lsl 16
-	movk x0, 0xdddd, lsl 0
+	ldr x0, mouse_eyes
 	mov x1, 384
 	mov x2, 124
 	mov x3, 4

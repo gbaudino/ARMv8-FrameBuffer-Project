@@ -44,6 +44,22 @@ panel_joystick_silver: .dword 0x00ecfbef
 screen_border_golden: .dword 0x00514621
 screen_border_brown: .dword 0x00724526
 screen_border_purple: .dword 0x00422d42
+screen_off: .dword 0x00001a0d
+screen_short_reflex: .dword 0x00012413
+screen_large_reflex: .dword 0x0000542a
+
+//Mouse
+mouse_eyes: .dword 	0xdddddddd
+
+//Switchers
+switch_on_cyan: .dword 0x0021c59b
+switch_background: .dword 0x00c9d7da
+switch_silver: .dword 0x00616161
+
+//Wire
+wire_electricity: .dword 0x00ffa200
+wire_base_silver: .dword 0x00424242
+
 
 
 //Poster

@@ -8,8 +8,7 @@ generateVerticalCurrent:
 	str x30, [sp]
 
 	//Interior cable vertical
-	movz x0, 0x00ff, lsl 16
-	movk x0, 0xa200, lsl 0
+    ldr x0, wire_electricity
 	mov x1, 333
 	mov x2, 527
 	mov x3, 1
@@ -38,8 +37,7 @@ generateCurveCurrent:
 	bl delay
 
 	//Interior cable cuadradito curva
-	movz x0, 0x00ff, lsl 16
-	movk x0, 0xa200, lsl 0
+	ldr x0, wire_electricity
 	mov x1, 371
 	mov x2, 523
 	mov x3,	4
@@ -65,8 +63,7 @@ generateHorizontalCurrent:
 	bl delay
 
 	//Interior cable horizontal
-	movz x0, 0x00ff, lsl 16
-	movk x0, 0xa200, lsl 0
+	ldr x0, wire_electricity
 	mov x1, 375
 	mov x2, 522
 	mov x3,	4
@@ -140,8 +137,7 @@ wire:
 	str x0, [sp]
 
     //Interior cable vertical
-	movz x0, 0x00ff, lsl 16
-	movk x0, 0xa200, lsl 0
+	ldr x0, wire_electricity
 	mov x1, 328
 	mov x2, 527
 	mov x3,	43
@@ -183,8 +179,7 @@ createWire:
 	mov x4, 12
 	bl createVRectangle
 
-	movz x0, 0x0042, lsl 16
-	movk x0, 0x4242, lsl 0
+	ldr x0, wire_base_silver
 	mov x1, 328
 	mov x2, 526
 	mov x3,	44

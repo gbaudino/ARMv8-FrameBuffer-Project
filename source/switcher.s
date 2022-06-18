@@ -27,8 +27,7 @@ switcher:
 	ldr x0, [sp]
 	cbz x0, doneSwitcher
 
-	movz x0, 0x0021, lsl 16
-	movk x0, 0xc59b, lsl 0
+	ldr x0, switch_on_cyan
 	mov x1, 129
 	mov x2, 98
 	mov x3,	12
@@ -63,8 +62,7 @@ createSwitcher:
 	mov x4, 35
 	bl createVRectangle
 
-	movz x0, 0x00c9, lsl 16
-	movk x0, 0xd7da, lsl 0
+	ldr x0, switch_background	
 	mov x1, 118
 	mov x2, 87
 	mov x3,	52
@@ -81,8 +79,7 @@ createSwitcher:
 	mov x1, 166
 	bl createVRectangle
 	
-	movz x0, 0x0061, lsl 16
-	movk x0, 0x6161, lsl 0
+	ldr x0, switch_silver
 	mov x1, 141
 	mov x2, 98
 	mov x3,	6
