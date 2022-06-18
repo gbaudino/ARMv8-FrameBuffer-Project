@@ -136,11 +136,18 @@ wire:
 	sub sp, sp, 16
 	str x0, [sp]
 
-    //Interior cable vertical
-	ldr x0, wire_electricity
+	ldr x0, black
 	mov x1, 328
 	mov x2, 527
-	mov x3,	43
+	mov x3,	4
+	mov x4, 4
+	bl createVRectangle
+
+    //Interior cable vertical
+	ldr x0, wire_electricity
+	mov x1, 332
+	mov x2, 527
+	mov x3,	39
 	mov x4, 4
 	bl createVRectangle
 

@@ -627,6 +627,10 @@ transitionToTheGame:
 
 	bl donkeySplashScreen
 
+	movz x7, 0x800, lsl 16
+	movk x7, 0x0, lsl 0
+	bl delay
+
 	bl donkeyFace
 
 	movz x7, 0x4000, lsl 16
@@ -641,6 +645,10 @@ transitionToTheGame:
 	bl createVRectangle
 
 	bl donkeyFace2
+
+	movz x7, 0x4000, lsl 16
+	movk x7, 0x0, lsl 0
+	bl delay
 
 	bl reduceToZeroScreen
 

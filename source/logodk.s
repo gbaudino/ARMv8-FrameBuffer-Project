@@ -24,8 +24,6 @@ logoD:
 	bl createVRectangle
 
 	//Parte superior D
-	mov x1, 110
-	add x1, x1, x5
 	mov x2, 298
 	mov x3, 11
 	sub x3, x3, x5

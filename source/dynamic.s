@@ -6,8 +6,6 @@ dynamic:
 
 	bl createOnSwitcher
 	
-	bl mouseBlinking
-	
 	bl generateCurrent
 	
 	bl mouseBlinking
@@ -22,16 +20,16 @@ dynamic:
 	
 	bl transitionToTheGame
 	
-	bl breakSwitcher
-
 	bl mouseBlinking
+
+	bl breakSwitcher
 	
 	mov x5, 27
 	mov x9, 126
 	infCycle:
 		bl glitchScreen
 
-		movz x7, 0x4000, lsl 16
+		movz x7, 0x3000, lsl 16
 		movk x7, 0x0, lsl 0
 		bl delay
 		
@@ -39,13 +37,13 @@ dynamic:
 		mov x1, x9
 		bl climber
 
-		movz x7, 0x2000, lsl 16
+		movz x7, 0x1800, lsl 16
 		movk x7, 0x0, lsl 0
 		bl delay
 
 		bl glitchScreen
 
-		movz x7, 0x4000, lsl 16
+		movz x7, 0x3000, lsl 16
 		movk x7, 0x0, lsl 0
 		bl delay
 
@@ -53,13 +51,13 @@ dynamic:
 		sub x1, x9, x5
 		bl climber
 
-		movz x7, 0x2000, lsl 16
+		movz x7, 0x1800, lsl 16
 		movk x7, 0x0, lsl 0
 		bl delay
 
 		bl glitchScreen
 
-		movz x7, 0x4000, lsl 16
+		movz x7, 0x3000, lsl 16
 		movk x7, 0x0, lsl 0
 		bl delay
 
@@ -67,7 +65,7 @@ dynamic:
 		add x1, x9, x5
 		bl climber
 
-		movz x7, 0x2000, lsl 16
+		movz x7, 0x1800, lsl 16
 		movk x7, 0x0, lsl 0
 		bl delay
 
@@ -77,6 +75,5 @@ dynamic:
 		reinit:
 		mov x5, 27
 		continue:
-		
 
 		b infCycle
