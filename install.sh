@@ -7,14 +7,17 @@ echo "######### Installing necessary pkgs #########"
 echo "#############################################"
 echo
 
+echo $ID
+echo
+
 if [ $ID = "centos" ]; then
-    sudo yum install docker xorg-xhost
-elif [ $ID = "ubuntu" ] || [ $ID = "debian" ] || [ $ID = "mint" ]; then
-    sudo apt-get install -y docker xorg-xhost
+    sudo yum install docker
+elif [ $ID = "ubuntu" ] || [ $ID = "debian" ] || [ $ID = "linuxmint" ]; then
+    sudo apt-get install -y docker
 elif [ $ID = "alpine" ]; then
-    sudo apk add docker xorg-xhost
+    sudo apk add docker
 elif [ $ID = "arch" ] || [ $ID = "endeavouros" ] || [ $ID = "arcolinux" ]; then
-    sudo pacman -S --needed docker xorg-xhost
+    sudo pacman -S --needed docker
 else
     echo "########################################################################"   
     echo "WARNING: Unsupported linux distribution. Please install DOCKER manually."
